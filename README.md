@@ -25,7 +25,7 @@ Before compiling specify the following global variables:
 
 ### Specify the spin basis (see functions in `Basis_Choice.cpp`):
 
-The element of the basis for building the Minimally Complex Model (MCM) has to be specified by the user at the beginning of the program.
+The element of the basis for building the Minimally Complex Model (MCM) has to be specified by the user before compiling the code.
 
 The basis can be written “by hand” directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`, or by using an input file (see section below).
 
