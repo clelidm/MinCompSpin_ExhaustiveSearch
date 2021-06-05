@@ -68,6 +68,9 @@ The following functions allow you to define a basis from an input file.
 
 For any of these two functions, operators should be written in one single column in the file. 
 
+#### Print the basis in the terminal:
+To check the information about a basis, you can print it in the terminal using the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
+
 ### Examples:
 
 All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described in the section "Available functions" below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file.
