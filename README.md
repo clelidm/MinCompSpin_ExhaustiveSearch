@@ -11,7 +11,7 @@ The code uses the C++11 version of C++.
 
 ### Set global variables in the file `data.h`:
 
-Before compiling specify the following constants:
+Before compiling specify the following global variables:
  - `const unsigned int n`, with the number of variables of the dataset; This number can also be the number of basis operators in the provided basis; it must not be smaller than the number of basis operators.
  - `const string OUTPUT_directory`, with the name of the output directory; All the generated files will be placed in this folder.
  - `const string datafilename`, with the location and name of the binary datafile.
