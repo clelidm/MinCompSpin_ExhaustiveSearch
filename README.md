@@ -52,7 +52,21 @@ Finally, to simplify the definition of a spin operator, you can directly use the
 
 The number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` specified basis elements.
 
+#### Defining the basis manually:
+The basis can be specified by hand directly at the beginning of the int main() function in `uint32_t Basis_Choice[]`. In this case you we advise you to use the integer representation of the basis operators. For instance:
+`uint32_t Basis_Choice[] = {….}`
+defines the basis:
+> 	3 = 000011
+> 	36 = 000011001
+> 	…
+
 #### Reading the basis from an input file:
+
+The following functions allow you to define a basis from an input file.
+ - `list<uint32_t> Read_BasisOp_BinaryRepresentation()`, if operators are written using the binary representation (see example file in the `INPUT` folder); the location of the file must be specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
+ - `list<uint32_t> Read_BasisOp_IntegerRepresentation()`, if operators are written using the integer representation (see example file in the `INPUT` folder); the location of the file must be specified in `data.h` in the variable `basis_IntegerRepresentation_filename`.
+
+For any of these two functions, operators should be written in one single column in the file. 
 
 ### Examples:
 
