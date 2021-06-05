@@ -31,9 +31,9 @@ The basis can be written “by hand” directly at the beginning of the `int mai
 
 If you don’t know which basis to use, you can run the minimally complex model algorithm on the original basis in which the dataset is written. This can be done by using the function `list<uint32_t> Original_Basis()` to define the basis.
 
-In general we advise to use the basis in which the dataset is closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the heuristic/exhaustive search algorithm available separately here.
+In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the heuristic/exhaustive search algorithm available separately *here*.
 
-In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, where each integer defines a basis operator (see explanation above).
+In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, where each integer defines a basis operator (see explanation below).
 
 #### Structure of the basis:
 
