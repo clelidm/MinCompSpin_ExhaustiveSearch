@@ -2,7 +2,7 @@
 
 This repository contains a code developed for the paper on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520]. The code performs an exhaustive search for the best Minimally Complex Spin Model (MC-Spin Model) on a given basis. 
 
-The code go through all possible MC-spin models of a given rank `r`, where an MC-spin model is defined by a given partition of the `r` basis operators provided. The comparison between models is based on their evidence (posterior probability that the model produces the data, integrated over the parameter values — see paper). The selected model is the one with the largest evidence.
+The code go through all possible MC-spin models of a given rank `r`, where an MC-spin model is defined by a given partition of the `r` basis operators provided (see paper). The comparison between models is based on their evidence (posterior probability that the model produces the data, integrated over the parameter values). The selected model is the one with the largest evidence.
 
 One big advantage of the family of models (the MC-spin models) is that the computation of the evidence doesn’t require fitting the parameters of the model, which allows to significantly accelerate the comparison between models. The limiting factor of this code is the exhaustive search for the best model in a model space that is exponentially increasing with `r`.
 
