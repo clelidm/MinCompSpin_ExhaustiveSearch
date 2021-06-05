@@ -1,6 +1,6 @@
 # Exhaustive search for the best Minimally Complex Spin Models
 
-This repository contains a code developed for the paper on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520]. The code performs an exhaustive search for the best Minimally Complex Spin Model (MC-Spin Model) on a given basis. 
+This repository contains a code developed for the paper on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex Spin Model (MC-Spin Model) on a given basis. 
 
 The code go through all possible MC-spin models of a given rank `r`, where an MC-spin model is defined by a given partition of the `r` basis operators provided (see paper). The comparison between models is based on their evidence (posterior probability that the model produces the data, integrated over the parameter values). The selected model is the one with the largest evidence.
 
