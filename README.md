@@ -25,9 +25,32 @@ Before compiling specify the following global variables:
 
 ### Specify the spin basis:
 
-The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`, or by using an input file.
+The element of the basis for building the Minimally Complex Model (MCM) has to be specified by the user at the beginning of the program.
+
+The basis can be written “by hand” directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`, or by using an input file (see section below).
+
+If you don’t know which basis to use, you can run the minimally complex model algorithm on the original basis in which the dataset is written. This can be done by using the function `list<uint32_t> Original_Basis()` to define the basis.
+
+In general we advise to use the basis in which the dataset is closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the heuristic/exhaustive search algorithm available separately here.
 
 #### Structure of the basis:
+
+Basis elements are spin operators that are all independent from each others (see paper). You can use the function (to come) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
+
+Each element of the basis must be a spin operator. A spin operator is the product of a subset of spin variables (see paper). For instance, Op = s1 * s2 is a spin operator (physically, it is associated to a pairwise interactions between s1 and s2); Op = s1*s2*s3 is also a spin operator (this time associated to a three-body interaction between s1, s2 and s3).
+
+In the code, spin operators are encoded on a binary number of `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
+For instance, take the operator Op = s1 s2, this operator would be represented in the code by the binary number `Op = 000000011` (for `n=9`).
+
+// ***      -->  Op = s1 s2           Spin operator
+// ***      -->  Op = 000000011       Binary representation
+// ***      -->  Op = 3               Integer representation   ( 000000011 = 3 )
+
+Finally, to simplify the definition of a spin operator, you can directly use the integer corresponding to the binary number. For instance, to defined the operator Op = s1 s2, you can use the binary representation Op = 000000011 or the integer representation Op = 3.
+
+The number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` specified basis elements.
+
+In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, where each integer defines a basis operator (see explanation above).
 
 #### Reading the basis from an input file:
 
