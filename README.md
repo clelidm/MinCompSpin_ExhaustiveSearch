@@ -33,6 +33,8 @@ If you don’t know which basis to use, you can run the minimally complex model 
 
 In general we advise to use the basis in which the dataset is closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the heuristic/exhaustive search algorithm available separately here.
 
+In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, where each integer defines a basis operator (see explanation above).
+
 #### Structure of the basis:
 
 Basis elements are spin operators that are all independent from each others (see paper). You can use the function (to come) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
@@ -49,8 +51,6 @@ For instance, take the operator Op = s1 s2, this operator would be represented i
 Finally, to simplify the definition of a spin operator, you can directly use the integer corresponding to the binary number. For instance, to defined the operator Op = s1 s2, you can use the binary representation Op = 000000011 or the integer representation Op = 3.
 
 The number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` specified basis elements.
-
-In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, where each integer defines a basis operator (see explanation above).
 
 #### Reading the basis from an input file:
 
