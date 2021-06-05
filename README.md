@@ -27,7 +27,7 @@ Before compiling specify the following global variables:
 
 The element of the basis for building the Minimally Complex Model (MCM) has to be specified by the user before compiling the code.
 
-The basis can be written “by hand” directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`, or by using an input file (see sub-sections below).
+The basis can be written “by hand” directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`, or by using an input file (see subsections below).
 
 If you don’t know which basis to use, you can run the minimally complex model algorithm on the original basis in which the dataset is written. This can be done by using the function `list<uint32_t> Original_Basis()` to define the basis.
 
