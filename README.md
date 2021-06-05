@@ -7,10 +7,6 @@ This repository contains codes developped for the paper on *Statistical Inferenc
 
 The code uses the C++11 version of C++.
 
-### To compile:
-
-`g++ -std=c++11 -O3 main.cpp Operations_OnData.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
-
 ## Usage
 
 ### Set global variables in the file `data.h`:
@@ -22,9 +18,21 @@ Before compiling specify the following constants:
  - (Optional) `const string basis_IntegerRepresentation_filename`, with the location and name of the input file containing the basis element written in the integer representation.
  - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation.
 
-### Input files:
+### Specify the spin basis:
 
-### Available functions and Examples:
+The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`, or by using an input file.
+
+#### Structure of the basis:
+
+#### Reading the basis from an input file:
+
+### To compile:
+
+`g++ -std=c++11 -O3 main.cpp Operations_OnData.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
+
+## Input and Output files:
+
+## Available functions and Examples:
 
 All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described below.
 For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file.
