@@ -91,6 +91,14 @@ To check the information about a basis, you can print it in the terminal using t
 
 ## Input and Output files:
 
+### Input files:
+Input files must be stored in the `INPUT` folder, you must provide the following input files:
+— a binary datafile. The name of the datafile must be specified in `data.h` in the variable `datafilename`. Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example in the INPUT folder.
+— (optional) a basis input file (see section "Reading the basis from an input file” above).
+
+### Output files:
+All the output files will be stored in the output folder whose name is specified in `data.h`.
+
 ## Available functions:
 
 
