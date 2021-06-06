@@ -86,7 +86,21 @@ For any of these two functions, operators should be written in one single column
 #### Print the basis in the terminal (see `Basis_Choice.cpp`):
 To check the information about a basis, you can print it in the terminal using the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
 
+### Read the input dataset:
+
+The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads the dataset available at the location specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the a structure `map<uint32_t, unsigned int> Nset` that map each observed states to the number of times they occur in the dataset.
+
+### Transform the input dataset in the new basis:
+
+The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset` provided as an argument is written) to the one provided as the argument `Basis`.
+
 ### Find the Best MC-Spin Model:
+
+Two functions are available to perform a search among MC-Spin Models:
+ - `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int r, unsigned int N, double *LogE_best)` compares all the MCM of rank r, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset);
+ - `map<uint32_t, uint32_t> MCM_allRank(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best)` compares all the MCM based on the `r` first elements of the new basis `Basis_li` for all `r=1` to the size of `Basis_li`;
+
+## Print information about your model
 
 
 ## Input and Output files:
