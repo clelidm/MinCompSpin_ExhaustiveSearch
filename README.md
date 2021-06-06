@@ -101,9 +101,32 @@ The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int>
 
 Two functions are available to perform a search among MC-Spin Models:
  - `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int r, unsigned int N, double *LogE_best)` compares all the MCM of rank r, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset);
- - `map<uint32_t, uint32_t> MCM_allRank(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best)` compares all the MCM based on the `r` first elements of the new basis `Basis_li` for all `r=1` to the size of `Basis_li`;
+ - `map<uint32_t, uint32_t> MCM_allRank(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best)` compares all the MCM based on the `r` first elements of the new basis `Basis_li` for all `r=1` to the size of `Basis_li`.
+
+These two functions enumerate all possible partitions of a set using variantes of the algorithm E described in [D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1 (Addison-Wesley Professional, 2011)]. The algorithm efficiently generates all set partitions in Gray-code order.
+
+### Encoding of MC-Spin Models:
+
+In this program, all the compared MC-spin models correspond to a partition of the basis operators. Once the dataset converted in this basis, an MC-spin model will be encoded on `m` digits, where .
+
+In the code, partitions of the `r`digits are encoded in two different ways.
+
+(Explains how to read a MCM)
 
 ## Print information about your model
+
+The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints information about the MC-spin model given as an argument in `MCM_Partition`. 
+
+(Details what is printed)
+
+Users can also get direct **information about any subcomplete part (SC-part) of an MCM** with the functions:
+ - `double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-evidence of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section `Encoding of MC-Spin Models`).
+ - `double LogL_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-likelihood of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section `Encoding of MC-Spin Models`).
+ - `double ParamComplexity_SubCM(unsigned int m, unsigned int N)` returns the model complexity of the SC-part due to the number of parameters in the part; this is the first complexity term appearing the Minimum Description Length principle (which is of the order of `O(log N)` where `N` is the number of datapoints -- see paper).
+ - `double GeomComplexity_SubCM(unsigned int m)` returns the geometric complexity of the SC-part; this is the secdon complexity term appearing the Minimum Description Length principle (which is of the order of `O(1)` -- see paper).
+
+Users can also get direct information about the MCM with the functions:
+
 
 
 ## Input and Output files:
@@ -116,7 +139,6 @@ Input files must be stored in the `INPUT` folder, you must provide the following
 ### Output files:
 All the output files will be stored in the output folder whose name is specified in `data.h`.
 
-## Available functions:
 
 
 
