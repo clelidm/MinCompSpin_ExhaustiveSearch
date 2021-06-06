@@ -12,6 +12,14 @@ For a given number of `r` of basis elements, the number of possible partitions t
 
 The code uses the C++11 version of C++.
 
+### Compile:
+
+`g++ -std=c++11 -O3 main.cpp Operations_OnData.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
+
+### Examples:
+
+All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described in the section "Available functions" below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file.
+
 ## Usage
 
 ### Set global variables in the file `data.h`:
@@ -71,13 +79,8 @@ For any of these two functions, operators should be written in one single column
 #### Print the basis in the terminal:
 To check the information about a basis, you can print it in the terminal using the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
 
-### Examples:
+#### Find the Best MC-Spin Model:
 
-All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described in the section "Available functions" below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file.
-
-### Compile:
-
-`g++ -std=c++11 -O3 main.cpp Operations_OnData.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
 
 ## Input and Output files:
 
