@@ -55,10 +55,9 @@ Each element of the basis must be a spin operator. A spin operator is the produc
 In the code, spin operators are encoded on a binary number of `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
 For instance, take the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011` (for `n=9`). Finally, to simplify the definition of a spin operator in the code, you can directly use the integer corresponding to this binary number. For instance, to defined the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
 
-> `Example: the three representations of a spin operator: 
 >      -->  Op = s1 s2           Spin operator
 >      -->  Op = 000000011       Binary representation
->      -->  Op = 3               Integer representation   ( 000000011 = 3 )`
+>      -->  Op = 3               Integer representation   ( 000000011 = 3 )
 
 Finally, the number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` specified basis elements.
 
