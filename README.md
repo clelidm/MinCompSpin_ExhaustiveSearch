@@ -67,15 +67,15 @@ However, an important point to be able to interpret the results of the program, 
 
 ### Defining the basis manually (at beginning of the `int main()` function):
 The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, you we advise you to use the integer representation of the basis operators. In the example provided in the `int main()` function: `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent operators. Here are the different representations for these spin operators (first, the integer representation; second, the binary representation; finally the corresponding spin operators)
->   36     000100100     s3 s6
->   10 	   000001010     s2 s4
->   3 	    000000011     s1 s2
->   272 	  100010000     s5 s9
->   260 	  100000100     s3 s9
->   320 	  101000000     s7 s9
->   130 	  010000010     s2 s8
->   65 	   001000001     s1 s7
->   4 	    000000100     s3
+>      36     000100100     s3 s6
+>      10 	   000001010     s2 s4
+>      3 	    000000011     s1 s2
+>      272 	  100010000     s5 s9
+>      260 	  100000100     s3 s9
+>      320 	  101000000     s7 s9
+>      130 	  010000010     s2 s8
+>      65 	   001000001     s1 s7
+>      4 	    000000100     s3
 
 ### Reading the basis from an input file (see `Basis_Choice.cpp`):
 
