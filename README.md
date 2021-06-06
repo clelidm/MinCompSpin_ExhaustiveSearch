@@ -18,7 +18,7 @@ The code uses the C++11 version of C++.
 
 ## Examples:
 
-All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described in the section "Available functions" below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file.
+All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. (Add details on the dataset taken as an example).
 
 ## Usage
 
@@ -45,30 +45,37 @@ In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, whe
 
 #### Structure of the basis:
 
-Basis elements are spin operators that are all independent from each others (see paper). You can use the function (to come) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
+Basis elements are spin operators that are all independent from each others (see paper). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
 
 Each element of the basis must be a spin operator. A spin operator is the product of a subset of spin variables (see paper). For instance, `Op = s1 * s2` is a spin operator (physically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (this time associated to a three-body interaction between `s1`, `s2` and `s3`).
 
 In the code, spin operators are encoded on a binary number of `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
-For instance, take the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011` (for `n=9`).
+For instance, take the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011` (for `n=9`). Finally, to simplify the definition of a spin operator in the code, you can directly use the integer corresponding to this binary number. For instance, to defined the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
 
+> Example: the three representations of a spin operator: 
 >      -->  Op = s1 s2           Spin operator
 >      -->  Op = 000000011       Binary representation
 >      -->  Op = 3               Integer representation   ( 000000011 = 3 )
 
-Finally, to simplify the definition of a spin operator, you can directly use the integer corresponding to the binary number. For instance, to defined the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
+Finally, the number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` specified basis elements.
 
-The number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` specified basis elements.
+Note, in the example above, that the convention taken for writing the spin operators is to label the spin variables from the right to the left in the binary representation. This is just a convention and doesn't change the ordering of the spin variables from their order in the dataset, i.e., the first variable on the left in the binary representation of the operators is the same as the first variable on the left in the dataset provided as input file.
 
-#### Defining the basis manually:
-The basis can be specified by hand directly at the beginning of the int main() function in `uint32_t Basis_Choice[]`. In this case you we advise you to use the integer representation of the basis operators. For instance:
-`uint32_t Basis_Choice[] = {….}`
-defines the basis:
-> 	3 = 000011
-> 	36 = 000011001
-> 	…
+However, an important point to be able to interpret the results of the program, is that we adopted the same convention for the new basis: the first operator provided in the basis will correspond to the variable `sigma1`, which will be the most on the right in the transformed dataset.
 
-#### Reading the basis from an input file:
+#### Defining the basis manually (at beginning of the `int main()` function):
+The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, you we advise you to use the integer representation of the basis operators. In the example provided in the `int main()` function: `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent operators. Here are the different representations for these spin operators (first, the integer representation; second, the binary representation; finally the corresponding spin operators)
+>   36     000100100     s3 s6
+>   10 	   000001010     s2 s4
+>   3 	    000000011     s1 s2
+>   272 	  100010000     s5 s9
+>   260 	  100000100     s3 s9
+>   320 	  101000000     s7 s9
+>   130 	  010000010     s2 s8
+>   65 	   001000001     s1 s7
+>   4 	    000000100     s3
+
+#### Reading the basis from an input file (see `Basis_Choice.cpp`):
 
 The following functions allow you to define a basis from an input file.
  - `list<uint32_t> Read_BasisOp_BinaryRepresentation()`, if operators are written using the binary representation (see example file in the `INPUT` folder); the location of the file must be specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
@@ -76,10 +83,10 @@ The following functions allow you to define a basis from an input file.
 
 For any of these two functions, operators should be written in one single column in the file. 
 
-#### Print the basis in the terminal:
+#### Print the basis in the terminal (see `Basis_Choice.cpp`):
 To check the information about a basis, you can print it in the terminal using the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
 
-#### Find the Best MC-Spin Model:
+### Find the Best MC-Spin Model:
 
 
 ## Input and Output files:
