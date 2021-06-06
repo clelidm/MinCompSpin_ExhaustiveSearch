@@ -63,19 +63,20 @@ Finally, the number of elements in the basis must be at most equal to the number
 
 Note, in the example above, that the convention taken for writing the spin operators is to label the spin variables from the right to the left in the binary representation. This is just a convention and doesn't change the ordering of the spin variables from their order in the dataset, i.e., the first variable on the left in the binary representation of the operators is the same as the first variable on the left in the dataset provided as input file.
 
-However, an important point to be able to interpret the results of the program, is that we adopted the same convention for the new basis: the first operator provided in the basis will correspond to the variable `sigma1`, which will be the most on the right in the transformed dataset.
+However, an important point to be able to interpret the results of the program, is that we adopted the same convention for the new basis: the first operator provided in the basis will correspond to the variable `sigma1`, which will be the most on the right in the transformed dataset (see example in the next section).
 
 ### Defining the basis manually (at beginning of the `int main()` function):
-The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, you we advise you to use the integer representation of the basis operators. In the example provided in the `int main()` function: `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent operators. Here are the different representations for these spin operators (first, the integer representation; second, the binary representation; finally the corresponding spin operators)
->      36     000100100     s3 s6
->      10     000001010     s2 s4
->      3      000000011     s1 s2
->      272    100010000     s5 s9
->      260    100000100     s3 s9
->      320    101000000     s7 s9
->      130    010000010     s2 s8
->      65     001000001     s1 s7
->      4      000000100     s3
+
+The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, you we advise you to use the integer representation of the basis operators. In the example provided in the `int main()` function: `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent operators. Here are the different representations for these spin operators: first, the integer representation; second, the binary representation; third, the corresponding spin operators; and finally representations of these operators in the new basis:
+>      36     000100100     s3 s6     -->>  new basis :     000000001     1       sigma1
+>      10     000001010     s2 s4     -->>  new basis :     000000010     2       sigma2
+>      3      000000011     s1 s2     -->>  new basis :     000000100     4       sigma3
+>      272    100010000     s5 s9     -->>  new basis :     000001000     8       sigma4
+>      260    100000100     s3 s9     -->>  new basis :     000010000     16      sigma5
+>      320    101000000     s7 s9     -->>  new basis :     000100000     32      sigma6
+>      130    010000010     s2 s8     -->>  new basis :     001000000     64      sigma7
+>      65     001000001     s1 s7     -->>  new basis :     010000000     128     sigma8
+>      4      000000100     s3        -->>  new basis :     100000000     256     sigma9
 
 ### Reading the basis from an input file (see `Basis_Choice.cpp`):
 
