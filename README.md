@@ -31,7 +31,7 @@ Before compiling specify the following global variables:
  - (Optional) `const string basis_IntegerRepresentation_filename`, with the location and name of the input file containing the basis element written in the integer representation.
  - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation.
 
-----
+--
 
 ### Specify the spin basis (see functions in `Basis_Choice.cpp`):
 
