@@ -12,7 +12,7 @@ For a given number of `r` of basis elements, the number of possible partitions t
 
 The code uses the C++11 version of C++.
 
-**To compile:** `g++ -std=c++11 -O3 main.cpp Operations_OnData.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
+**To compile:** `g++ -std=c++11 -O3 main.cpp Data_Operations.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
 
 **To execute:** `./a.out`
 
