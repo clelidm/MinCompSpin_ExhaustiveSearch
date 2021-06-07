@@ -59,8 +59,8 @@ map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<ui
 // *** For ex. Ai = 01001 is encoded on n=5 basis elements, and element Op1 and Op4 belong to the part;
 // *** Rem: Basis elements are ordered from the right to the left.
 
-double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false);
 double LogL_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false);
+double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false);
 
 // *** Complexity of a SC model based on m basis Operators: m >= 1. Rem: C_geom(m=1) = log(pi):
 double GeomComplexity_SubCM(unsigned int m);                  // Geometric complexity
@@ -74,7 +74,7 @@ double LogL_CM(map<uint32_t, unsigned int > Kset, unsigned int N);
 /******************************************************************************/
 double LogL_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false);
 double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false);
-void Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom);
+double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom);
 
 /******************************************************************************/
 /******************************   Find Best MCM   *****************************/
@@ -105,7 +105,7 @@ int main()
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "******************************  Choice of the basis:  *************************************";
   cout << endl << "*******************************************************************************************" << endl;
-// *** Choice of the basis for building the Mimimally Complex Model (MCM):
+// *** Choice of the basis for building the Minimally Complex Model (MCM):
 
 // *** Basis elements are written using the integer representation of the operator
 // *** For instance, a basis element on the last two spin variable would be written: 

@@ -31,7 +31,7 @@ double ParamComplexity_SubCM(unsigned int m, unsigned int N)  // Parameter Compl
 // Compute separately: -- the first order complexity    --> stored in C_param
 //                     -- and the geometric complexity  --> stored in C_geom
 
-void Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)
+double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)
 {
   *C_param = 0;   *C_geom = 0;
   uint32_t m_i = 0;  // number of elements in Ai
@@ -42,5 +42,7 @@ void Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C
     (*C_param) += ParamComplexity_SubCM(m_i, N);
     (*C_geom) += GeomComplexity_SubCM(m_i);
   }  
+
+  return (*C_param) + (*C_geom);
 }
 
