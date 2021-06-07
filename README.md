@@ -20,6 +20,10 @@ The code uses the C++11 version of C++.
 
 All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. (Add details on the dataset taken as an example).
 
+## License
+
+This code is an open source project under the GNU GPLv3.
+
 ----
 
 # Usage
