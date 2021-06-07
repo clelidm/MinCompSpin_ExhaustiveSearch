@@ -16,7 +16,7 @@ The code uses the C++11 version of C++.
 
 `g++ -std=c++11 -O3 main.cpp Operations_OnData.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
 
-**Execute:** ./a.out
+**Execute:** `./a.out`
 
 ## Examples:
 
