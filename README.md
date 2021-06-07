@@ -16,7 +16,7 @@ The code uses the C++11 version of C++.
 
 **To execute:** `./a.out`
 
-## Examples:
+## Examples
 
 All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. (Add details on the dataset taken as an example).
 
@@ -24,7 +24,7 @@ All useful functions that can be called from `int main()` are declared at the be
 
 # Usage
 
-## Set global variables in the file `data.h`:
+## Set global variables in the file `data.h`
 
 Before compiling specify the following global variables:
  - `const unsigned int n`, with the number of variables of the dataset; This number can also be the number of basis operators in the provided basis; it must not be smaller than the number of basis operators.
@@ -34,7 +34,7 @@ Before compiling specify the following global variables:
  - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation.
 
 
-## Specify the spin basis (see functions in `Basis_Choice.cpp`):
+## Specify the spin basis (see functions in `Basis_Choice.cpp`)
 
 The element of the basis for building the Minimally Complex Model (MCM) has to be specified by the user before compiling the code.
 
@@ -89,15 +89,15 @@ For any of these two functions, operators should be written in one single column
 ### Print the basis in the terminal (see `Basis_Choice.cpp`):
 To check the information about a basis, you can print it in the terminal using the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
 
-## Read the input dataset:
+## Read the input dataset
 
 The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads the dataset available at the location specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the a structure `map<uint32_t, unsigned int> Nset` that map each observed states to the number of times they occur in the dataset.
 
-## Transform the input dataset in the new basis:
+## Transform the input dataset in the new basis
 
 The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset` provided as an argument is written) to the one provided as the argument `Basis`.
 
-## Find the Best MC-Spin Model:
+## Find the Best MC-Spin Model
 
 Two functions are available to perform a search among MC-Spin Models:
  - `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int r, unsigned int N, double *LogE_best)` compares all the MCM of rank r, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset);
@@ -133,7 +133,7 @@ Users can also get direct information about the MCM with the functions:
 - `double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)` place the parameter complexity and the geometric complexity of the MCM model defined in `Partition` respectively at the addresses `*C_param` and `*C_geom`; return the total complexity of the model.
 
 
-## Input and Output files:
+## Input and Output files
 
 ### Input files:
 Input files must be stored in the `INPUT` folder, you must provide the following input files:
