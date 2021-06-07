@@ -119,6 +119,8 @@ The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, uns
 
 (Details what is printed)
 
+### Likelihood, Complexity and Evidence:
+
 Users can also get direct **information about any subcomplete part (SC-part) of an MCM** with the functions:
  - `double LogL_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-likelihood of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section `Encoding of MC-Spin Models`).
  - `double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-evidence of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section `Encoding of MC-Spin Models`).
