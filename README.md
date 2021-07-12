@@ -8,6 +8,10 @@ One big advantage of this family of models (the MC-spin models) is that the comp
 
 For a given number of `r` of basis elements, the number of possible partitions the `r` basis operators is equal to the Bell number of `r`, which grows exponentially with `r`. The running time of the program also grows linearly with the number of different states observed in the system (so approximatively linearly with the number of datapoints in the dataset). For these reasons, this code is good for use on small systems, typically with `r <~15` variables. Note that for `r~15`, the code will take several days to perform the exhaustive search.
 
+To generate all possible set partitions of these $r$ operators, we used the algorithm described in Ref. [1] (Algorithm E) that efficiently generates the partitions in Gray-code order. 
+
+[1] D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1.693 (Addison-Wesley Professional), (2011).
+
 ## Requirements
 
 The code uses the C++11 version of C++.
