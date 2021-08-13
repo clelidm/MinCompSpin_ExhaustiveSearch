@@ -94,7 +94,7 @@ The following functions allow you to define a basis from an input file.
 
 For any of these two functions, operators should be written in one single column in the file. 
 
-### Print the basis in the terminal (see `Basis_Choice.cpp`):
+### Printing the basis in the terminal (see `Basis_Choice.cpp`):
 To check the information about a basis, you can print it in the terminal using the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
 
 ## Read the input dataset
