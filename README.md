@@ -16,7 +16,7 @@ To generate all possible set partitions of these `r` operators, we used the algo
 
 The code uses the C++11 version of C++.
 
-**To compile:** `g++ -std=c++11 -O3 main.cpp Data_Operations.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
+**To compile:** `g++ -std=c++11 -O3 main.cpp Operations_OnData.cpp.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp`
 
 **To execute:** `./a.out`
 
