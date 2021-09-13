@@ -11,6 +11,7 @@ For a given number of `r` of basis elements, the number of possible partitions t
 To generate all possible set partitions of these `r` operators, we used the algorithm described in Ref.[1] and in Ref. [2] (Algorithm E) that efficiently generates the partitions in Gray-code order. 
 
 [1] Ehrlich, Gideon. "Loopless algorithms for generating permutations, combinations, and other combinatorial configurations." Journal of the ACM (JACM) 20.3 (1973): 500-513.
+
 [2] D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1.693 (Addison-Wesley Professional), (2011).
 
 ## Requirements
