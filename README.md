@@ -42,7 +42,7 @@ Input files can be placed in the `INPUT` folder; you must provide the following 
  - (Optional) a file containing the basis elements (see section "Reading the basis from an input file” below).
 
 ### Output files:
-All the output files will be stored in the output folder whose name is specified in `data.h` in the variable `OUTPUT_directory`.
+All the output files will be stored in the output folder, whose name is specified in `data.h` in the variable `OUTPUT_directory`.
 
 ## Set global variables in the file `data.h`
 
