@@ -6,7 +6,7 @@ The code go through all possible MCMs of a given rank `r`, where an MCM is defin
 
 One big advantage of this family of models (the MCMs) is that the computation of the evidence doesn’t require fitting the parameters of the model, which allows to significantly accelerate the comparison between models. The limiting factor of this code is the exhaustive search for the best model, as the space of models is exponentially increasing with `r`.
 
-For a given number of `r` of basis elements, the number of possible partitions the `r` basis operators is equal to the Bell number of `r`, which grows exponentially with `r`. The running time of the program also grows linearly with the number of different states observed in the system (so approximatively linearly with the number of datapoints in the dataset). For these reasons, this code is good for use on small systems, typically with `r <~15` variables. Note that for `r~15`, the code will take several days to perform the exhaustive search.
+For a given number of `r` of basis elements, the number of possible partitions the `r` basis operators is equal to the Bell number of `r`, which grows exponentially with `r`. The running time of the program also grows linearly with the number of different states observed in the dataset (so approximatively linearly with the number of datapoints in the dataset). For these reasons, this code is good for use on small systems, typically with `r <~15` variables. Note that for `r~15`, the code will take several days to perform the exhaustive search.
 
 To generate all possible set partitions of these `r` operators, we used the algorithm described in Ref.[1] and in Ref. [2] (Algorithm E) that efficiently generates the partitions in Gray-code order. 
 
