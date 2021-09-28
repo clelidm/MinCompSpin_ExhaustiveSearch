@@ -37,12 +37,12 @@ This code is an open source project under the GNU GPLv3.
 ## Input and Output files
 
 ### Input files:
-Input files can be stored in the `INPUT` folder, you must provide the following input files:
+Input files can be placed in the `INPUT` folder; you must provide the following input files:
  - a binary datafile. The name of the datafile must be specified in `data.h` in the variable `datafilename`. Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example in the INPUT folder.
- - (Optional) a basis input file (see section "Reading the basis from an input file” above).
+ - (Optional) a file containing the basis elements (see section "Reading the basis from an input file” below).
 
 ### Output files:
-All the output files will be stored in the output folder whose name is specified in `data.h`.
+All the output files will be stored in the output folder whose name is specified in `data.h` in the variable `OUTPUT_directory`.
 
 ## Set global variables in the file `data.h`
 
