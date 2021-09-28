@@ -1,6 +1,6 @@
 # Exhaustive search for the best Minimally Complex Spin Models
 
-This repository contains a code developed for the paper on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex Spin Model (MCM) on a given basis. 
+This repository contains a code developed for the paper Ref.[1] on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex Spin Model (MCM) on a given basis. 
 
 The code go through all possible MCMs of a given rank `r`, where an MCM is defined by a given partition of the `r` basis operators provided (see paper). The comparison between models is based on their evidence (posterior probability that the model generates the data, integrated over the parameter values). The selected model is the one with the largest evidence.
 
@@ -8,11 +8,13 @@ One big advantage of this family of models (the MCMs) is that the computation of
 
 For a given number of `r` of basis elements, the number of possible partitions the `r` basis operators is equal to the Bell number of `r`, which grows exponentially with `r`. The running time of the program also grows linearly with the number of different states observed in the dataset (so approximatively linearly with the number of datapoints in the dataset). For these reasons, this code is good for use on small systems, typically with `r <~15` variables. Note that for `r~15`, the code will take several days to perform the exhaustive search.
 
-To generate all possible set partitions of these `r` operators, we used the algorithm described in Ref.[1] and in Ref. [2] (Algorithm E) that efficiently generates the partitions in Gray-code order. 
+To generate all possible set partitions of these `r` operators, we used the algorithm described in Ref.[2] and in Ref.[3] (Algorithm E) that efficiently generates the partitions in Gray-code order. 
 
-[1] Ehrlich, Gideon. "Loopless algorithms for generating permutations, combinations, and other combinatorial configurations." Journal of the ACM (JACM) 20.3 (1973): 500-513.
+[1] C. de Mulatier, P. P. Mazza, M. Marsili, "Statistical Inference of Minimally Complex Models", arXiv:2008.00520
 
-[2] D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1.693 (Addison-Wesley Professional), (2011).
+[2] Ehrlich, Gideon. "Loopless algorithms for generating permutations, combinations, and other combinatorial configurations." Journal of the ACM (JACM) 20.3 (1973): 500-513.
+
+[3] D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1.693 (Addison-Wesley Professional), (2011).
 
 ## Requirements
 
@@ -67,26 +69,26 @@ In general, we advise you to use the basis in which the dataset is the closest t
 
 ### Structure of the basis:
 
-Basis elements are spin operators that are all independent from each others (see paper). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
+Basis elements are spin operators that are all independent from each others (see Ref.[1]). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
 
-Each element of the basis must be a spin operator. A spin operator is the product of a subset of spin variables (see paper). For instance, `Op = s1 * s2` is a spin operator (physically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (this time associated to a three-body interaction between `s1`, `s2` and `s3`).
+Each element of the basis must be a spin operator. A spin operator is the product of a subset of spin variables (see Ref.[1]). For instance, `Op = s1 * s2` is a spin operator (physically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (associated to a three-body interaction between `s1`, `s2` and `s3`).
 
-In the code, spin operators are encoded on a binary number of `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
+In the code, spin operators are encoded by a binary integer of `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
 For instance, take the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011` (for `n=9`). Finally, to simplify the definition of a spin operator in the code, you can directly use the integer corresponding to this binary number. For instance, to defined the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
 >      Example: the three representations of a spin operator: 
 >      -->  Op = s1 s2           Spin operator
 >      -->  Op = 000000011       Binary representation
 >      -->  Op = 3               Integer representation   ( 000000011 = 3 )
 
-Finally, the number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` specified basis elements.
+Finally, the number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` first basis elements specified.
 
 Note, in the example above, that the convention taken for writing the spin operators is to label the spin variables from the right to the left in the binary representation. This is just a convention and doesn't change the ordering of the spin variables from their order in the dataset, i.e., the first variable on the left in the binary representation of the operators is the same as the first variable on the left in the dataset provided as input file.
 
-However, an important point to be able to interpret the results of the program, is that we adopted the same convention for the new basis: the first operator provided in the basis will correspond to the variable `sigma1`, which will be the most on the right in the transformed dataset (see example in the next section).
+However, an important point, to be able to interpret the results of the program, is that we adopted the same convention for the new basis: the first operator provided in the basis will correspond to the variable `sigma1`, which will be the variable the most on the right in the transformed dataset (see example in the next section).
 
-### Defining the basis manually (at beginning of the `int main()` function):
+### Defining the basis manually (see example at the beginning of the `int main()` function):
 
-The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, you we advise you to use the integer representation of the basis operators. In the example provided in the `int main()` function: `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent operators. Here are the different representations for these spin operators: first, the integer representation; second, the binary representation; third, the corresponding spin operators; and finally representations of these operators in the new basis:
+The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, we advise you to use the integer representation of the basis operators. In the example provided in the `int main()` function: `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent spin operators. Below we give the different representations for these operators: first, the integer representation in the oiginal basis; second, the corresponding binary representation; third, the corresponding spin operator; and finally representations of these operators in the new basis:
 >      36     000100100     s3 s6     -->>  new basis :     000000001     1       sigma1
 >      10     000001010     s2 s4     -->>  new basis :     000000010     2       sigma2
 >      3      000000011     s1 s2     -->>  new basis :     000000100     4       sigma3
