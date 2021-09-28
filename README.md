@@ -37,7 +37,7 @@ This code is an open source project under the GNU GPLv3.
 ## Set global variables in the file `data.h`
 
 Before compiling specify the following global variables:
- - `const unsigned int n`, with the number of variables of the dataset; This number can also be the number of basis operators in the provided basis; it must not be smaller than the number of basis operators.
+ - `const unsigned int n`, with the number of variables of the dataset; If this number if smaller than `n`, then the program will only read the `n` first column of the input dataset. This number can also be the number of basis operators in the provided basis; it must not be smaller than the number of basis operators.
  - `const string OUTPUT_directory`, with the name of the output directory; All the generated files will be placed in this folder.
  - `const string datafilename`, with the location and name of the input binary datafile.
  - (Optional) `const string basis_IntegerRepresentation_filename`, with the location and name of the input file containing the basis element written in the integer representation.
