@@ -43,6 +43,17 @@ Before compiling specify the following global variables:
  - (Optional) `const string basis_IntegerRepresentation_filename`, with the location and name of the input file containing the basis element written in the integer representation.
  - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation.
 
+## Input and Output files
+
+### Input files:
+Input files can be stored in the `INPUT` folder, you must provide the following input files:
+ - a binary datafile. The name of the datafile must be specified in `data.h` in the variable `datafilename`. Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example in the INPUT folder.
+ - (Optional) a basis input file (see section "Reading the basis from an input file” above).
+
+### Output files:
+All the output files will be stored in the output folder whose name is specified in `data.h`.
+
+
 
 ## Specify the spin basis (see functions in `Basis_Choice.cpp`)
 
@@ -142,16 +153,6 @@ Users can also get direct information about the MCM with the functions:
 - `double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-evidence of the MCM defined by `Partition`;
 - `double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)` place the parameter complexity and the geometric complexity of the MCM model defined in `Partition` respectively at the addresses `*C_param` and `*C_geom`; return the total complexity of the model.
 
-
-## Input and Output files
-
-### Input files:
-Input files must be stored in the `INPUT` folder, you must provide the following input files:
- - a binary datafile. The name of the datafile must be specified in `data.h` in the variable `datafilename`. Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example in the INPUT folder.
- - (optional) a basis input file (see section "Reading the basis from an input file” above).
-
-### Output files:
-All the output files will be stored in the output folder whose name is specified in `data.h`.
 
 
 
