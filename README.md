@@ -24,7 +24,7 @@ The code uses the C++11 version of C++.
 
 ## Examples
 
-All useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file and described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. (Add details on the dataset taken as an example).
+All the useful functions that can be called from `int main()` are declared at the beginning of the `main.cpp` file, and described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. (Add details on the dataset taken as an example).
 
 ## License
 
