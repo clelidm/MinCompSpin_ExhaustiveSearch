@@ -55,15 +55,15 @@ Before compiling specify the following global variables:
 
 ## Specify the spin basis (see functions in `Basis_Choice.cpp`)
 
-The elements of the basis for building the Minimally Complex Model (MCM) have to be specified by the user before running the program.
+The elements of the basis on which to build the Minimally Complex Model (MCM) have to be specified by the user before running the program.
+
+In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, where each integer defines a spin operator (see explanation below).
 
 The basis can be written “by hand” directly at the beginning of the `int main()` function, in `uint32_t Basis_Choice[]`, or by using an input file (see subsections below).
 
 If you don’t know which basis to use, you can run the minimally complex model algorithm on the "original basis" of the data, which is the basis in which the dataset is written. This can be done by using the function `list<uint32_t> Original_Basis()` to define the basis.
 
-In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the heuristic/exhaustive search algorithm available separately *here*.
-
-In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, where each integer defines a basis operator (see explanation below).
+In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the greedy search algorithm available separately *here*.
 
 ### Structure of the basis:
 
