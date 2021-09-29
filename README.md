@@ -65,7 +65,7 @@ The basis can be written “by hand” directly at the beginning of the `int mai
 
 If you don’t know which basis to use, you can run the minimally complex model algorithm on the "original basis" of the data, which is the basis in which the dataset is written. This can be done by using the function `list<uint32_t> Original_Basis()` to define the basis.
 
-In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the greedy search algorithm available separately *here*.
+In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the greedy search algorithm available separately [here](https://github.com/clelidm/BinaryData_HighOrderInteractions_GreedyAlgo).
 
 ### Structure of the basis:
 
