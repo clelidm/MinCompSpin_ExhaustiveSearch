@@ -2,6 +2,8 @@
 
 In short, this code allows to uncover community structures (in binary data) that takes into account high order patterns of data. The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) with minimal information theoretic complexity. Details can be found in Ref.[1].
 
+----
+
 This repository contains a code developed for the paper Ref.[1] on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex Spin Model (MCM) on a given basis. 
 
 The code go through all possible MCMs of a given rank `r`, where an MCM is defined by a given partition of the `r` basis operators provided (see paper). The comparison between models is based on their evidence (posterior probability that the model generates the data, integrated over the parameter values). The selected model is the one with the largest evidence.
