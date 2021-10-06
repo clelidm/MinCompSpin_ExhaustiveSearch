@@ -121,7 +121,7 @@ The following functions allow you to define the basis from an input file:
 
 For both functions, operators must be written in the file in one single column. The operator at the top of the column will correspond to the variable `sigma1` in the new basis (i.e. to the bit the most to the right), the second to `sigma2`, etc.
 
-### Printing a basis in the terminal:
+### Printing the basis in the terminal:
 To print information about a basis in the terminal, use the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
 
 ## Read and Transform the Input Data (the following functions are defined in `Data_Manipulation.cpp`):
@@ -130,7 +130,7 @@ To print information about a basis in the terminal, use the function `void Print
 
 The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads the dataset available in the file specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `map<uint32_t, unsigned int> Nset` that maps each observed state to the number of times they occur in the dataset. Note that a state of the system is encoded as an `n`-bit integer.
 
-### Transform the input dataset in the new basis
+### Re-write the dataset in the new basis
 
 The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset`, provided as an argument, is written) to the basis provided as an argument in `Basis`. It is possible to print this new map (i.e., the frequency of occurrence of each state in the new basis) by changing the default value of `print_bool` to `true`.
 
@@ -179,11 +179,11 @@ For all three functions:
  - the default value of `r` is the number `n` of spin variables;
  - it is possible to print in a file the values of the log-Evidence of **all the tested models**. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
 
-**Recommendations** The three functions were created for you to test what happens if you compare models in the three different cases. However, for general use, we recommend that, once you have defined which are the `r` operators on which you want to search for the best MCM, you directly only run the search on MCMs exactly based on the `r` operators (function 1.). We advise to reduce beforehand the selection to the `r` most relevant basis operators (similarly to a dimensionality reduction).
+**Recommendations:**  These three functions were created for you to test what happens if you compare the models for the three different cases. However, for general use, we recommend that, once you have defined which are the `r` operators on which you want to search for the best MCM, you directly run the search among MCMs exactly based on these `r` operators (i.e., using the function 1). We suggest to reduce beforehand the selection to the `r` most relevant basis operators (similarly to a dimensionality reduction step).
 
 ### Print information about your model
 
-The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MC-spin model given as the argument `MCM_Partition`. 
+The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MCM given as an argument in `MCM_Partition`. 
 
 (Details what is printed)
 
