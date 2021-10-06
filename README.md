@@ -93,9 +93,9 @@ For instance, take a system of `n=9` spins and the operator `Op = s1 s2`, this o
 >      -->  Op = 000000011       Binary representation
 >      -->  Op = 3               Integer representation   ( 000000011 = 3 )
 
-Note, in the example above, that the convention taken for writing the spin operators is to label the spin variables from the right to the left in the binary representation. This is just a convention and doesn't change the ordering of the spin variables from their order in the dataset, i.e., the first variable on the left in the binary representation of the operators is the same as the first variable on the left in the dataset provided as input file.
+The convention taken for writing the spin operators is to label the spin variables from the right to the left in the binary representation. Note that this doesn't change the ordering of the spin variables from their order in the dataset, i.e., the first variable on the left in the binary representation of the operators is the same as the first variable on the left in the dataset provided as input file.
 
-However, an important point, to be able to interpret the results of the program, is that we adopted the same convention for the new basis: the first operator provided in the basis will correspond to the variable `sigma1`, which will be the variable the most on the right in the transformed dataset (see example in the next section).
+However, an important point, to be able to interpret the results of the program, is that we adopted the same convention for the new basis: the first operator provided in the basis will correspond to the variable `sigma1`, which will be the variable the most on the right in the transformed dataset (see the example in the next section).
 
 ### Defining the basis manually (see example at the beginning of the `int main()` function):
 
