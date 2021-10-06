@@ -1,6 +1,6 @@
 # Exhaustive search for the best Minimally Complex Spin Models
 
-This program allows to **uncover community structures (in binary data)** that **takes into account high order patterns of data**. The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) with minimal information theoretic complexity. Details can be found in Ref. [1].
+This program allows to **uncover community structures (in binary data)** that **takes into account possible high order patterns of data**. The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) with minimal information theoretic complexity. Details can be found in Ref. [1].
 
 ----
 
