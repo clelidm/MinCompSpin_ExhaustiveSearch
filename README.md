@@ -171,13 +171,13 @@ The total number of these models is given by the Bell number of `r`, denoted `Be
 The total number of these model is given by the sum for `k=1` to `r` of `Bell(k)`.
 
  3. The function `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on any `k` elements of the new basis `Basis_li` for all `k=1 to r`.
-The total number of these model is given by the sum for `k=1` to `r` of `[n choose k] Bell(k)`.
+The total number of these model is given by the sum for `k=1` to `r` of `[n choose k] x Bell(k)`.
 
-These functions enumerate all possible partitions of a set using variantes of the algorithm E described in [D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1 (Addison-Wesley Professional, 2011)]. The algorithm efficiently generates all set partitions in Gray-code order.
+These three functions enumerate all possible partitions of a set using variantes of the algorithm described in Ref. [2] and [3]. The algorithm efficiently generates all set partitions in Gray-code order.
 
 For all three functions: 
  - the default value of `r` is the number `n` of spin variables;
- - it is possible to print in a file the values of the log-Evidence of all the tested models. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
+ - it is possible to print in a file the values of the log-Evidence of ALL the tested models. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
 
 ### Print information about your model
 
