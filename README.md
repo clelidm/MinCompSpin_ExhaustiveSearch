@@ -33,7 +33,7 @@ The code uses the C++11 version of C++.
 
 ## Examples
 
-All the useful functions are declared at the beginning of the `main.cpp` file and can be called from the function `int main()`. They are described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the input folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" of Ref. [1]. 
+All the useful functions are declared at the beginning of the `main.cpp` file and can be called from the function `int main()`. They are described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the `INPUT` folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" of Ref. [1]. 
 
 ## License
 
@@ -47,7 +47,7 @@ This code is an open source project under the GNU GPLv3.
 
 ### Input files:
 Input files can be placed in the `INPUT` folder; you must provide the following input files:
- - a binary datafile. The name of the datafile must be specified in `data.h` in the variable `datafilename`. Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example file `Dataset_Shapes_n9_N1e5.dat` in the INPUT folder.
+ - a binary datafile. The name of the datafile must be specified in `data.h` in the variable `datafilename`. Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example file `Dataset_Shapes_n9_N1e5.dat` in the `INPUT` folder.
  - (Optional) a file containing the basis elements (see section "Reading the basis from an input file” below).
 
 ### Output files:
@@ -62,15 +62,15 @@ Before compiling specify the following global variables:
  - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation (see section "Reading the basis from an input file” below).
  - `const string OUTPUT_directory`, with the name of the output directory. All the generated files will be placed in this folder.
 
-## Specify the spin basis (full functions located in `Basis_Choice.cpp`)
+## Specify the spin basis (functions are defined in `Basis_Choice.cpp`)
 
 The elements of the basis on which to build the Minimally Complex Model (MCM) have to be specified by the user before running the program.
 
 In the code, a basis is stored as a list of 32-bit integers `list<uint32_t> Basis`, where each integer defines a spin operator (see explanation below, in the section `Structure of the basis`). There are three ways to specify the basis:
 
- - The basis can be written “by hand” directly at the beginning of the `int main()` function, in the variable `uint32_t Basis_Choice[]`.
+ - The basis can be written “by hand” directly at the beginning of the `int main()` function, in the variable `uint32_t Basis_Choice[]` (see section `Defining the basis manually` below).
  
- - The basis can be provided in an input file (see subsections below).
+ - The basis can be provided in an input file (see section `Reading the basis from an input file` below).
  
  - The basis can simply be the original basis in which the data is already written. If you don’t know which basis to use, you can run the minimally complex model algorithm on the "original basis" of the data, which is the basis in which the dataset is written. This can be done by using the function `list<uint32_t> Original_Basis()` to define the basis.
 
@@ -80,10 +80,10 @@ In general, we advise you to use the basis in which the dataset is the closest t
 
 Basis elements are spin operators that are all independent from each others (see Ref. [1]). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
 
-Each element of the basis must be a spin operator. A spin operator is the product of a subset of spin variables (see Ref.[1]). For instance, `Op = s1 * s2` is a spin operator (physically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (associated to a three-body interaction between `s1`, `s2` and `s3`).
+Each element of the basis must be a spin operator, where a spin operator is defined as the product of a subset of spin variables. For instance, `Op = s1 * s2` is a spin operator (graphically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (associated to a three-body interaction between `s1`, `s2` and `s3`).
 
-In the code, spin operators are encoded by a binary integer of `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
-For instance, take the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011` (for `n=9`). Finally, to simplify the definition of a spin operator in the code, you can directly use the integer corresponding to this binary number. For instance, to defined the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
+In the code, spin operators are encoded by a binary integer on `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
+For instance, take a system of `n=9` spins and the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011`. Finally, to simplify the definition of a spin operator in the code, you can directly use the integer corresponding to this binary number. For instance, to defined the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
 >      Example: the three representations of a spin operator: 
 >      -->  Op = s1 s2           Spin operator
 >      -->  Op = 000000011       Binary representation
