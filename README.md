@@ -177,7 +177,9 @@ These three functions enumerate all possible partitions of a set using variantes
 
 For all three functions: 
  - the default value of `r` is the number `n` of spin variables;
- - it is possible to print in a file the values of the log-Evidence of ALL THE TESTED MODELS. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
+ - it is possible to print in a file the values of the log-Evidence of **all the tested models**. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
+
+**Recommendations** The three functions were created for you to test what happens if you compare models in the three different cases. However, for general use, we recommend that, once you have defined which are the `r` operators on which you want to search for the best MCM, you directly only run the search on MCMs exactly based on the `r` operators (function 1.). We advise to reduce beforehand the selection to the `r` most relevant basis operators (similarly to a dimensionality reduction).
 
 ### Print information about your model
 
