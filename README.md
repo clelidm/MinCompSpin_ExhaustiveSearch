@@ -112,34 +112,40 @@ The basis can be specified by hand directly at the beginning of the `int main()`
 
 ### Reading the basis from an input file:
 
-The following functions allow you to define a basis from an input file.
- - `list<uint32_t> Read_BasisOp_BinaryRepresentation()`, if operators are written using the binary representation (see example file in the `INPUT` folder); the location of the file must be specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
- - `list<uint32_t> Read_BasisOp_IntegerRepresentation()`, if operators are written using the integer representation (see example file in the `INPUT` folder); the location of the file must be specified in `data.h` in the variable `basis_IntegerRepresentation_filename`.
+The following functions allow you to define the basis from an input file:
 
-For any of these two functions, operators should be written in one single column in the file. 
+ - `list<uint32_t> Read_BasisOp_BinaryRepresentation()`, for operators written with the binary representation (see the example file `Dataset_Shapes_n9_Basis_Binary.dat` in the `INPUT` folder). The location of the file must be specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
 
-### Printing the basis in the terminal:
-To check the information about a basis, you can print it in the terminal using the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
+ - `list<uint32_t> Read_BasisOp_IntegerRepresentation()`, for operators written with the integer representation (see example file `Dataset_Shapes_n9_Basis_Integer.dat` in the `INPUT` folder). The location of the file must be specified in `data.h` in the variable `basis_IntegerRepresentation_filename`.
 
-## Manipulation of Input dataset (functions available in `Data_Manipulation.cpp`):
+For both functions, operators must be written in the file in one single column. The operator at the top of the column will correspond to the variable `sigma1` in the new basis (i.e. to the bit the most to the right), the second to `sigma2`, etc.
+
+### Printing a basis in the terminal:
+To print information about a basis in the terminal, use the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
+
+## Read and Transform the Input Data (the following functions are defined in `Data_Manipulation.cpp`):
 
 ### Read the input dataset
 
-The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads the dataset available at the location specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `map<uint32_t, unsigned int> Nset` that maps each observed state to the number of times they occur in the dataset.
+The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads the dataset available in the file specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `map<uint32_t, unsigned int> Nset` that maps each observed state to the number of times they occur in the dataset. Note that a state of the system is encoded as an `n`-bit integer.
 
 ### Transform the input dataset in the new basis
 
 The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset`, provided as an argument, is written) to the basis provided as an argument in `Basis`. It is possible to print this new map (i.e., the frequency of occurrence of each state in the new basis) by changing the default value of `print_bool` to `true`.
 
-## Find the Best MC-Spin Model
+## Find the Best MCM (the following functions are defined in `Best_MCM.cpp`):
 
-Two functions are available to perform a search among MC-Spin Models:
- - `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int r, unsigned int N, double *LogE_best)` compares all the MCM of rank r, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset);
- - `map<uint32_t, uint32_t> MCM_allRank(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best)` compares all the MCM based on the `r` first elements of the new basis `Basis_li` for all `r=1` to the size of `Basis_li`.
+Three functions are available to perform an exhaustive search for the best MCM:
 
-These two functions enumerate all possible partitions of a set using variantes of the algorithm E described in [D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1 (Addison-Wesley Professional, 2011)]. The algorithm efficiently generates all set partitions in Gray-code order.
+ - 1) `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs of rank `r`, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset);
 
-It is possible to print in a file the values of the log-Evidence for all the tested MCMs. For that change the value of the input variable `print_bool` to true (the defaut value is `false`). 
+ - 2) `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on the `k` first elements of the new basis `Basis_li` for all `k=1 to r`;
+
+ - 3) `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on any `k` elements of the new basis `Basis_li` for all `k=1 to r`.
+
+These functions enumerate all possible partitions of a set using variantes of the algorithm E described in [D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1 (Addison-Wesley Professional, 2011)]. The algorithm efficiently generates all set partitions in Gray-code order.
+
+For all three functions, it is possible to print in a file the values of the log-Evidence of all the models tested. For that change the value of the input variable `print_bool` to true (the defaut value is `false`). 
 
 ### Encoding of MC-Spin Models:
 
