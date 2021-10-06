@@ -47,12 +47,11 @@ This code is an open source project under the GNU GPLv3.
 
 ## Input and Output files
 
-### Input files:
-Input files can be placed in the `INPUT` folder; you must provide the following input files:
+**Input files:** Input files can be placed in the `INPUT` folder; you must provide the following input files:
  - a binary datafile. The name of the datafile must be specified in `data.h` in the variable `datafilename`. Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example file `Dataset_Shapes_n9_N1e5.dat` in the `INPUT` folder.
  - (Optional) a file containing the basis elements (see section "Reading the basis from an input file” below).
 
-### Output files:
+**Output files:**
 All the output files will be stored in the output folder, whose name is specified in `data.h` in the variable `OUTPUT_directory`.
 
 ## Set the global variables, in the file `data.h`
@@ -137,33 +136,39 @@ The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int>
 
 ## Find the Best MCM (the following functions are defined in `Best_MCM.cpp`):
 
-Three functions are available to perform an exhaustive search for the best MCM:
+### Encoding MCMs:
 
- - 1) `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs of rank `r`, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset);
+The code only compares MCMs that correspond to partitions of the basis operators provided.
+Once the dataset is converted in the new basis, these MCMs will be encoded on `r` digits, where `r` is the number of basis operators on which one want to perform the search for the best MCM (see next section).
 
- - 2) `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on the `k` first elements of the new basis `Basis_li` for all `k=1 to r`;
+In the code, partitions of the `r` digits are encoded in two different ways:
 
- - 3) `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on any `k` elements of the new basis `Basis_li` for all `k=1 to r`.
-
-These functions enumerate all possible partitions of a set using variantes of the algorithm E described in [D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1 (Addison-Wesley Professional, 2011)]. The algorithm efficiently generates all set partitions in Gray-code order.
-
-For all three functions, it is possible to print in a file the values of the log-Evidence of all the models tested. For that change the value of the input variable `print_bool` to true (the defaut value is `false`). 
-
-### Encoding of MC-Spin Models:
-
-In this program, all the compared MC-spin models correspond to a partition of the basis operators. Once the dataset converted in this basis, an MC-spin model will be encoded on `m` digits, where .
-
-In the code, partitions of the `r`digits are encoded in two different ways.
+ - a vector of `r` integers, which is used for enumerating partitions in Gray-code order.
 
 (Explains how to read a MCM)
 
-## Print information about your model
+### Exhaustive search for the best MCM:
+Three functions are available to perform an exhaustive search for the best MCM:
+
+ 1. `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs of rank `r`, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset). The number of such models is given by the Bell number of `r`, `BellNb(r)`.
+
+ 2. `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on the `k` first elements of the new basis `Basis_li` for all `k=1 to r`. The number of such model
+
+ 3. `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on any `k` elements of the new basis `Basis_li` for all `k=1 to r`.
+
+These functions enumerate all possible partitions of a set using variantes of the algorithm E described in [D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1 (Addison-Wesley Professional, 2011)]. The algorithm efficiently generates all set partitions in Gray-code order.
+
+For all three functions: 
+ - the default value of `r` is the number `n` of spin variables;
+ - it is possible to print in a file the values of the log-Evidence of all the tested models. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
+
+### Print information about your model
 
 The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MC-spin model given as the argument `MCM_Partition`. 
 
 (Details what is printed)
 
-### Likelihood, Complexity and Evidence:
+## Likelihood, Complexity and Evidence:
 
 Users can also get direct **information about any subcomplete part (SC-part) of an MCM** with the functions:
  - `double LogL_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-likelihood of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section `Encoding of MC-Spin Models`).
