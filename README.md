@@ -143,9 +143,9 @@ Once the dataset is converted in the new basis, these MCMs are simply encoded on
 
 In the code, partitions of the `r` digits are encoded in two different ways:
 
- - **Version a:**  a vector of `r` integers, which is used for enumerating partitions in Gray-code order. In this representation, spin variables with the same digit belong to the same part. This representation is also used for printing MCMs in files.
+ - **Version a:**  a vector of `r` integers, which is used for enumerating partitions in Gray-code order. In this representation, spin variables with the same digit belong to the same part. This representation is also used for printing MCMs in files. See example below.
 
- - **Version b:**  a list of 32-bits integers, which is used for computing the log-evidence and the log-likelihood of MCMs (see section below), and which is the representation in which the best MCM is printed to the terminal. In this representation, each integer encodes a part of the partition: in the binary representation of each integer, the variables with a bit equal to `1` belong to the part.
+ - **Version b:**  a list of 32-bits integers, which is used for computing the log-evidence and the log-likelihood of MCMs (see section below), and which is the representation in which the best MCM is printed to the terminal. In this representation, each integer encodes a part of the partition: in the binary representation of each integer, the variables with a bit equal to `1` belong to the part. See example below.
 
 >      Example, for a system with 9 binary variables:
 >      
