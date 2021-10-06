@@ -56,7 +56,7 @@ Before compiling specify the following global variables:
  - `const unsigned int n`, with the number of variables of the dataset. This number must be smaller or equal to the number of columns in the input dataset. If it is smaller, the program will only read the `n` first columns of the dataset (from the left). This number must be larger or equal to the number `m` of basis elements provided in the `main()` function.
  - `const string datafilename`, with the location and name of the input binary datafile.
  - (Optional) `const string basis_IntegerRepresentation_filename`, with the location and name of the input file containing the basis element written in the integer representation (see section "Reading the basis from an input file” below).
- - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation.
+ - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation (see section "Reading the basis from an input file” below).
  - `const string OUTPUT_directory`, with the name of the output directory. All the generated files will be placed in this folder.
 
 ## Specify the spin basis (see functions in `Basis_Choice.cpp`)
