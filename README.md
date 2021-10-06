@@ -62,7 +62,7 @@ Before compiling specify the following global variables:
  - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation (see section "Reading the basis from an input file” below).
  - `const string OUTPUT_directory`, with the name of the output directory. All the generated files will be placed in this folder.
 
-## Specify the spin basis (functions are defined in `Basis_Choice.cpp`)
+## Specify the spin basis (these functions are defined in `Basis_Choice.cpp`)
 
 The elements of the basis on which to build the Minimally Complex Model (MCM) have to be specified by the user before running the program.
 
@@ -78,9 +78,13 @@ In general, we advise you to use the basis in which the dataset is the closest t
 
 ### Structure of the basis:
 
-Basis elements are spin operators that are all independent from each others (see Ref. [1]). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
+**Basis:** The basis elements are spin operators that are all independent from each others (see Ref. [1]). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
 
-Each element of the basis must be a spin operator, where a spin operator is defined as the product of a subset of spin variables. For instance, `Op = s1 * s2` is a spin operator (graphically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (associated to a three-body interaction between `s1`, `s2` and `s3`).
+The number of elements in the basis can be at most equal to the number `n` of variables in the system. Note that if you provide more than `n` elements in your basis, then the elements in the set you provided are not independent, and, at most, there is `n` of them that are independent. 
+
+The rank `r` of the basis you provide can be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` first basis elements specified.
+
+**Spin operators:** Each element of the basis must be a spin operator, where a spin operator is defined as the product of a subset of spin variables. For instance, `Op = s1 * s2` is a spin operator (graphically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (associated to a three-body interaction between `s1`, `s2` and `s3`).
 
 In the code, spin operators are encoded by a binary integer on `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
 For instance, take a system of `n=9` spins and the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011`. Finally, to simplify the definition of a spin operator in the code, you can directly use the integer corresponding to this binary number. For instance, to defined the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
@@ -88,8 +92,6 @@ For instance, take a system of `n=9` spins and the operator `Op = s1 s2`, this o
 >      -->  Op = s1 s2           Spin operator
 >      -->  Op = 000000011       Binary representation
 >      -->  Op = 3               Integer representation   ( 000000011 = 3 )
-
-Finally, the number of elements in the basis must be at most equal to the number `n` of variables in the system. Note that the rank `r` of the basis can also be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` first basis elements specified.
 
 Note, in the example above, that the convention taken for writing the spin operators is to label the spin variables from the right to the left in the binary representation. This is just a convention and doesn't change the ordering of the spin variables from their order in the dataset, i.e., the first variable on the left in the binary representation of the operators is the same as the first variable on the left in the dataset provided as input file.
 
