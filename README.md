@@ -1,10 +1,10 @@
 # Exhaustive search for the best Minimally Complex Spin Models
 
-This program allows to **uncover community structures (in binary data)** that **takes into account high order patterns of data**. The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) with minimal information theoretic complexity. Details can be found in Ref.[1].
+This program allows to **uncover community structures (in binary data)** that **takes into account high order patterns of data**. The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) with minimal information theoretic complexity. Details can be found in Ref. [1].
 
 ----
 
-This repository contains a code developed for the paper Ref.[1] on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex Spin Model (MCM) on a given basis. 
+This repository contains a code developed for the paper Ref. [1] on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex Spin Model (MCM) on a given basis. 
 
 The code go through all possible MCMs of a given rank `r`, where an MCM is defined by a given partition of the `r` basis operators provided (see paper). The comparison between models is based on their evidence (posterior probability that the model generates the data, integrated over its parameter values). The selected model is the one with the largest evidence.
 
@@ -12,7 +12,7 @@ One big advantage of this family of models (the MCMs) is that the computation of
 
 For a given number `r` of basis elements, the number of possible partitions of this set of `r` elements is equal to the Bell number of `r`, which grows roughly exponentially with `r`. Besides, the running time of the program also grows linearly with the number of different states observed in the dataset (so approximatively linearly with the number of datapoints in the dataset). For these reasons, this code is good for use on small systems, typically with `r <~15` variables. Note that for `r~15`, the code will take several days to perform the exhaustive search.
 
-To efficiently generate all possible set partitions of these `r` operators, we used the algorithm described in Ref.[2] and in Ref.[3] (Algorithm E) that generates the partitions in Gray-code order. Thus, the code goes through all possible partitions by changing only one bit for each new partition. 
+To efficiently generate all possible set partitions of these `r` operators, we used the algorithm described in Ref. [2] and in Ref. [3] (Algorithm E) that generates the partitions in Gray-code order. Thus, the code goes through all possible partitions by changing only one bit for each new partition. 
 
 [1]  C. de Mulatier, P. P. Mazza, M. Marsili, *Statistical Inference of Minimally Complex Models*, [arXiv:2008.00520](https://arxiv.org/abs/2008.00520)
 
@@ -69,11 +69,11 @@ The basis can be written “by hand” directly at the beginning of the `int mai
 
 If you don’t know which basis to use, you can run the minimally complex model algorithm on the "original basis" of the data, which is the basis in which the dataset is written. This can be done by using the function `list<uint32_t> Original_Basis()` to define the basis.
 
-In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in the paper). Finding this basis can be done using the greedy search algorithm available separately [here](https://github.com/clelidm/BinaryData_HighOrderInteractions_GreedyAlgo).
+In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in Ref. [1]). Finding this basis can be done using the greedy search algorithm available separately [here](https://github.com/clelidm/BinaryData_HighOrderInteractions_GreedyAlgo).
 
 ### Structure of the basis:
 
-Basis elements are spin operators that are all independent from each others (see Ref.[1]). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
+Basis elements are spin operators that are all independent from each others (see Ref. [1]). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
 
 Each element of the basis must be a spin operator. A spin operator is the product of a subset of spin variables (see Ref.[1]). For instance, `Op = s1 * s2` is a spin operator (physically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (associated to a three-body interaction between `s1`, `s2` and `s3`).
 
