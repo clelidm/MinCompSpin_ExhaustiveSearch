@@ -118,11 +118,11 @@ To check the information about a basis, you can print it in the terminal using t
 
 ### Read the input dataset
 
-The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads the dataset available at the location specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the a structure `map<uint32_t, unsigned int> Nset` that map each observed states to the number of times they occur in the dataset.
+The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads the dataset available at the location specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `map<uint32_t, unsigned int> Nset` that maps each observed state to the number of times they occur in the dataset.
 
 ### Transform the input dataset in the new basis
 
-The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset`, provided as an argument, is written) to the basis provided as the argument in `Basis`. It is possible to print this new map (i.e., the frequency of occurrence of each state in the new basis), by changing the default value of `print_bool` to `true`.
+The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset`, provided as an argument, is written) to the basis provided as an argument in `Basis`. It is possible to print this new map (i.e., the frequency of occurrence of each state in the new basis) by changing the default value of `print_bool` to `true`.
 
 ## Find the Best MC-Spin Model
 
