@@ -12,7 +12,7 @@ One big advantage of this family of models (the MCMs) is that the computation of
 
 For a given number `r` of basis elements, the number of possible partitions of this set of `r` elements is equal to the Bell number of `r`, which grows roughly exponentially with `r`. Besides, the running time of the program also grows linearly with the number of different states observed in the dataset (so approximatively linearly with the number of datapoints in the dataset). For these reasons, this code is good for use on small systems, typically with `r <~15` variables. Note that for `r~15`, the code will take several days to perform the exhaustive search.
 
-To efficiently generate all possible set partitions of these `r` operators, we used the algorithm described in Ref.[2] and in Ref.[3] (Algorithm E) that generates the partitions in Gray-code order (i.e., the code goes through all possible partitions by changing only one bit for each new partition). 
+To efficiently generate all possible set partitions of these `r` operators, we used the algorithm described in Ref.[2] and in Ref.[3] (Algorithm E) that generates the partitions in Gray-code order. Thus, the code goes through all possible partitions by changing only one bit for each new partition. 
 
 [1]  C. de Mulatier, P. P. Mazza, M. Marsili, *Statistical Inference of Minimally Complex Models*, [arXiv:2008.00520](https://arxiv.org/abs/2008.00520)
 
