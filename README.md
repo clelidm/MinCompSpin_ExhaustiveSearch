@@ -139,7 +139,7 @@ The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int>
 ### Encoding MCMs:
 
 The code only compares MCMs that correspond to partitions of the basis operators provided.
-Once the dataset is converted in the new basis, these MCMs will be encoded on `r` digits, where `r` is the number of basis operators on which one want to perform the search for the best MCM (see next section).
+Once the dataset is converted in the new basis, these MCMs are simply encoded on `r` digits, where `r` is the number of basis operators on which one want to perform the search for the best MCM (see next section).
 
 In the code, partitions of the `r` digits are encoded in two different ways:
 
@@ -161,13 +161,17 @@ In the code, partitions of the `r` digits are encoded in two different ways:
 >                            -   1 = 000000001, this part contains the spin s1 alone.
 
 ### Exhaustive search for the best MCM:
+
 Three functions are available to perform an exhaustive search for the best MCM:
 
- 1. `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs of rank `r`, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset). The number of such models is given by the Bell number of `r`, `BellNb(r)`.
+ 1. The function `map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs of rank `r`, based on the `r` first elements of the new basis `Basis_li` (the one used to build Kset).
+The total number of these models is given by the Bell number of `r`, denoted `Bell(r)`.
 
- 2. `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on the `k` first elements of the new basis `Basis_li` for all `k=1 to r`. The number of such model
+ 2. The function `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on the `k` first elements of the new basis `Basis_li` for all `k=1 to r`. 
+The total number of these model is given by the sum for `k=1` to `r` of `Bell(k)`.
 
- 3. `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on any `k` elements of the new basis `Basis_li` for all `k=1 to r`.
+ 3. The function `map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)` compares all the MCMs based on any `k` elements of the new basis `Basis_li` for all `k=1 to r`.
+The total number of these model is given by the sum for `k=1` to `r` of `[n choose k] Bell(k)`.
 
 These functions enumerate all possible partitions of a set using variantes of the algorithm E described in [D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1 (Addison-Wesley Professional, 2011)]. The algorithm efficiently generates all set partitions in Gray-code order.
 
