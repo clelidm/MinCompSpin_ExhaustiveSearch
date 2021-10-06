@@ -177,7 +177,7 @@ These three functions enumerate all possible partitions of a set using variantes
 
 For all three functions: 
  - the default value of `r` is the number `n` of spin variables;
- - it is possible to print in a file the values of the log-Evidence of ALL the tested models. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
+ - it is possible to print in a file the values of the log-Evidence of ALL THE TESTED MODELS. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
 
 ### Print information about your model
 
