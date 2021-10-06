@@ -130,6 +130,8 @@ Two functions are available to perform a search among MC-Spin Models:
 
 These two functions enumerate all possible partitions of a set using variantes of the algorithm E described in [D.E. Knuth, The Art of Computer Programming, Volume 4, Combinatorial Algorithms: Part 1 (Addison-Wesley Professional, 2011)]. The algorithm efficiently generates all set partitions in Gray-code order.
 
+It is possible to print in a file the values of the log-Evidence for all the tested MCMs. For that change the value of the input variable `print_bool` to true (the defaut value is `false`). 
+
 ### Encoding of MC-Spin Models:
 
 In this program, all the compared MC-spin models correspond to a partition of the basis operators. Once the dataset converted in this basis, an MC-spin model will be encoded on `m` digits, where .
