@@ -63,7 +63,7 @@ Before compiling specify the following global variables:
 
 The elements of the basis on which to build the Minimally Complex Model (MCM) have to be specified by the user before running the program.
 
-In the code, a basis is stored as a list of integers `list<uint32_t> Basis`, where each integer defines a spin operator (see explanation below).
+In the code, a basis is stored as a list of 32-bit integers `list<uint32_t> Basis`, where each integer defines a spin operator (see explanation below).
 
 The basis can be written “by hand” directly at the beginning of the `int main()` function, in `uint32_t Basis_Choice[]`, or by using an input file (see subsections below).
 
