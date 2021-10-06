@@ -185,7 +185,8 @@ For all three functions:
 
 The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MCM given as an argument in `MCM_Partition`. 
 
-(Details what is printed)
+For each part in the partition, the function print the integer/binary representation of the part, as well as the following information for the sub-complethe log-likelihood (`LogL`), the parametric complexity (`C_param`), the geometric complexity (), the total complexity, and the log-evidence.
+
 
 ## Likelihood, Complexity and Evidence:
 
