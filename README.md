@@ -59,7 +59,7 @@ Before compiling specify the following global variables:
  - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation (see section "Reading the basis from an input file” below).
  - `const string OUTPUT_directory`, with the name of the output directory. All the generated files will be placed in this folder.
 
-## Specify the spin basis (see functions in `Basis_Choice.cpp`)
+## Specify the spin basis (functions available in `Basis_Choice.cpp`)
 
 The elements of the basis on which to build the Minimally Complex Model (MCM) have to be specified by the user before running the program.
 
@@ -103,7 +103,7 @@ The basis can be specified by hand directly at the beginning of the `int main()`
 >      65     001000001     s1 s7     -->>  new basis :     010000000     128     sigma8
 >      4      000000100     s3        -->>  new basis :     100000000     256     sigma9
 
-### Reading the basis from an input file (see `Basis_Choice.cpp`):
+### Reading the basis from an input file:
 
 The following functions allow you to define a basis from an input file.
  - `list<uint32_t> Read_BasisOp_BinaryRepresentation()`, if operators are written using the binary representation (see example file in the `INPUT` folder); the location of the file must be specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
@@ -111,14 +111,16 @@ The following functions allow you to define a basis from an input file.
 
 For any of these two functions, operators should be written in one single column in the file. 
 
-### Printing the basis in the terminal (see `Basis_Choice.cpp`):
+### Printing the basis in the terminal:
 To check the information about a basis, you can print it in the terminal using the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
 
-## Read the input dataset
+## Manipulation of Input dataset (functions available in `Data_Manipulation.cpp`):
+
+### Read the input dataset
 
 The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads the dataset available at the location specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the a structure `map<uint32_t, unsigned int> Nset` that map each observed states to the number of times they occur in the dataset.
 
-## Transform the input dataset in the new basis
+### Transform the input dataset in the new basis
 
 The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset` provided as an argument is written) to the one provided as the argument `Basis`.
 
