@@ -190,6 +190,9 @@ See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) f
 
  - The same information is printed for the whole MCM, as well as the Minimum Description Length (`MDL`).
 
+### Define your own MCM
+
+
 ## Likelihood, Complexity and Evidence:
 
 Users can also get direct **information about any subcomplete part (SC-part) of an MCM** with the functions:
