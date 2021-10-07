@@ -165,13 +165,13 @@ In the code, partitions of the `r` digits are encoded in two different ways:
 Three functions are available to perform an exhaustive search for the best MCM:
 
  - **Function 1:** The function **`MCM_GivenRank_r`** compares all the MCMs of rank `r`, based on the `r` first elements of the new basis (i.e., the basis used to build Kset). The total number of these models is given by the Bell number of `r`, denoted `Bell(r)`. See declaration:
->   map<uint32_t, uint32_t> **MCM_GivenRank_r**(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+ >        map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 
  - **Function 2:** The function **`MCM_AllRank_SmallerThan_r_Ordered`** compares all the MCMs based on the `k` first elements of the new basis for all `k=1 to r`. The total number of these model is given by the sum for `k=1` to `r` of `Bell(k)`. See declaration:
->   map<uint32_t, uint32_t> **MCM_AllRank_SmallerThan_r_Ordered**(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+>        map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 
  - **Function 3:** The function **`MCM_AllRank_SmallerThan_r_nonOrdered`** compares all the MCMs based on **any** `k` elements of the new basis for all `k=1 to r`. The total number of these model is given by the sum for `k=1` to `r` of `[n choose k] x Bell(k)`. See declaration:
->  map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+>        map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 
 These three functions enumerate all possible partitions of a set using variantes of the algorithm described in Ref. [2] and [3]. The algorithm efficiently generates all set partitions in Gray-code order.
 
@@ -185,7 +185,7 @@ For all three functions:
 
 The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MCM given as an argument in `MCM_Partition`. 
 
-For each part in the partition, the function print the integer/binary representation of the part, as well as the following information for the sub-complethe log-likelihood (`LogL`), the parametric complexity (`C_param`), the geometric complexity (), the total complexity, and the log-evidence.
+For each part in the partition, the function print the integer and binary representation of the part (see section `Encoding MCMs` above), as well as the following information for the sub-complethe log-likelihood (`LogL`), the parametric complexity (`C_param`), the geometric complexity (`C_geom`), the total complexity `C_tot`, and the log-evidence `LogE`.
 
 
 ## Likelihood, Complexity and Evidence:
