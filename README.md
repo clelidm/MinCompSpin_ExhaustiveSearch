@@ -7,7 +7,7 @@ This program allows to **find community structures in binary data**, taking into
 
 ## Description
 
-This repository contains a code developed for the paper Ref. [1] on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex Spin Model (MCM) in a chosen basis for the data. 
+This repository contains a code developed for the paper Ref. [1] on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex spin Model (MCM) in a chosen basis for the data. The basis is chosen by the user.
 
 To do so, the code go through all possible MCMs of a given rank `r`, where an MCM is defined by a partition of the `r` basis operators provided (see Ref. [1]). The comparison between models is based on their evidence (posterior probability that the model generates the data, integrated over its parameter values). The selected model is the one with the largest evidence.
 
