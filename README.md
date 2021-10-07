@@ -183,12 +183,12 @@ For all three functions:
 
 ### Print information about your model
 
-The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MCM given as an argument in `MCM_Partition`. 
+The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MCM given as an argument in `MCM_Partition`:
 
-For each part in the partition, the function print the integer and binary representation of the part (see section "Encoding MCMs" above), as well as the following information for the MCM with a single community based on that part: the log-likelihood (`LogL`), the parametric complexity (`C_param`), the geometric complexity (`C_geom`), the total complexity (`C_tot`), and the log-evidence (`LogE`). See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) for the definition of complexity of spin models.
+ - For each part in the partition, the function print the integer and binary representation of the part (see section "Encoding MCMs" above), as well as the following information for the MCM with a single community based on that part: the log-likelihood (`LogL`), the parametric complexity (`C_param`), the geometric complexity (`C_geom`), the total complexity (`C_tot`), and the log-evidence (`LogE`).
+See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) for the definition of complexity of spin models.
 
-The same 
-
+ - The same information is printed for the whole MCM, as well as the Minimum Description Length (`MDL`).
 
 ## Likelihood, Complexity and Evidence:
 
