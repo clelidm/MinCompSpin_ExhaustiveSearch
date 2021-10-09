@@ -196,7 +196,7 @@ See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) f
 ## Likelihood, Complexity and Evidence:
 
 Users can also get **specific information about an MCM** with the following functions:
-- `double **LogL_MCM**(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-likelihood of the MCM defined by `Partition`;
+- `double` **`LogL_MCM`** `(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-likelihood of the MCM defined by `Partition`;
 - `double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-evidence of the MCM defined by `Partition`;
 - `double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)` place the parameter complexity and the geometric complexity of the MCM model defined in `Partition` respectively at the addresses `*C_param` and `*C_geom`. Finally, the function returns the total complexity of the model.
 
