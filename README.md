@@ -195,17 +195,16 @@ See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) f
 
 ## Likelihood, Complexity and Evidence:
 
-Users can also get direct **information about any subcomplete part (SC-part) of an MCM** with the functions:
- - `double LogL_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-likelihood of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section `Encoding of MC-Spin Models`).
- - `double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-evidence of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section `Encoding of MC-Spin Models`).
- - `double ParamComplexity_SubCM(unsigned int m, unsigned int N)` returns the model complexity of the SC-part due to the number of parameters in the part; this is the first complexity term appearing the Minimum Description Length principle (which is of the order of `O(log N)` where `N` is the number of datapoints -- see paper).
- - `double GeomComplexity_SubCM(unsigned int m)` returns the geometric complexity of the SC-part; this is the secdon complexity term appearing the Minimum Description Length principle (which is of the order of `O(1)` -- see paper).
-
-Users can also get direct information about the MCM with the functions:
+Users can also get specific information about the MCM with the functions:
 - `double LogL_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-likelihood of the MCM defined by `Partition`;
 - `double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-evidence of the MCM defined by `Partition`;
-- `double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)` place the parameter complexity and the geometric complexity of the MCM model defined in `Partition` respectively at the addresses `*C_param` and `*C_geom`; return the total complexity of the model.
+- `double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)` place the parameter complexity and the geometric complexity of the MCM model defined in `Partition` respectively at the addresses `*C_param` and `*C_geom`. Finally, the function returns the total complexity of the model.
 
+Users can also get specific information about any subcomplete part (SC-part) of an MCM with the functions:
+ - `double LogL_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-likelihood of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
+ - `double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-evidence of the SC-part where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
+ - `double ParamComplexity_SubCM(unsigned int m, unsigned int N)` returns the model complexity of the SC-part due to the number of parameters in the part; this is the first complexity term appearing the Minimum Description Length principle (which is of the order of `O(log N)` where `N` is the number of datapoints -- see paper).
+ - `double GeomComplexity_SubCM(unsigned int m)` returns the geometric complexity of the SC-part; this is the secdon complexity term appearing the Minimum Description Length principle (which is of the order of `O(1)` -- see paper).
 
 
 
