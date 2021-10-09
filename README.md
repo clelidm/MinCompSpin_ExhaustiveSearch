@@ -35,7 +35,7 @@ The code uses the C++11 version of C++.
 
 ## Examples
 
-All the useful functions are declared at the beginning of the `main.cpp` file and can be called from the function `int main()`. They are described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the `INPUT` folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" of Ref. [1]. 
+All the useful functions are declared at the beginning of the `main.cpp` file and can be called from the function `int main()`. They are described in the sections below. For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the `INPUT` folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" of Ref. [1]. Note that the example in `int main()` run the three different versions of the algorithm for illustration (see section "Find the Best MCM"). To run with more variables, choose only one of these versions (we advise you to use version 1). 
 
 ## License
 
