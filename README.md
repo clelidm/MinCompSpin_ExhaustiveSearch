@@ -162,7 +162,7 @@ In the code, partitions of the `r` digits are encoded in two different ways:
 
 ### Exhaustive search for the best MCM:
 
-Three functions are available to perform an exhaustive search for the best MCM:
+Three functions are available to perform an exhaustive search for the best MCM (i.e., the MCM with the largest log-evidence `logE`):
 
  - **Function 1:** The function **`MCM_GivenRank_r`** compares all the MCMs of rank `r`, based on the `r` first elements of the new basis (i.e., the basis used to build Kset). The total number of these models is given by the Bell number of `r`, denoted `Bell(r)`. See declaration:
  >        map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
@@ -185,10 +185,10 @@ For all three functions:
 
 The function `void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MCM given as an argument in `MCM_Partition`:
 
- - For each part in the partition, the function print the integer and binary representation of the part (see section "Encoding MCMs" above), as well as the following information for the MCM with a single community based on that part: the log-likelihood (`LogL`), the parametric complexity (`C_param`), the geometric complexity (`C_geom`), the total complexity (`C_tot`), and the log-evidence (`LogE`).
-See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) for the definition of complexity of spin models.
+ - **For the whole MCM,** the function prints the number of Independent Components of the MCM (i.e., the number of partitions -- or communities -- of the MCM, see ref. [1]), as well as the log-likelihood (`LogL`), the parameter complexity (`C_param`), the geometric complexity (`C_geom`), the total complexity (`C_tot`), the Minimum Description Length (`MDL`) and the log-evidence (`LogE`). 
+See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) for the definition of the complexity of spin models (in connection with the Minimum Description Length Principle).
 
- - The same information is printed for the whole MCM, as well as the Minimum Description Length (`MDL`).
+ - **For each independent part in the MCM,** the function prints the integer and binary representation of the part (see section "Encoding MCMs" above), as well as  the following information for the MCM with a single community based on that part: the log-likelihood (`LogL`), the parametric complexity (`C_param`), the geometric complexity (`C_geom`), the total complexity (`C_tot`), and the log-evidence (`LogE`).
 
 ### Define your own MCM
 
