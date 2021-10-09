@@ -63,7 +63,9 @@ Before compiling specify the following global variables:
  - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation (see section "Reading the basis from an input file” below).
  - `const string OUTPUT_directory`, with the name of the output directory. All the generated files will be placed in this folder.
 
-## Specify the spin basis (these functions are defined in `Basis_Choice.cpp`)
+## Specify the spin basis
+
+The following functions are defined in `Basis_Choice.cpp`.
 
 The elements of the basis on which to build the Minimally Complex Model (MCM) have to be specified by the user before running the program.
 
@@ -124,7 +126,9 @@ For both functions, operators must be written in the file in one single column. 
 ### Printing the basis in the terminal:
 To print information about a basis in the terminal, use the function `void PrintTerm_Basis(list<uint32_t> Basis_li)`.
 
-## Read and Transform the Input Data (the following functions are defined in `Data_Manipulation.cpp`):
+## Read and Transform the Input Data:
+
+The following functions are defined in `Data_Manipulation.cpp`.
 
 ### Read the input dataset
 
@@ -134,7 +138,9 @@ The function `map<uint32_t, unsigned int> read_datafile(unsigned int *N)` reads 
 
 The function `map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset`, provided as an argument, is written) to the basis provided as an argument in `Basis`. It is possible to print this new map (i.e., the frequency of occurrence of each state in the new basis) by changing the default value of `print_bool` to `true`.
 
-## Find the Best MCM (the following functions are defined in `Best_MCM.cpp`):
+## Find the Best MCM:
+
+The following functions are defined in `Best_MCM.cpp`.
 
 ### Encoding MCMs:
 
@@ -194,6 +200,8 @@ See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) f
 
 
 ## Likelihood, Complexity and Evidence:
+
+The following functions are defined in `LogL.cpp`, `Complexity.cpp` and `LogE.cpp`.
 
 Users can also get **specific information about an MCM** with the following functions:
 - `double` **`LogL_MCM`** `(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-likelihood of the MCM defined by `Partition`;
