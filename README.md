@@ -57,11 +57,11 @@ All the output files will be stored in the output folder, whose name is specifie
 ## Set the global variables, in the file `data.h`
 
 Before compiling specify the following global variables:
- - `const unsigned int n`, with the number of variables of the dataset. This number must be smaller or equal to the number of columns in the input dataset. If it is smaller, the program will only read the `n` first columns of the dataset (from the left). This number must be larger or equal to the number `m` of basis elements provided in the `main()` function.
- - `const string datafilename`, with the location and name of the input binary datafile.
- - (Optional) `const string basis_IntegerRepresentation_filename`, with the location and name of the input file containing the basis element written in the integer representation (see section "Reading the basis from an input file” below).
- - (Optional) `const string basis_BinaryRepresentation_filename`,  with the location and name of the input file containing the basis element written in the binary representation (see section "Reading the basis from an input file” below).
- - `const string OUTPUT_directory`, with the name of the output directory. All the generated files will be placed in this folder.
+ - `const unsigned int` **`n`**, with the number of variables of the dataset. This number must be smaller or equal to the number of columns in the input dataset. If it is smaller, the program will only read the `n` first columns of the dataset (from the left). This number must be larger or equal to the number `m` of basis elements provided in the `main()` function.
+ - `const string` **`datafilename`**, with the location and name of the input binary datafile.
+ - (Optional) `const string` **`basis_IntegerRepresentation_filename`**, with the location and name of the input file containing the basis element written in the integer representation (see section "Reading the basis from an input file” below).
+ - (Optional) `const string` **`basis_BinaryRepresentation_filename`**,  with the location and name of the input file containing the basis element written in the binary representation (see section "Reading the basis from an input file” below).
+ - `const string` **`OUTPUT_directory`**, with the name of the output directory. All the generated files will be placed in this folder.
 
 ## Specify the spin basis
 
@@ -69,13 +69,13 @@ The following functions are defined in `Basis_Choice.cpp`.
 
 The elements of the basis on which to build the Minimally Complex Model (MCM) have to be specified by the user before running the program.
 
-In the code, a basis is stored as a list of 32-bit integers `list<uint32_t> Basis`, where each integer defines a spin operator (see explanation below, in the section `Structure of the basis`). There are three ways to specify the basis:
+In the code, a basis is stored as a list of 32-bit integers `list<uint32_t>` **`Basis`**, where each integer defines a spin operator (see explanation below, in the section `Structure of the basis`). There are three ways to specify the basis:
 
  - The basis can be written “by hand” directly at the beginning of the `int main()` function, in the variable `uint32_t Basis_Choice[]` (see section `Defining the basis manually` below).
  
  - The basis can be provided in an input file (see section `Reading the basis from an input file` below).
  
- - The basis can simply be the original basis in which the data is already written. If you don’t know which basis to use, you can run the minimally complex model algorithm on the "original basis" of the data, which is the basis in which the dataset is written. This can be done by using the function `list<uint32_t> Original_Basis()` to define the basis.
+ - The basis can simply be the original basis in which the data is already written. If you don’t know which basis to use, you can run the minimally complex model algorithm on the "original basis" of the data, which is the basis in which the dataset is written. This can be done by using the function `list<uint32_t>` **`Original_Basis`**`()` to define the basis.
 
 In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in Ref. [1]). Finding this basis can be done using the greedy search algorithm available separately [here](https://github.com/clelidm/BinaryData_HighOrderInteractions_GreedyAlgo).
 
