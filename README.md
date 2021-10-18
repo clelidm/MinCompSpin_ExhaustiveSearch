@@ -202,7 +202,7 @@ See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) f
 
 ### Define your own MCM
 
-You can check that the model (set of parts) you have provided, properly defines an MCM by calling the function `bool`**`check_partition`**`(map<uint32_t, uint32_t> Partition)`.
+You can check that the model (i.e., list of parts) that you have provided properly defines an MCM by calling the function `bool`**`check_partition`**`(map<uint32_t, uint32_t> Partition)`. This function will return `false` if there is an overlap between the parts.
 
 ## Likelihood, Complexity and Evidence:
 
