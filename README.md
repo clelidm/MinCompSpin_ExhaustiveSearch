@@ -37,7 +37,9 @@ The code uses the C++11 version of C++.
 
 All the functions useful for the user are declared in the file `library.h` and can be called from the function `int main()` in the file `main.cpp`. They are described in the sections below.
 
-For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the `INPUT` folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" of Ref. [1]. Note that the example in `int main()` run three different versions of the search algorithm for illustration (see section "Find the Best MCM"). To run with more variables, please choose only one of these versions (we advise you to use the function `MCM_GivenRank_r()`). 
+For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the `INPUT` folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" of Ref. [1].
+
+Note that the example in `int main()` run three different versions of the search algorithm for illustration (see section "Find the Best MCM"). To run with more variables, please choose only one of these versions (we advise you to use the function `MCM_GivenRank_r()`). 
 
 ## License
 
