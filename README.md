@@ -106,7 +106,7 @@ However, an important point, to be able to interpret the results of the program,
 
 ### Defining the basis manually (see example at the beginning of the `int main()` function):
 
-The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, we advise you to use the integer representation of the basis operators. In the example provided in the `int main()` function: `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent spin operators. Below we give the different representations for these operators: first, the integer representation in the oiginal basis; second, the corresponding binary representation; third, the corresponding spin operator; and finally representations of these operators in the new basis:
+The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, we advise you to use the integer representation of the basis operators. For example, `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent spin operators. Below we give the different representations for these operators: first, the integer representation in the oiginal basis; second, the corresponding binary representation; third, the corresponding spin operator; and finally representations of these operators in the new basis:
 >      36     000100100     s3 s6     -->>  new basis :     000000001     1       sigma1
 >      10     000001010     s2 s4     -->>  new basis :     000000010     2       sigma2
 >      3      000000011     s1 s2     -->>  new basis :     000000100     4       sigma3
