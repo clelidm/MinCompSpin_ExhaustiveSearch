@@ -121,9 +121,9 @@ The basis can be specified by hand directly at the beginning of the `int main()`
 
 The following functions allow you to define the basis from an input file:
 
- - `list<uint32_t>`**`Read_BasisOp_BinaryRepresentation()`**, for operators written with the binary representation (see the example file `Dataset_Shapes_n9_Basis_Binary.dat` in the `INPUT` folder). The location of the file must be specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
+ - `list<uint32_t>`**`Read_BasisOp_BinaryRepresentation`**`(string Basis_binary_filename = basis_BinaryRepresentation_filename)`, for operators written with the binary representation (see the example file `Dataset_Shapes_n9_Basis_Binary.dat` in the `INPUT` folder). The location of the file must be given as an argument of the function. By default the function will read the file specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
 
- - `list<uint32_t>`**`Read_BasisOp_IntegerRepresentation()`**, for operators written with the integer representation (see example file `Dataset_Shapes_n9_Basis_Integer.dat` in the `INPUT` folder). The location of the file must be specified in `data.h` in the variable `basis_IntegerRepresentation_filename`.
+ - `list<uint32_t>`**`Read_BasisOp_IntegerRepresentation`**`(string Basis_integer_filename = basis_IntegerRepresentation_filename)`, for operators written with the integer representation (see example file `Dataset_Shapes_n9_Basis_Integer.dat` in the `INPUT` folder). The location of the file must be given as an argument of the function. By default the function will read the file specified in `data.h` in the variable `basis_IntegerRepresentation_filename`.
 
 For both functions, operators must be written in the file in one single column. The operator at the top of the column will correspond to the variable `sigma1` in the new basis (i.e. to the bit the most to the right), the second to `sigma2`, etc.
 
@@ -136,7 +136,7 @@ The following functions are defined in `Data_Manipulation.cpp`.
 
 ### Read the input dataset
 
-The function `map<uint32_t, unsigned int>`**`read_datafile`**`(unsigned int *N)` reads the dataset available in the file specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `map<uint32_t, unsigned int>`**`Nset`** that maps each observed state to the number of times they occur in the dataset. Note that a state of the system is encoded as an `n`-bit integer.
+The function `map<uint32_t, unsigned int>`**`read_datafile`**`(unsigned int *N, string filename = datafilename)` reads the dataset with location and name provided in argument (`string filename`). By default the function will read the file specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `map<uint32_t, unsigned int>`**`Nset`** that maps each observed state to the number of times they occur in the dataset. Note that each state of the system is encoded as an `n`-bit integer.
 
 ### Re-write the dataset in the new basis
 
