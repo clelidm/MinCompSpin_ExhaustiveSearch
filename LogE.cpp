@@ -79,25 +79,11 @@ double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N
 /******************************************************************************/
 /****************************   LogE of a MCM   *******************************/
 /******************************************************************************/
-//check if *Partition* is an actual partition of the r elements, 
+//check if *Partition* is an actual partition of the basis elements, 
 // i.e., that no basis element appears in more than 1 part of the partition.
+// i.e., that each basis element only appears in a single part of the partition.
+bool check_partition(map<uint32_t, uint32_t> Partition);
 
-bool check_partition(map<uint32_t, uint32_t> Partition)
-{
-  map<uint32_t, uint32_t>::iterator Part;
-  uint32_t sum = 0;
-  uint32_t rank = 0; 
-
-  for (Part = Partition.begin(); Part != Partition.end(); Part++)
-  {
-    sum |= (*Part).second;
-    rank += bitset<n>((*Part).second).count();
-    //cout << bitset<n>( (*Part).second ) << " \t";
-  }
-  //cout << bitset<n>(sum) << endl;
-
-  return (bitset<n>(sum).count() == rank);
-}
 
 double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)
 {

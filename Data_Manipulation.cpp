@@ -14,16 +14,16 @@
 /**************************     READ FILE    **********************************/
 /******************************************************************************/
 /**************    READ DATA and STORE them in Nset    ************************/
-map<uint32_t, unsigned int> read_datafile(unsigned int *N)    // O(N)  where N = data set size
+map<uint32_t, unsigned int> read_datafile(unsigned int *N, string filename = datafilename)    // O(N)  where N = data set size
 {
   string line, line2;     uint32_t nb = 0;
   (*N) = 0;            // N = dataset size
-  cout << endl << "--->> Read \"" << datafilename << "\",\t Build Nset...";
+  cout << endl << "--->> Read \"" << filename << "\",\t Build Nset...";
 
 // ***** data are store in Nset:  ********************************
   map<uint32_t, unsigned int> Nset; // Nset[mu] = #of time state mu appears in the data set
   
-  ifstream myfile (datafilename.c_str());
+  ifstream myfile (filename.c_str());
   if (myfile.is_open())
   {
     while ( getline (myfile,line))
@@ -50,7 +50,7 @@ map<uint32_t, unsigned int> read_datafile(unsigned int *N)    // O(N)  where N =
 // Rem: must have m <= n 
 uint32_t transform_mu_basis(uint32_t mu, list<uint32_t> basis)
 {
-  uint32_t un_i = 1;
+  uint32_t bit_i = 1;
   uint32_t final_mu = 0;
 
   list<uint32_t>::iterator phi_i;
@@ -59,9 +59,9 @@ uint32_t transform_mu_basis(uint32_t mu, list<uint32_t> basis)
   {
     if ( (bitset<n>( (*phi_i) & mu ).count() % 2) == 1) // odd number of 1, i.e. sig_i = 1
       {
-        final_mu += un_i;
+        final_mu += bit_i;
       }
-    un_i = (un_i << 1);
+    bit_i = (bit_i << 1);
   }
 
   return final_mu;

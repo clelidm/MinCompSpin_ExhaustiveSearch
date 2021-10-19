@@ -30,12 +30,12 @@
 /*** VERSION a) Operators are written as the binary          ******************/
 /****           representation of the interactions           ******************/
 /******************************************************************************/
-list<uint32_t> Read_BasisOp_BinaryRepresentation()
+list<uint32_t> Read_BasisOp_BinaryRepresentation(string Basis_binary_filename = basis_BinaryRepresentation_filename)
 {
   uint32_t Op = 0;
   list<uint32_t> Basis_li;
 
-  ifstream myfile (basis_BinaryRepresentation_filename.c_str());
+  ifstream myfile (Basis_binary_filename.c_str());
   string line, line2;     
 
   if (myfile.is_open())
@@ -57,12 +57,12 @@ list<uint32_t> Read_BasisOp_BinaryRepresentation()
 /*** VERSION b) Operators are written as the integer values of the binary *****/
 /****           representation of the interactions           ******************/
 /******************************************************************************/
-list<uint32_t> Read_BasisOp_IntegerRepresentation()
+list<uint32_t> Read_BasisOp_IntegerRepresentation(string Basis_integer_filename = basis_IntegerRepresentation_filename)
 {
   uint32_t Op = 0;
   list<uint32_t> Basis_li;
 
-  ifstream myfile (basis_IntegerRepresentation_filename.c_str());
+  ifstream myfile (Basis_integer_filename.c_str());
   string line;    
 
   if (myfile.is_open())
