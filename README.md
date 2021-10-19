@@ -106,7 +106,7 @@ However, an important point, to be able to interpret the results of the program,
 
 ### Defining the basis manually (see example at the beginning of the `int main()` function):
 
-The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, we advise you to use the integer representation of the basis operators. For example, `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent spin operators. Below we give the different representations for these operators: first, the integer representation in the oiginal basis; second, the corresponding binary representation; third, the corresponding spin operator; and finally representations of these operators in the new basis:
+The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, we advise you to use the integer representation of the basis operators. For example, `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent spin operators. Below we give the different representations for these operators: first, the integer representation in the original basis; second, the corresponding binary representation; third, the corresponding spin operator; and finally representations of these operators in the new basis:
 >      36     000100100     s3 s6     -->>  new basis :     000000001     1       sigma1
 >      10     000001010     s2 s4     -->>  new basis :     000000010     2       sigma2
 >      3      000000011     s1 s2     -->>  new basis :     000000100     4       sigma3
@@ -201,6 +201,16 @@ See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) f
  - **For each independent part in the MCM,** the function prints the integer and binary representation of the part (see section "Encoding MCMs" above), as well as  the following information for the MCM with a single community based on that part: the log-likelihood (`LogL`), the parametric complexity (`C_param`), the geometric complexity (`C_geom`), the total complexity (`C_tot`), and the log-evidence (`LogE`).
 
 ### Define your own MCM
+
+The MCM can be specified by hand directly using the function `map<uint32_t, uint32_t>``**Create_MCM**``(uint32_t MCM_table[], int k)` (see the example in the `int main()` function). In this case, we advise you to use the integer representation of the parts. For example, `uint32_t MCM_Choice[] = {384, 64, 32, 16, 8, 4, 2, 1}` defines an MCM with `8` independent parts, based on `n=9` spins. This is the best MCM obtained in the example of section "Boolean description of a binary dataset" in Ref. [1]. Below we give the different representations for these parts: first, the integer representation in the original basis; second, the corresponding binary representation:
+>      384    110000000
+>      64     001000000
+>      32     000100000
+>      16     000010000 
+>      8      000001000  
+>      4      000000100  
+>      2      000000010  
+>      1      000000001 
 
 You can check that the model (i.e., list of parts) that you have provided properly defines an MCM by calling the function `bool`**`check_partition`**`(map<uint32_t, uint32_t> Partition)`. This function will return `false` if there is an overlap between the parts.
 
