@@ -202,7 +202,13 @@ See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) f
 
 ### Define your own MCM
 
-The MCM can be specified by hand directly using the function `map<uint32_t, uint32_t>``**Create_MCM**``(uint32_t MCM_table[], int k)` (see the example in the `int main()` function). In this case, we advise you to use the integer representation of the parts. For example, `uint32_t MCM_Choice[] = {384, 64, 32, 16, 8, 4, 2, 1}` defines an MCM with `8` independent parts, based on `n=9` spins. This is the best MCM obtained in the example of section "Boolean description of a binary dataset" in Ref. [1]. Below we give the different representations for these parts: first, the integer representation in the original basis; second, the corresponding binary representation:
+Any MCM can also be specified by the user:
+
+  - **directly in the program**, with the function `map<uint32_t, uint32_t>``**Create_MCM**``(uint32_t MCM_table[], int k)` (see the example in the `int main()` function). In this case, we advise you to use the integer representation of the parts. For example, `uint32_t MCM_Choice[] = {384, 64, 32, 16, 8, 4, 2, 1}` defines an MCM with `8` independent parts, based on `n=9` spins. This is the best MCM obtained in the example of section "Boolean description of a binary dataset" in Ref. [1]. 
+
+  - **Using an input file**, with the function `map<uint32_t, uint32_t>`**`Read_MCMParts_BinaryRepresentation`**`(string MCM_binary_filename)`
+Below we give the different representations for these parts: first, the integer representation in the original basis; second, the corresponding binary representation:
+  - **directly in the program**, using the function `map<uint32_t, uint32_t>`**`Create_MCM`**`(uint32_t MCM_table[], int k)` (see the example in the `int main()` function). In this case, we advise you to use the integer representation of the parts. For example, `uint32_t MCM_Choice[] = {384, 64, 32, 16, 8, 4, 2, 1}` defines an MCM with `8` independent parts, based on `n=9` spins. This is the best MCM obtained in the example of section "Boolean description of a binary dataset" in Ref. [1]. Below we give the different representations for these parts: first, the integer representation in the original basis; second, the corresponding binary representation:
 >      384    110000000
 >      64     001000000
 >      32     000100000
