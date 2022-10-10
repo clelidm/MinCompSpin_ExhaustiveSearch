@@ -33,10 +33,12 @@ double LogE_SubC_forMCM(map<uint32_t, unsigned int > Kset, uint32_t m, unsigned 
     Ks = (it->second);  Ncontrol += Ks;
     if (Ks == 0) {cout << "problem Ks = 0 for mu_m = " << (it->first) << endl; }
     LogE += lgamma(Ks + 0.5);
-  }
+  }  
   if (Ncontrol != N) { cout << "Error Likelihood function: Ncontrol != N" << endl;  }
 
-  return LogE - GeomComplexity_SubCM(m) - lgamma( (double)( N + (1UL << (m-1)) ) );
+  //LogE +=  ((1UL << m) - Kset.size()) * lgamma(0.5); // for all the states that are not observed
+  //return LogE - GeomComplexity_SubCM(m) - lgamma( (double)( N + (1UL << (m-1)) ) );
+  return LogE + lgamma((double)( 1UL << (m-1) )) - (Kset.size()/2.) * log(M_PI) - lgamma( (double)( N + (1UL << (m-1)) ) ); 
 }
 
 /******************************************************************************/
@@ -44,7 +46,7 @@ double LogE_SubC_forMCM(map<uint32_t, unsigned int > Kset, uint32_t m, unsigned 
 /******************************************************************************/
 // Compute the log-evidence of the sub-complete part (of an MCM) defined by Ai.
 // This function could be also used directly by the user
-// to compute the log-likelihood of a sub-complete model
+// to compute the log-evidence of a sub-complete model
 
 double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)
 {

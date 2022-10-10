@@ -77,12 +77,12 @@ int main()
   cout << endl << "Transform the data in the specified basis." << endl;
   cout << endl << "/!\\ If m<n:";
   cout << endl << "\t If the size 'm' of the basis is strictly smaller than the number 'n' of variables, ";
-  cout << endl << "\t then the data will be troncated to the 'm' first basis elements." << endl;
+  cout << endl << "\t then the data will be truncated to the 'm' first basis elements." << endl;
 
   map<uint32_t, unsigned int> Kset = build_Kset(Nset, Basis_li, false);
 
   cout << endl << "*******************************************************************************************"; 
-  cout << endl << "************************************  All Indep Models:  **********************************";
+  cout << endl << "********************************  All Independent Models:  ********************************";
   cout << endl << "*******************************************************************************************" << endl << endl;
 
   cout << "Independent models in the new basis:" << endl;
@@ -117,7 +117,8 @@ int main()
   }
   else { cout << "The set of 'parts' provided does not form a partition of the basis elements." << endl;  }
   
-  cout << endl << "*******************************************************************************************";
+  cout << endl << "*******************************************************************************************"; 
+  cout << endl << "*******************************  Find the Best MCM:  **************************************";
   cout << endl << "***********************************  VERSION 1  *******************************************"; 
   cout << endl << "*******************************************************************************************";  
   cout << endl << "**********************  Compare all MCMs of a given rank 'r' ******************************";
@@ -140,7 +141,8 @@ int main()
   }
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
 
-  cout << endl << "*******************************************************************************************";
+  cout << endl << "*******************************************************************************************"; 
+  cout << endl << "*******************************  Find the Best MCM:  **************************************";
   cout << endl << "***********************************  VERSION 2  *******************************************"; 
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "****************  Compare all MCMs of rank 'k', with 1 <= k <=r' **************************";
@@ -171,7 +173,8 @@ int main()
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
 
 
-  cout << endl << "*******************************************************************************************";
+  cout << endl << "*******************************************************************************************"; 
+  cout << endl << "*******************************  Find the Best MCM:  **************************************";
   cout << endl << "***********************************  VERSION 3  *******************************************";   
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "****************  Compare all MCMs of rank 'k', with 1 <= k <=r' **************************";

@@ -95,7 +95,7 @@ void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, m
   double LogL = LogL_MCM(Kset, MCM_Partition, N);
 
   cout << "********** General Information about the MCM: **********" << endl; 
-  cout << "Best MCM has " << MCM_Partition.size() << " partitions and the following properties:" << endl;
+  cout << "The chosen MCM has " << MCM_Partition.size() << " partitions and the following properties:" << endl;
   cout << "\t LogL = " << LogL << endl;
   cout << " \t C_param = " << C_param << " \t \t C_geom = " << C_geom << endl;
   cout << " \t Total complexity = " << C_param + C_geom << endl;
@@ -103,9 +103,9 @@ void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, m
   cout << "  \t LogE = " << LogE_MCM(Kset, MCM_Partition, N) << endl;
 
   cout << endl << "********** Information about each part of the MCM: **********";
-  cout << endl << "\t (the total LogE of the model is the sum of the values for each part)";
-  cout << endl << "\t !! The first operator of the basis provided corresponds to the bit the most on the right !!";
-  cout << endl << "\t !! The last operator corresponds to the bit the most on the left !!" << endl << endl;;
+  cout << endl << "\t (the total LogE of the model is the sum of the values for each part, which are reported in the table below)";
+  cout << endl << "\t !! The first operator of the specified basis corresponds to the rightmost bit !!";
+  cout << endl << "\t !! The last operator corresponds to the leftmost bit !!" << endl << endl;;
   cout << "## 1:Part_int \t 2:Part_binary \t 3:LogL \t 4:C_param \t 5:C_geom \t 6:C_tot \t 7:LogE" << endl;
 
   for (map<uint32_t, uint32_t>::iterator i = MCM_Partition.begin(); i != MCM_Partition.end(); i++)
