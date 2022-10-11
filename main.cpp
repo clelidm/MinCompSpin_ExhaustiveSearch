@@ -32,8 +32,10 @@ int main()
   map<uint32_t, unsigned int> Nset = read_datafile(&N);
 
 
-  cout << endl << "*******************************************************************************************"; 
-  cout << endl << "******************************  Choice of the basis:  *************************************";
+  cout << endl << "*******************************************************************************************";  
+  cout << endl << "********************************** !! IMPORTANT !! ****************************************";
+  cout << endl << "*******************************************************************************************";  
+  cout << endl << "******************************  CHOICE OF THE BASIS:  *************************************";
   cout << endl << "*******************************************************************************************" << endl;
 
   cout << endl << "Choice of the basis for building the Minimally Complex Model (MCM):" << endl;
@@ -44,6 +46,9 @@ int main()
 // ***      -->  Op = 000000011       Binary representation
 // ***      -->  Op = 3               Integer representation   ( 000000011 = 3 )
 
+  // *** One can simply use the original basis of the data:   // This is the most natural choice a priori
+//   list<uint32_t> Basis_li = Original_Basis();
+
   // *** The basis can be specified by hand here:
   uint32_t Basis_Choice[] =  {3, 5, 9, 48, 65, 129, 272, 81, 1};    // Ex. This is the best basis for the "Shapes" dataset
 
@@ -53,9 +58,6 @@ int main()
   // *** The basis can also be read from a file:
 //   list<uint32_t> Basis_li = Read_BasisOp_IntegerRepresentation();
 //   list<uint32_t> Basis_li = Read_BasisOp_BinaryRepresentation();
-
-  // *** Or one can simply use the original basis of the data:
-//   list<uint32_t> Basis_li = Original_Basis();
 
   // *** Print info about the Basis:
   PrintTerm_Basis(Basis_li);
@@ -70,15 +72,19 @@ int main()
 
 
   cout << endl << "*******************************************************************************************"; 
-  cout << endl << "*********************************  Change the data basis   ********************************"; 
+  cout << endl << "******************************  CHANGE THE BASIS OF THE DATA  *****************************"; 
   cout << endl << "**************************************  Build Kset:  **************************************";
   cout << endl << "*******************************************************************************************" << endl;
 
-  cout << endl << "Transform the data in the specified basis." << endl;
-  cout << endl << "/!\\ If m<n:";
+  cout << endl << "INFORMATION:\n\t To look for the best MCM on a chosen basis, the data needs first to be re-written in that basis." << endl;
+  cout << endl << "\t the following function re-write the histogram of the data in the basis specified above." << endl;
+  cout << endl << "\t If the specified basis is the original basis, then this transformation is not needed." << endl;
+
+  cout << endl << "/!\\ IMPORTANT: If m<n:";
   cout << endl << "\t If the size 'm' of the basis is strictly smaller than the number 'n' of variables, ";
   cout << endl << "\t then the data will be truncated to the 'm' first basis elements." << endl;
 
+  cout << endl << "Transform the data in the specified basis:" << endl;  
   map<uint32_t, unsigned int> Kset = build_Kset(Nset, Basis_li, false);
 
   cout << endl << "*******************************************************************************************"; 
@@ -116,19 +122,39 @@ int main()
     PrintTerminal_MCM_Info(Kset, N, MCM_Partition0);
   }
   else { cout << "The set of 'parts' provided does not form a partition of the basis elements." << endl;  }
-  
+
+
+  cout << endl << "*******************************************************************************************";  
+  cout << endl << "**************************************  EXAMPLES:  ****************************************";
+  cout << endl << "*****************  The three following functions search for the BEST MCM ******************";
+  cout << endl << "*************************  based on the BASIS specified above *****************************";
+  cout << endl << "*******************************************************************************************" << endl; 
+
+  cout << endl << "/!\\ IMPORTANT: prior to use the following functions:"; 
+  cout << endl << "\tThe choice of the basis must have been provided in the variable \'Basis_li\', and";
+  cout << endl << "\tthe data (stored in \'Nset\') must have been re-written in that basis using the function \'build_Kset()\'.";
+  cout << endl << "\tThe variable \'Kset\' then contains the transformed data." << endl;
+
+  cout << endl << "/!\\ ANALYSIS IN THE ORIGINAL BASIS:"; 
+  cout << endl << "\tThe data may also be analyzed untransformed, i.e. in its original basis.";
+  cout << endl << "\tIn this case:\n\t\t-- there is no need to specify \'Basis_li\', nor to transformed the data with \'build_Kset()\',";  
+  cout << endl << "\t\t-- the three following functions can be used directly with the variable \'Nset\' instead of \'Kset\'." << endl;
+
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "*******************************  Find the Best MCM:  **************************************";
   cout << endl << "***********************************  VERSION 1  *******************************************"; 
   cout << endl << "*******************************************************************************************";  
   cout << endl << "**********************  Compare all MCMs of a given rank 'r' ******************************";
   cout << endl << "*********************  based on the 'r' first basis Operators:  ***************************";
-  cout << endl << "*******************************************************************************************" << endl << endl;
+  cout << endl << "*******************************************************************************************" << endl;
 
-  cout << endl << "Search among all MCMs based on the 'r' first basis operators (i.e., the models of rank exactly equal to 'r')" << endl;
-  cout << endl << "/!\\ Conditions on the value of 'r':  r <= m <= n ";
-  cout << endl << "\t 'r' must be smaller or equal to the number 'm' of basis element provided, 'm=Basis_li.size()',";
-  cout << endl << "\t which must be smaller or equal to the number 'n' of spin variables." << endl << endl;
+  cout << endl << "/!\\ INFORMATION:"; 
+  cout << endl << "\tThe following function searches for the best MCM among all the MCMs based on the 'r' first basis operators";
+  cout << endl << "\ti.e., among only among MCMs of rank exactly equal to 'r'" << endl;
+
+  cout << endl << "/!\\ IMPORTANT: Condition on the value of 'r':  r <= m <= n ";
+  cout << endl << "\t'r' must be smaller or equal to the number 'm' of basis element provided, 'm=Basis_li.size()',";
+  cout << endl << "\twhich must be smaller or equal to the number 'n' of spin variables." << endl << endl;
 
   int r1 = 9;
   double LogE_BestMCM1 = 0;
@@ -147,14 +173,16 @@ int main()
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "****************  Compare all MCMs of rank 'k', with 1 <= k <=r' **************************";
   cout << endl << "******************  based on the 'k' first basis Operators:  ******************************";
-  cout << endl << "*******************************************************************************************" << endl << endl;
+  cout << endl << "*******************************************************************************************" << endl;
 
-  cout << endl << "Search among all MCMs based on the 'k' FIRST basis operators provided, for all k=1 to r" << endl;
-  cout << endl << "/!\\ Conditions on the value of 'r':  r <= m <= n ";
-  cout << endl << "\t 'r' must be smaller or equal to the number 'm' of basis element provided, 'm=Basis_li.size()',";
-  cout << endl << "\t which must be smaller or equal to the number 'n' of spin variables." << endl << endl;
+  cout << endl << "/!\\ INFORMATION:"; 
+  cout << endl << "\tThe following function searches among all the MCMs based on the 'k' FIRST basis operators provided, for all k in [1; r]" << endl;
 
-  cout << endl << "\t Check function declaration for the default options." << endl << endl;
+  cout << endl << "/!\\ IMPORTANT: Condition on the value of 'r':  r <= m <= n ";
+  cout << endl << "\t'r' must be smaller or equal to the number 'm' of basis element provided, 'm=Basis_li.size()',";
+  cout << endl << "\twhich must be smaller or equal to the number 'n' of spin variables." << endl;
+
+  cout << endl << "\tPlease check the function declaration for the default arguments." << endl << endl;
 
 /******************************************************************************/
 // *** By default: - r=n
@@ -172,21 +200,22 @@ int main()
   }
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
 
-
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "*******************************  Find the Best MCM:  **************************************";
   cout << endl << "***********************************  VERSION 3  *******************************************";   
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "****************  Compare all MCMs of rank 'k', with 1 <= k <=r' **************************";
   cout << endl << "***********  based on any 'k' subset of the basis Operators provided  *********************";
-  cout << endl << "*******************************************************************************************" << endl << endl;
+  cout << endl << "*******************************************************************************************" << endl;
   
-  cout << endl << "Search among all MCMs based on ANY SUBSET of 'k' operators of the basis provided, for all k=1 to r" << endl;
-  cout << endl << "/!\\ Conditions on the value of 'r':  r <= m <= n ";
-  cout << endl << "\t 'r' must be smaller or equal to the number 'm' of basis element provided, 'm=Basis_li.size()',";
-  cout << endl << "\t which must be smaller or equal to the number 'n' of spin variables." << endl << endl;
+  cout << endl << "/!\\ INFORMATION:"; 
+  cout << endl << "The following function searches among all MCMs based on ANY SUBSET of 'k' operators of the basis provided, for all k=1 to r" << endl;
 
-  cout << endl << "\t Check function declaration for the default options." << endl << endl;
+  cout << endl << "/!\\ IMPORTANT: Conditions on the value of 'r':  r <= m <= n ";
+  cout << endl << "\t'r' must be smaller or equal to the number 'm' of basis element provided, 'm=Basis_li.size()',";
+  cout << endl << "\twhich must be smaller or equal to the number 'n' of spin variables." << endl;
+
+  cout << endl << "\tPlease check the function declaration for the default arguments." << endl << endl;
 
 /******************************************************************************/
 // *** By default: - r=n
