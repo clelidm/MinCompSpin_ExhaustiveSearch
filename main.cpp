@@ -1,4 +1,5 @@
 //g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp MCM_info.cpp
+
 //time ./a.out
 //
 #include <iostream>
@@ -70,14 +71,13 @@ int main()
     cout << "Make sure that the set of basis elements provided are orthogonal to each other." << endl;
   }
 
-
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "******************************  CHANGE THE BASIS OF THE DATA  *****************************"; 
   cout << endl << "**************************************  Build Kset:  **************************************";
   cout << endl << "*******************************************************************************************" << endl;
 
-  cout << endl << "INFORMATION:\n\t To look for the best MCM on a chosen basis, the data needs first to be re-written in that basis." << endl;
-  cout << endl << "\t the following function re-write the histogram of the data in the basis specified above." << endl;
+  cout << endl << "INFORMATION:\n\t To look for the best MCM on a chosen basis, the data needs first to be re-written in that basis.";
+  cout << endl << "\t The following function re-write the histogram of the data in the basis specified above.";
   cout << endl << "\t If the specified basis is the original basis, then this transformation is not needed." << endl;
 
   cout << endl << "/!\\ IMPORTANT: If m<n:";
@@ -115,7 +115,7 @@ int main()
   map<uint32_t, uint32_t> MCM_Partition0 = Create_MCM(MCM_Choice, k);
 
   // *** The MCM can also be read from a file:
-//  map<uint32_t, uint32_t> MCM_Partition0 = Read_MCMParts_BinaryRepresentation("./INPUT/Dataset_Shapes_n9_MCM_Binary.dat");
+//  map<uint32_t, uint32_t> MCM_Partition0 = Read_MCMParts_BinaryRepresentation("./INPUT/Shapes_n9_MCM_Binary.dat");
 
   if(check_partition(MCM_Partition0))
   {
@@ -130,12 +130,12 @@ int main()
   cout << endl << "*************************  based on the BASIS specified above *****************************";
   cout << endl << "*******************************************************************************************" << endl; 
 
-  cout << endl << "/!\\ IMPORTANT: prior to use the following functions:"; 
-  cout << endl << "\tThe choice of the basis must have been provided in the variable \'Basis_li\', and";
-  cout << endl << "\tthe data (stored in \'Nset\') must have been re-written in that basis using the function \'build_Kset()\'.";
+  cout << endl << "/!\\ IMPORTANT: prior to using the three following functions:"; 
+  cout << endl << "\tThe choice of the basis must have been provided in the variable \'Basis_li\',";
+  cout << endl << "\tand the data (initially stored in \'Nset\') must have been re-written in that basis using the function \'build_Kset()\'.";
   cout << endl << "\tThe variable \'Kset\' then contains the transformed data." << endl;
 
-  cout << endl << "/!\\ ANALYSIS IN THE ORIGINAL BASIS:"; 
+  cout << endl << "/!\\ SPECIAL CASE:  ANALYSIS IN THE ORIGINAL BASIS:"; 
   cout << endl << "\tThe data may also be analyzed untransformed, i.e. in its original basis.";
   cout << endl << "\tIn this case:\n\t\t-- there is no need to specify \'Basis_li\', nor to transformed the data with \'build_Kset()\',";  
   cout << endl << "\t\t-- the three following functions can be used directly with the variable \'Nset\' instead of \'Kset\'." << endl;
