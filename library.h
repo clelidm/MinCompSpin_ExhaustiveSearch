@@ -95,7 +95,7 @@ map<uint32_t, uint32_t> Create_MCM(uint32_t MCM_table[], int k);
 map<uint32_t, uint32_t> Read_MCMParts_BinaryRepresentation(string MCM_binary_filename);
 
 // *** Check that the provided model corresponds to a partition of the basis variables (i.e. properly defines an MCM):
-bool check_partition(map<uint32_t, uint32_t> Partition);
+pair<bool, uint32_t> check_partition(map<uint32_t, uint32_t> Partition); // the second element is the rank of the partition (dimension of the MCM)
 
 // *** Print information about the MCM specified in `MCM_Partition`:
 void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition);
@@ -140,4 +140,19 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned
 // *** By default: - r=n
 // ***             - the function doesn't print the logE-values for all the tested MCMs. To activate --> print_bool = true 
 map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false);
+
+
+
+
+/******************************************************************************/
+/******************************************************************************/
+/***************************   PRINT TO FILE:  ********************************/
+/******************   DATA VS MODEL STATE PROBABILITIES  **********************/
+/******************************************************************************/
+/******************************************************************************/
+// *** Functions in the file "P_s.cpp":
+
+void PrintFile_StateProbabilites_OriginalBasis(map<uint32_t, unsigned int > Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result");
+void PrintFile_StateProbabilites_NewBasis(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result");
+
 

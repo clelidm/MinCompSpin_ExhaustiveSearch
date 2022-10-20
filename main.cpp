@@ -1,4 +1,4 @@
-// To compile: g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp MCM_info.cpp
+// To compile: g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp MCM_info.cpp P_s.cpp
 // To run: time ./a.out
 //
 #include <iostream>
@@ -16,6 +16,7 @@ using namespace std;
 #include "data.h"
 #include "library.h"
 
+
 /******************************************************************************/
 /*******************************   main function   ****************************/
 /******************************************************************************/
@@ -29,7 +30,7 @@ int main()
   cout << endl << "***********************************  Read the data:  **************************************";
   cout << endl << "*******************************************************************************************" << endl;
   unsigned int N=0; // will contain the number of datapoints in the dataset
-  map<uint32_t, unsigned int> Nset = read_datafile(&N);
+  map<uint32_t, unsigned int> Nset = read_datafile(&N, datafilename);
 
 
   cout << endl << "*******************************************************************************************";  
@@ -116,15 +117,20 @@ int main()
   // *** The MCM can also be read from a file:
 //  map<uint32_t, uint32_t> MCM_Partition0 = Read_MCMParts_BinaryRepresentation("./INPUT/Shapes_n9_MCM_Binary.dat");
 
-  if(check_partition(MCM_Partition0))
+  if(check_partition(MCM_Partition0).first)
   {
     PrintTerminal_MCM_Info(Kset, N, MCM_Partition0);
   }
   else { cout << "The set of 'parts' provided does not form a partition of the basis elements." << endl;  }
 
 
+
+  cout << endl << "*******************************************************************************************"; 
+  cout << endl << "*******************************  Find the Best MCM:  **************************************";
+  cout << endl << "*******************************************************************************************";
+
   cout << endl << "*******************************************************************************************";  
-  cout << endl << "**************************************  EXAMPLES:  ****************************************";
+  cout << endl << "********************************* THREE EXAMPLES:  ****************************************";
   cout << endl << "*****************  The three following functions search for the BEST MCM ******************";
   cout << endl << "*************************  based on the BASIS specified above *****************************";
   cout << endl << "*******************************************************************************************" << endl; 
@@ -163,6 +169,7 @@ int main()
     map<uint32_t, uint32_t> MCM_Partition1 = MCM_GivenRank_r(Kset, N, &LogE_BestMCM1, r1, false);
     //cout << "\t Best LogE = " << LogE_BestMCM1 << endl;
     PrintTerminal_MCM_Info(Kset, N, MCM_Partition1);
+    MCM_Partition0 = MCM_Partition1;
   }
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
 
@@ -196,6 +203,7 @@ int main()
     map<uint32_t, uint32_t> MCM_Partition2 = MCM_AllRank_SmallerThan_r_Ordered(Kset, N, &LogE_BestMCM2, r2, false);
     //cout << "\t Best LogE = " << LogE_BestMCM2 << endl;
     PrintTerminal_MCM_Info(Kset, N, MCM_Partition2);
+    MCM_Partition0 = MCM_Partition2;
   }
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
 
@@ -229,11 +237,24 @@ int main()
     map<uint32_t, uint32_t> MCM_Partition3 = MCM_AllRank_SmallerThan_r_nonOrdered(Kset, N, &LogE_BestMCM3, r3, false);
     //cout << "\t Best LogE = " << LogE_BestMCM3 << endl;
     PrintTerminal_MCM_Info(Kset, N, MCM_Partition3);
+    MCM_Partition0 = MCM_Partition3;
   }
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
 
 
+  cout << endl << "*******************************************************************************************"; 
+  cout << endl << "***********************************    PRINT TO FILE    ***********************************";
+  cout << endl << "****************************    DATA VS MODEL PROBABILITIES:    ***************************";
+  cout << endl << "*******************************************************************************************" << endl << endl;
+
+// Print Information about the:
+  PrintFile_StateProbabilites_OriginalBasis(Nset, Basis_li, MCM_Partition0, N, "Result");
+  PrintFile_StateProbabilites_NewBasis(Kset, MCM_Partition0, N, "Result");
+
   return 0;
 }
+
+
+
 
 

@@ -50,7 +50,7 @@ map<uint32_t, uint32_t> Read_MCMParts_BinaryRepresentation(string MCM_binary_fil
   {
     while ( getline (myfile,line))
     {
-      line2 = line.substr (0,n);          //take the n first characters of line
+      line2 = line.substr(0,n);          //take the n first characters of line
 
       MCM_partition[integer]=bitset<n>(line2).to_ulong();   //convert string line2 into a binary integer
       integer++;
@@ -67,7 +67,7 @@ map<uint32_t, uint32_t> Read_MCMParts_BinaryRepresentation(string MCM_binary_fil
 // i.e., that no basis element appears in more than 1 part of the partition.
 // i.e., that each basis element only appears in a single part of the partition.
 
-bool check_partition(map<uint32_t, uint32_t> Partition)
+pair<bool, uint32_t> check_partition(map<uint32_t, uint32_t> Partition)
 {
   map<uint32_t, uint32_t>::iterator Part;
   uint32_t sum = 0;
@@ -81,7 +81,7 @@ bool check_partition(map<uint32_t, uint32_t> Partition)
   }
   //cout << bitset<n>(sum) << endl;
 
-  return (bitset<n>(sum).count() == rank);
+  return make_pair((bitset<n>(sum).count() == rank), rank);
 }
 
 /********************************************************************/
