@@ -29,7 +29,7 @@ For larger systems (`r>~15`), please check the greedy algorithm available [here]
 
 The code uses the C++11 version of C++.
 
-**To compile:** `g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp MCM_info.cpp`
+**To compile:** `g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp MCM_info.cpp P_s.cpp`
 
 **To execute:** `./a.out`
 
