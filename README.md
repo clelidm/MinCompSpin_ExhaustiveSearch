@@ -52,7 +52,7 @@ This code is an open source project under the GNU GPLv3.
 ## Input and Output files
 
 **Input files:** Input files can be placed in the `INPUT` folder; you must provide the following input files:
- - a binary datafile. The name of the datafile must be specified in `data.h` in the variable `datafilename`. Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example file `Dataset_Shapes_n9_N1e5.dat` in the `INPUT` folder.
+ - **a binary datafile.** The name of the datafile must be specified in `data.h` in the variable `datafilename`, or can be given directly as a second argument of the function `read_datafile(&N, datafilename)` in the `main()` function of the file `main.cpp` (instead of `datafilename`). Datapoints must be written as binary strings of 0’s and 1’s encoded on at least `n` bits (with no spaces between the bits), where `n` is the number of spin variables specified in `data.h`. The file must contain one datapoint per line — see example file `Dataset_Shapes_n9_N1e5.dat` in the `INPUT` folder.
  - (Optional) a file containing the basis elements (see section "Reading the basis from an input file” below).
 
 **Output files:**
