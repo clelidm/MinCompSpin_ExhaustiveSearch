@@ -235,3 +235,9 @@ Users can also get **specific information about any subcomplete part (SC-part)**
  - `double`**`ParamComplexity_SubCM`**`(unsigned int m, unsigned int N)` returns the model complexity of the SC-part due to the number of parameters in the part ("parameter complexity"); this is the first order complexity term in the Minimum Description Length principle (this term is of the order of `O(log N)` where `N` is the number of datapoints -- see Ref. [1]).
  - `double`**`GeomComplexity_SubCM`**`(unsigned int m)` returns the geometric complexity of the SC-part; it is the second order complexity term in the Minimum Description Length principle (which is of the order of `O(1)` -- see Ref. [1]).
 
+
+## Print to file the state probability P(s) and the probability of k `1` in a state P(k):
+
+To print the value of the state probabilities P(s) in the data and in the fitted model, and the values of P(k), one can use:
+ - the function   `void PrintFile_StateProbabilites_OriginalBasis(map<uint32_t, unsigned int > Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Nset` contains the histogram of the original dataset, `MCM_Partition` contains the partition corresponding to the MCM for which one would like t get more info. `Basis` contains the basis in which the MCM specifed MCM was computed, and `filename` is a string used to create the output filenames. 
+ - the function `void PrintFile_StateProbabilites_NewBasis(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`
