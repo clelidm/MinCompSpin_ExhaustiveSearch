@@ -62,7 +62,7 @@ All the output files will be stored in the output folder, whose name is specifie
 
 Before compiling specify the following global variables:
  - `const unsigned int`**`n`**, with the number of variables of the dataset. This number must be smaller or equal to the number of columns in the input dataset. If it is smaller, the program will only read the `n` first columns of the dataset (from the left). This number must be larger or equal to the number `m` of basis elements provided in the `main()` function.
- - `const string`**`datafilename`**, with the location and name of the input binary datafile.
+ - (Optional) `const string`**`datafilename`**, with the location and name of the input binary datafile. If the input filename is not specified here, it must then be given as a second argument of the function `read_datafile(&N, datafilename)` in the `main()` function of the file `main.cpp` (the name of the file must be given, as a string, instead of `datafilename`).
  - (Optional) `const string`**`basis_IntegerRepresentation_filename`**, with the location and name of the input file containing the basis element written in the integer representation (see section "Reading the basis from an input file” below).
  - (Optional) `const string`**`basis_BinaryRepresentation_filename`**,  with the location and name of the input file containing the basis element written in the binary representation (see section "Reading the basis from an input file” below).
  - `const string`**`OUTPUT_directory`**, with the name of the output directory. All the generated files will be placed in this folder.
