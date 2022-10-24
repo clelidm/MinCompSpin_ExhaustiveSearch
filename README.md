@@ -236,7 +236,7 @@ Users can also get **specific information about any subcomplete part (SC-part)**
  - `double`**`GeomComplexity_SubCM`**`(unsigned int m)` returns the geometric complexity of the SC-part; it is the second order complexity term in the Minimum Description Length principle (which is of the order of `O(1)` -- see Ref. [1]).
 
 
-## Print (in a file) the empirical and model state probabilities P(s) (and the probability P(k)):
+## Print (in a file) the state probabilities P(s) for the model (and the probability P(k)):
 
 To print the value of the state probabilities P(s) in the data and in the fitted model, and the values of P(k), one can use:
  - (1) the function `void`**`PrintFile_StateProbabilites_OriginalBasis`**`(map<uint32_t, unsigned int > Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Nset` contains the histogram of the original dataset, `Basis` contains the basis on which the specified MCM is defined, `MCM_Partition` contains the partition corresponding to MCM used, and `filename` is a string used to create the output filenames.
