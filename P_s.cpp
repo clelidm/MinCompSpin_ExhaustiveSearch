@@ -56,7 +56,8 @@ map<uint32_t, unsigned int> Build_Kset_ba(map<uint32_t, unsigned int > Kset, uin
 pair<bool, uint32_t> check_partition(map<uint32_t, uint32_t> Partition);
 
 /******************************************************************************/
-/**************   Build Kset for each part b_a of the whole basis  ************/
+/*****************   Compute the contribution to P_MCM(s)   *******************/
+/******************  due to the sub-CM defined by Kset_ba   *******************/
 /******************************************************************************/
 
 void update_proba_MCM(map<uint32_t, Proba> &all_P, map<uint32_t, unsigned int> Kset_ba, uint32_t Ai, unsigned int N)
