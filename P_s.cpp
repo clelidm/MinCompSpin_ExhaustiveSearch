@@ -132,7 +132,9 @@ void PrintFile_StateProbabilites_NewBasis(map<uint32_t, unsigned int > Kset, map
   map<uint32_t, Proba> P_all = P_sig(Kset, MCM_Partition, N);
   map<uint32_t, Proba>::iterator it_P;
 
-  fstream file_P_sig((OUTPUT_directory + filename + "_P_sig.dat"), ios::out);
+  string Psig_filename = filename + "_DataVSMCM_Psig.dat";
+
+  fstream file_P_sig((OUTPUT_directory + Psig_filename), ios::out);
   file_P_sig << "## 1:sig \t 2:P_D(sig) \t 3:P_MCM(sig)" << endl;
 
   for (it_P = P_all.begin(); it_P!=P_all.end(); ++it_P)
@@ -290,16 +292,19 @@ void PrintFile_StateProbabilites_OriginalBasis(map<uint32_t, unsigned int > Nset
     Pk_MCM[k] = 0;
   }
 
+  string Ps_filename = filename + "_DataVSMCM_Ps.dat";
+  string Pk_filename = filename + "_DataVSMCM_Pk.dat";
+
   cout << "--->> Print information about the MCM in the file: \'" << filename << "_MCM_info.dat\'" << endl;
-  cout << "--->> Print the state probabilities P(s) in the file: \'" << filename << "_Ps.dat\'" << endl;
-  cout << "--->> Print the probability of a state with k \'+1\' bits: \'" << filename << "_Pk.dat\'" << endl << endl;
+  cout << "--->> Print the state probabilities P(s) in the file: \'" << Ps_filename << "\'" << endl;
+  cout << "--->> Print the probability of a state with k \'+1\' bits: \'" << Pk_filename << "\'" << endl << endl;
 
   //***** Print info about the model -- Print Basis and MCM:  **************/
   PrintFile_MCM_Info(Basis, MCM_Partition, filename);
 
   //***** Print P(s):  *****************************************************/
   uint32_t s;
-  fstream file_Ps((OUTPUT_directory + filename + "_Ps.dat"), ios::out);
+  fstream file_Ps((OUTPUT_directory + Ps_filename), ios::out);
 
   file_Ps << "## s = states in the original basis" << endl;
   file_Ps << "## sig = states in the chosen new basis (ideally the best basis)" << endl;
@@ -321,7 +326,7 @@ void PrintFile_StateProbabilites_OriginalBasis(map<uint32_t, unsigned int > Nset
   file_Ps.close();
 
   //***** Print P(k):   ***************************************************/
-  fstream file_Pk((OUTPUT_directory + filename + "_Pk.dat"), ios::out);
+  fstream file_Pk((OUTPUT_directory + Pk_filename), ios::out);
 
   file_Pk << "## 1:k \t 2:P_D(k) \t 3:P_MCM(k)" << endl;
 
