@@ -1,4 +1,4 @@
-// To compile: g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogE.cpp LogL.cpp Complexity.cpp Best_MCM.cpp Basis_Choice.cpp MCM_info.cpp P_s.cpp
+// To compile: g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogE.cpp LogL.cpp Complexity.cpp Basis_Choice.cpp MCM_info.cpp P_s.cpp Best_MCM.cpp
 // To run: time ./a.out
 //
 #include <iostream>
@@ -6,9 +6,15 @@
 #include <sstream>
 #include <list>
 #include <map>
+#include <vector>
 #include <cmath>       /* tgamma */
 
+#include <ctime> // for chrono
+#include <ratio> // for chrono
+#include <chrono> // for chrono
+
 using namespace std;
+using namespace std::chrono;
 
 /********************************************************************/
 /**************************    CONSTANTS    *************************/
@@ -30,7 +36,8 @@ int main()
   cout << endl << "***********************************  Read the data:  **************************************";
   cout << endl << "*******************************************************************************************" << endl;
   unsigned int N=0; // will contain the number of datapoints in the dataset
-  map<uint32_t, unsigned int> Nset = read_datafile(&N, datafilename);
+
+  vector<pair<uint32_t, unsigned int>> Nset_Vect = read_datafile_Vect(&N, datafilename);
 
 
   cout << endl << "*******************************************************************************************";  
@@ -85,7 +92,8 @@ int main()
   cout << endl << "\t then the data will be truncated to the 'm' first basis elements." << endl;
 
   cout << endl << "Transform the data in the specified basis:" << endl;  
-  map<uint32_t, unsigned int> Kset = build_Kset(Nset, Basis_li, false);
+
+  vector<pair<uint32_t, unsigned int>> Kset_Vect = build_Kset_Vect(Nset_Vect, Basis_li, false);
 
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "********************************  All Independent Models:  ********************************";
@@ -93,7 +101,7 @@ int main()
 
   cout << "Independent models in the new basis:" << endl;
   
-  PrintInfo_All_Indep_Models(Kset, N);
+  PrintInfo_All_Indep_Models_Vect(Kset_Vect, N);
 
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "**************************  All Successive Sub-Complete Models:  **************************";
@@ -101,14 +109,16 @@ int main()
 
   cout << "Sub-Complete models in the new basis:" << endl;
 
-  PrintInfo_All_SubComplete_Models(Kset, N);
+  PrintInfo_All_SubComplete_Models_Vect(Kset_Vect, N);
 
 
   cout << endl << "*******************************************************************************************"; 
-  cout << endl << "*********************************  Define your own MCM:  **********************************";
+  cout << endl << "***********************************  Define your own MCM:  ********************************";
+  cout << endl << "*******************************  and get information about it:  ***************************";
   cout << endl << "*******************************************************************************************" << endl << endl;
 
   // *** The MCM can be specified by hand here:
+  
   uint32_t MCM_Choice[] =  {384, 64, 32, 16, 8, 4, 2, 1};
 
   unsigned int k = sizeof(MCM_Choice) / sizeof(uint32_t);  // Number of parts
@@ -119,7 +129,7 @@ int main()
 
   if(check_partition(MCM_Partition0).first)
   {
-    PrintTerminal_MCM_Info(Kset, N, MCM_Partition0);
+    PrintTerminal_MCM_Info_Vect(Kset_Vect, N, MCM_Partition0);
   }
   else { cout << "The set of 'parts' provided does not form a partition of the basis elements." << endl;  }
 
@@ -128,6 +138,7 @@ int main()
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "*******************************  Find the Best MCM:  **************************************";
   cout << endl << "*******************************************************************************************";
+  cout << endl;
 
   cout << endl << "*******************************************************************************************";  
   cout << endl << "********************************* THREE EXAMPLES:  ****************************************";
@@ -161,17 +172,25 @@ int main()
   cout << endl << "\t'r' must be smaller or equal to the number 'm' of basis element provided, 'm=Basis_li.size()',";
   cout << endl << "\twhich must be smaller or equal to the number 'n' of spin variables." << endl << endl;
 
+  auto start = chrono::system_clock::now();
+
   int r1 = 9;
   double LogE_BestMCM1 = 0;
 
   if (r1 <= Basis_li.size())
   {
-    map<uint32_t, uint32_t> MCM_Partition1 = MCM_GivenRank_r(Kset, N, &LogE_BestMCM1, r1, false);
-    //cout << "\t Best LogE = " << LogE_BestMCM1 << endl;
-    PrintTerminal_MCM_Info(Kset, N, MCM_Partition1);
+    map<uint32_t, uint32_t> MCM_Partition1 = MCM_GivenRank_r_Vect(Kset_Vect, N, &LogE_BestMCM1, r1, false);
+      //cout << "\t Best LogE = " << LogE_BestMCM1 << endl;
+    PrintTerminal_MCM_Info_Vect(Kset_Vect, N, MCM_Partition1);
     MCM_Partition0 = MCM_Partition1;
   }
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
+
+  // *** Time it takes to go through all the partition:
+  auto end = chrono::system_clock::now();
+  chrono::duration<double> elapsed = end - start;
+
+  cout << "Elapsed time      : " << elapsed.count() << "s" << endl;
 
   cout << endl << "*******************************************************************************************"; 
   cout << endl << "*******************************  Find the Best MCM:  **************************************";
@@ -199,10 +218,10 @@ int main()
   double LogE_BestMCM2 = 0;
 
   if (r2 <= Basis_li.size())
-  {
-    map<uint32_t, uint32_t> MCM_Partition2 = MCM_AllRank_SmallerThan_r_Ordered(Kset, N, &LogE_BestMCM2, r2, false);
-    //cout << "\t Best LogE = " << LogE_BestMCM2 << endl;
-    PrintTerminal_MCM_Info(Kset, N, MCM_Partition2);
+  {   
+    map<uint32_t, uint32_t> MCM_Partition2 = MCM_AllRank_SmallerThan_r_Ordered_Vect(Kset_Vect, N, &LogE_BestMCM2, r2, false);
+      //cout << "\t Best LogE = " << LogE_BestMCM2 << endl;
+    PrintTerminal_MCM_Info_Vect(Kset_Vect, N, MCM_Partition2);
     MCM_Partition0 = MCM_Partition2;
   }
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
@@ -234,9 +253,9 @@ int main()
 
   if (r3 <= Basis_li.size())
   {
-    map<uint32_t, uint32_t> MCM_Partition3 = MCM_AllRank_SmallerThan_r_nonOrdered(Kset, N, &LogE_BestMCM3, r3, false);
-    //cout << "\t Best LogE = " << LogE_BestMCM3 << endl;
-    PrintTerminal_MCM_Info(Kset, N, MCM_Partition3);
+    map<uint32_t, uint32_t> MCM_Partition3 = MCM_AllRank_SmallerThan_r_nonOrdered_Vect(Kset_Vect, N, &LogE_BestMCM3, r3, false);
+      //cout << "\t Best LogE = " << LogE_BestMCM3 << endl;
+    PrintTerminal_MCM_Info_Vect(Kset_Vect, N, MCM_Partition3);
     MCM_Partition0 = MCM_Partition3;
   }
   else { cout << "The condition on the value of 'r' is not respected" << endl;  }
@@ -248,8 +267,8 @@ int main()
   cout << endl << "*******************************************************************************************" << endl << endl;
 
 // Print Information about the:
-  PrintFile_StateProbabilites_OriginalBasis(Nset, Basis_li, MCM_Partition0, N, "Result");
-  PrintFile_StateProbabilites_NewBasis(Kset, MCM_Partition0, N, "Result");
+  PrintFile_StateProbabilites_OriginalBasis_Vect(Nset_Vect, Basis_li, MCM_Partition0, N, "Result");
+  PrintFile_StateProbabilites_NewBasis_Vect(Kset_Vect, MCM_Partition0, N, "Result");
 
   return 0;
 }

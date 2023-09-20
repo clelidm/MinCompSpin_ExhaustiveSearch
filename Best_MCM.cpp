@@ -1,6 +1,7 @@
 #include <map>
 #include <fstream>
 #include <bitset>
+#include <vector>
 
 #include "data.h"
 
@@ -8,7 +9,7 @@
 /**************** Log-likelihood (LogL), Geometric Complexity *****************/
 /*************************  and Log-evidence (LogE) ***************************/
 /******************************************************************************/
-double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false);
+double LogE_MCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, map<uint32_t, uint32_t> Partition, unsigned int N);
 double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom);
 
 /********************************************************************/
@@ -25,8 +26,7 @@ bool check_partition(map<uint32_t, uint32_t> Partition);
 /********************************************************************/
 void Print_Partition(uint32_t *a)
 {
-  for (int i=0; i<n; i++)
-  {    cout << a[i];  }
+  for (int i=0; i<n; i++)   {    cout << a[i];  }
 }
 
 void Print_Partition_Converted(map<uint32_t, uint32_t>  partition)
@@ -99,7 +99,7 @@ int find_j(uint32_t *a, uint32_t *b, unsigned int r)
 // ***            Compare all the MCM of rank r, 
 // ***            based on the r first elements of the basis used to build Kset:
 /******************************************************************************/
-map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+map<uint32_t, uint32_t> MCM_GivenRank_r_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 {
   cout << "--->> Search for the best MCM.." << endl << endl;
 
@@ -142,7 +142,7 @@ map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsig
   uint32_t *aBest = (uint32_t *)malloc(n*sizeof(uint32_t));
   for(int i=0; i<r; i++) {  aBest[i]=a[i];  }
 
-  *LogE_best = LogE_MCM(Kset, Convert_Partition_forMCM(a, r), N);
+  *LogE_best = LogE_MCM_Vect(Kset_Vect, Convert_Partition_forMCM(a, r), N);
 
   // *** ALGO H:
   while(j != 0)
@@ -150,7 +150,7 @@ map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsig
     // *** H2: Visit:
     counter++;  //file_MCM_Rank_r << counter << ": \t";
     Partition = Convert_Partition_forMCM(a, r);
-    LogE = LogE_MCM(Kset, Partition, N);     //LogE
+    LogE = LogE_MCM_Vect(Kset_Vect, Partition, N);     //LogE
 
     // *** Print in file:
     if(print_bool)
@@ -225,7 +225,7 @@ map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsig
 // *** By default: - r=n
 // ***             - the function doesn't print the logE-values for all the tested MCMs. To activate --> print_bool = true 
 /******************************************************************************/
-map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 {
   int counter = 0, i = 0;
   int counter_subMCM = 0;
@@ -277,7 +277,7 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned
   uint32_t *aBest = (uint32_t *)malloc(r*sizeof(uint32_t));
   for(int i=0; i<r; i++) {  aBest[i]=a[i];  }
 
-  *LogE_best = LogE_MCM(Kset, Convert_Partition_forMCM(a, r), N);
+  *LogE_best = LogE_MCM_Vect(Kset_Vect, Convert_Partition_forMCM(a, r), N);
 
 
   // *** SubPartitions (rank < n):
@@ -291,7 +291,7 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned
 
     // *** Original Partition:
     Partition = Convert_Partition_forMCM_withSubPart(a, &keep_SubPartition, r);     //Print_Partition_Converted(Partition); 
-    LogE = LogE_MCM(Kset, Partition, N);     //LogE
+    LogE = LogE_MCM_Vect(Kset_Vect, Partition, N);     //LogE
 
     // *** Print in file:
     if(print_bool)
@@ -324,7 +324,7 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned
       counter_subMCM++;
 
       Partition.erase(0); //Print_Partition_Converted(Partition); 
-      LogE = LogE_MCM(Kset, Partition, N);     //LogE
+      LogE = LogE_MCM_Vect(Kset_Vect, Partition, N);     //LogE
 
       // *** Print in file:
       if(print_bool)
@@ -414,7 +414,7 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned
 // *** By default: - r=n
 // ***             - the function doesn't print the logE-values for all the tested MCMs. To activate --> print_bool = true 
 /******************************************************************************/
-map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 {
   cout << "All MCM based on all subsets of r operators among n chosen independent operators, r<=n: " << endl;
 
@@ -467,7 +467,7 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsig
   //  *** Save Best MCMs:
   uint32_t *aBest = (uint32_t *)malloc(r*sizeof(uint32_t));
   for(int i=0; i<r; i++) {  aBest[i]=a[i];  }
-  *LogE_best = LogE_MCM(Kset, Convert_Partition_forMCM(a, r), N);
+  *LogE_best = LogE_MCM_Vect(Kset_Vect, Convert_Partition_forMCM(a, r), N);
 
   // *** for SubModels:
   uint32_t amax = 0, atest = 0;
@@ -482,7 +482,7 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsig
 
     // *** Partition:
     Partition = Convert_Partition_forMCM(a, r); 
-    LogE = LogE_MCM(Kset, Partition, N);     //LogE
+    LogE = LogE_MCM_Vect(Kset_Vect, Partition, N);     //LogE
     Complexity_MCM(Partition, N, &C_param, &C_geom);    //Complexity
 
     // *** Print in file:
@@ -520,7 +520,7 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsig
       Partition_buffer = Partition;
       Partition_buffer.erase(atest);
 
-      LogE = LogE_MCM(Kset, Partition_buffer, N);     //LogE
+      LogE = LogE_MCM_Vect(Kset_Vect, Partition_buffer, N);     //LogE
       Complexity_MCM(Partition_buffer, N, &C_param, &C_geom);    //Complexity
 
       // *** Print in file:

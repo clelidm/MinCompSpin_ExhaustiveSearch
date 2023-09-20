@@ -1,4 +1,5 @@
 #include <map>
+#include <vector>
 #include <bitset>
 #include <fstream>
 
@@ -8,12 +9,14 @@
 /**************** Log-likelihood (LogL), Geometric Complexity *****************/
 /*************************  and Log-evidence (LogE) ***************************/
 /******************************************************************************/
-double LogL_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false);
-double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false);
+// Properties of MCM:
+double LogL_MCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, map<uint32_t, uint32_t> Partition, unsigned int N);
+double LogE_MCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, map<uint32_t, uint32_t> Partition, unsigned int N);
 double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom);
 
-double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false);
-double LogL_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false);
+// Properties of SCM:
+double LogL_SubCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, uint32_t Ai, unsigned int N);
+double LogE_SubCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, uint32_t Ai, unsigned int N);
 double GeomComplexity_SubCM(unsigned int m);
 double ParamComplexity_SubCM(unsigned int m, unsigned int N);
 
@@ -87,12 +90,12 @@ pair<bool, uint32_t> check_partition(map<uint32_t, uint32_t> Partition)
 /********************************************************************/
 /*******    PRINT INFO on each PART of an MCM (= a partition)   *****/
 /********************************************************************/
-void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)
+void PrintTerminal_MCM_Info_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)
 {
   uint32_t Part = 0, m=0;
   double C_param=0, C_geom=0;
   Complexity_MCM(MCM_Partition, N, &C_param, &C_geom);
-  double LogL = LogL_MCM(Kset, MCM_Partition, N);
+  double LogL = LogL_MCM_Vect(Kset_Vect, MCM_Partition, N);
 
   cout << "********** General Information about the MCM: **********" << endl; 
   cout << "The chosen MCM has " << MCM_Partition.size() << " partitions and the following properties:" << endl;
@@ -100,7 +103,7 @@ void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, m
   cout << " \t C_param = " << C_param << " \t \t C_geom = " << C_geom << endl;
   cout << " \t Total complexity = " << C_param + C_geom << endl;
   cout << " \t MDL = " << LogL - C_param - C_geom << endl;
-  cout << "  \t LogE = " << LogE_MCM(Kset, MCM_Partition, N) << endl;
+  cout << "  \t LogE = " << LogE_MCM_Vect(Kset_Vect, MCM_Partition, N) << endl;
 
   cout << endl << "********** Information about each part of the MCM: **********";
   cout << endl << "\t (the total LogE of the model is the sum of the values for each part, which are reported in the table below)";
@@ -116,9 +119,9 @@ void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, m
     C_geom = GeomComplexity_SubCM(m);
 
     cout << " \t " << Part << " \t " << bitset<n>(Part) << " \t";
-    cout << LogL_SubCM(Kset, Part, N) << " \t";
-    cout << C_param << " \t " << C_geom << " \t" << C_param + C_geom << " \t";
-    cout << LogE_SubCM(Kset, Part, N) << endl;
+    cout << LogL_SubCM_Vect(Kset_Vect, Part, N) << " \t";
+    cout << C_param << " \t " << C_geom << " \t" << C_param + C_geom << " \t ";
+    cout << LogE_SubCM_Vect(Kset_Vect, Part, N) << endl;
   }
   cout << endl;
 }
@@ -127,13 +130,13 @@ void PrintTerminal_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, m
 /**************************    PRINT INFO    ************************/
 /******    ON SUCCESSIVE INDEPENDENT MODELS IN THE NEW BASIS   ******/
 /********************************************************************/
-void PrintInfo_All_Indep_Models(map<uint32_t, unsigned int> Kset, unsigned int N)
+void PrintInfo_All_Indep_Models_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, unsigned int N)
 {
   map<uint32_t, uint32_t> Partition_Indep;  uint32_t Op = 1;
   for (uint32_t i = 0 ; i<n; i++)
   {
     Partition_Indep[i] = Op;
-    cout << "Add Op = " << Op << " \t LogE = " << LogE_MCM(Kset, Partition_Indep, N) << " \t LogL = " << LogL_MCM(Kset, Partition_Indep, N) << endl;    
+    cout << "Add Op = " << Op << " \t LogE = " << LogE_MCM_Vect(Kset_Vect, Partition_Indep, N) << " \t LogL = " << LogL_MCM_Vect(Kset_Vect, Partition_Indep, N) << endl;    
     Op = Op << 1;
   }
   Partition_Indep.clear();
@@ -143,16 +146,18 @@ void PrintInfo_All_Indep_Models(map<uint32_t, unsigned int> Kset, unsigned int N
 /**************************    PRINT INFO    ************************/
 /******    ON SUCCESSIVE SUB_COMPLETE MODELS IN THE NEW BASIS   *****/
 /********************************************************************/
-void PrintInfo_All_SubComplete_Models(map<uint32_t, unsigned int> Kset, unsigned int N)
+void PrintInfo_All_SubComplete_Models_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, unsigned int N)
 {
   map<uint32_t, uint32_t> Partition_SC;  uint32_t Op = 1;
   Partition_SC[0] = 0;
   for (uint32_t i = 0 ; i<n; i++)
   {
     Partition_SC[0] += Op;
-    cout << "Add Op = " << Op << " \t LogE = " << LogE_MCM(Kset, Partition_SC, N) << " \t LogL = " << LogL_MCM(Kset, Partition_SC, N) << endl;    
+    cout << "Add Op = " << Op << " \t LogE = " << LogE_MCM_Vect(Kset_Vect, Partition_SC, N) << " \t LogL = " << LogL_MCM_Vect(Kset_Vect, Partition_SC, N) << endl;    
     Op = Op << 1;
   }
   Partition_SC.clear();
 }
+
+
 

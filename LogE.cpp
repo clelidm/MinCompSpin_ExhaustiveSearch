@@ -1,6 +1,7 @@
 #include <bitset>
 #include <cmath>       /* tgamma */
 #include <map>
+#include <vector>
 
 using namespace std;
 
@@ -48,32 +49,19 @@ double LogE_SubC_forMCM(map<uint32_t, unsigned int > Kset, uint32_t m, unsigned 
 // This function could be also used directly by the user
 // to compute the log-evidence of a sub-complete model
 
-double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)
+double LogE_SubCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, uint32_t Ai, unsigned int N)
 {
-  map<uint32_t, unsigned int>::iterator it;
   map<uint32_t, unsigned int > Kset_new;
 
   uint32_t s;        // state
   unsigned int ks=0; // number of time state s appear in the dataset
 
-  if (print_bool)  { 
-  cout << endl << "--->> Build Kset for SC Model based on "  << Ai << " = " << bitset<n>(Ai) << " for MCM.." << endl;
-  }
-//Build Kset:
-  for (it = Kset.begin(); it!=Kset.end(); ++it)
+//Build Kset_new:
+  for (auto const& it : Kset_Vect)
   {
-    s = it->first;      // initial state s 
-    ks = it->second;    // # of times s appears in the data set
-    if (print_bool)  {  cout << s << ": \t" << bitset<n>(s) << " \t" ;  }
-
-    s &= Ai;   // troncated state: take only the bits indicated by Ai
-//    sig_m = bitset<m>(bitset<m>(mu).to_string()).to_ulong(); //bitset<m>(mu).to_ulong(); // mu|m
-    if (print_bool)  {  cout << s << ": \t" << bitset<n>(s) << endl; }
-
-    Kset_new[s] += ks;
-    //Kset[mu_m].second.push_back(make_pair(mu, N_mu));
+    s = ((it).first) & Ai;          // troncated state: take only the bits of s (=it.first) indicated by Ai
+    Kset_new[s] += ((it).second);   // # of times s appears in the data set
   }
-  if (print_bool)  {  cout << endl;  }
 
   return LogE_SubC_forMCM(Kset_new, bitset<n>(Ai).count(), N);
 }
@@ -86,8 +74,7 @@ double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N
 // i.e., that each basis element only appears in a single part of the partition.
 bool check_partition(map<uint32_t, uint32_t> Partition);
 
-
-double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)
+double LogE_MCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, map<uint32_t, uint32_t> Partition, unsigned int N)
 {
   //if (!check_partition(Partition)) {cout << "Error, the argument is not a partition." << endl; return 0;  }
 
@@ -99,10 +86,13 @@ double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Parti
 
     for (Part = Partition.begin(); Part != Partition.end(); Part++)
     {
-      LogE += LogE_SubCM(Kset, (*Part).second, N);
+      LogE += LogE_SubCM_Vect(Kset_Vect, (*Part).second, N);
       rank += bitset<n>((*Part).second).count();
     }  
     return LogE - ((double) (N * (n-rank))) * log(2.);
   //}
 }
+
+
+
 
