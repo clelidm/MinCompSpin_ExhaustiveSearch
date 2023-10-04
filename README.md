@@ -229,12 +229,13 @@ Users can also get **specific information about an MCM** with the following func
 - `double`**`LogE_MCM`**`(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> Partition, unsigned int N)` returns the log-evidence of the MCM defined by `Partition`;
 - `double`**`Complexity_MCM`**`(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)` place the parameter complexity and the geometric complexity of the MCM model defined in `Partition` respectively at the addresses `*C_param` and `*C_geom`. Finally, the function returns the total complexity of the model.
 
-Users can also get **specific information about any subcomplete part (SC-part)** of an MCM with the functions:
- - `double`**`LogL_SubCM`**`(vector<pair<uint32_t, unsigned int>> Kset, uint32_t Ai, unsigned int N)` returns the log-likelihood of the SC-part, where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
- - `double`**`LogE_SubCM`**`(vector<pair<uint32_t, unsigned int>> Kset, uint32_t Ai, unsigned int N)` returns the log-evidence of the SC-part, where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
- - `double`**`ParamComplexity_SubCM`**`(unsigned int m, unsigned int N)` returns the model complexity of the SC-part due to the number of parameters in the part ("parameter complexity"); this is the first order complexity term in the Minimum Description Length principle (this term is of the order of `O(log N)` where `N` is the number of datapoints -- see Ref. [1]).
- - `double`**`GeomComplexity_SubCM`**`(unsigned int m)` returns the geometric complexity of the SC-part; it is the second order complexity term in the Minimum Description Length principle (which is of the order of `O(1)` -- see Ref. [1]).
+Users can also get **specific information about any ICC**, i.e. about any sub-complete part of an MCM with the functions:
+ - `double`**`LogL_ICC`**`(vector<pair<uint32_t, unsigned int>> Kset, uint32_t Ai, unsigned int N)` returns the log-likelihood of the ICC, where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the ICC (see section "Encoding MCMs").
+ - `double`**`LogE_ICC`**`(vector<pair<uint32_t, unsigned int>> Kset, uint32_t Ai, unsigned int N)` returns the log-evidence of the SC-part, where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
+ - `double`**`ParamComplexity_ICC`**`(unsigned int m, unsigned int N)` returns the model complexity of the SC-part due to the number of parameters in the part ("parameter complexity"); this is the first order complexity term in the Minimum Description Length principle (this term is of the order of `O(log N)` where `N` is the number of datapoints -- see Ref. [1]).
+ - `double`**`GeomComplexity_ICC`**`(unsigned int m)` returns the geometric complexity of the SC-part; it is the second order complexity term in the Minimum Description Length principle (which is of the order of `O(1)` -- see Ref. [1]).
 
+**ICC** stands for "Independent Complete Component". ICCs are the Independent Complete model parts that are composing an MCM (see Ref. [1] for more details).
 
 ## Print in a File the state probabilities P(s) for the model (and the probability P(k)):
 
