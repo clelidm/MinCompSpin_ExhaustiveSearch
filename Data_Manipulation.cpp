@@ -57,7 +57,7 @@ vector<pair<uint32_t, unsigned int>> read_datafile(unsigned int *N, string filen
 /******************************************************************************/
 /*********************     CHANGE of BASIS: one datapoint  ********************/
 /******************************************************************************/
-// Given a choice of a model (defined by the m basis vector) --> return the new m-state (state in the new m-basis)
+// Given a choice of a basis (defined by the m-basis list) --> returns the new m-state (i.e. state in the new m-basis)
 // Rem: must have m <= n 
 uint32_t transform_mu_basis(uint32_t mu, list<uint32_t> basis)
 {
