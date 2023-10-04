@@ -242,15 +242,15 @@ Users can also get **specific information about any ICC**, i.e. about any sub-co
 The following functions are defined in `P_s.cpp`.
 
 To print the value of the state probabilities P(s) in the data and in the fitted model, and the values of P(k), one can use:
- - (1) the function `void`**`PrintFile_StateProbabilites_OriginalBasis`**`(vector<pair<uint32_t, unsigned int>> Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Nset` contains the histogram of the original dataset, `Basis` contains the basis on which the specified MCM is defined, `MCM_Partition` contains the partition corresponding to MCM used, and `filename` is a string used to create the output filenames.
- - (2) the function `void`**`PrintFile_StateProbabilites_NewBasis`**`(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Kset` is the histogram of occurrence of the states in the data written in any chosen basis, `MCM_Partition` is the partition defining the chosen MCM in the same basis, `N` is the size of the dataset, and `filename` is a string used to create the output file.
+ - 1. the function `void`**`PrintFile_StateProbabilites_OriginalBasis`**`(vector<pair<uint32_t, unsigned int>> Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Nset` contains the histogram of the original dataset, `Basis` contains the basis on which the specified MCM is defined, `MCM_Partition` contains the partition corresponding to MCM used, and `filename` is a string used to create the output filenames.
+ - 2. the function `void`**`PrintFile_StateProbabilites_NewBasis`**`(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Kset` is the histogram of occurrence of the states in the data written in any chosen basis, `MCM_Partition` is the partition defining the chosen MCM in the same basis, `N` is the size of the dataset, and `filename` is a string used to create the output file.
 
-The first function (1) prints:
+The first function (i) prints:
  - a file, with name ending by`_Ps.dat`: which contains, for all the states `s` observed in the dataset, their empirical probability `P_D(s)` VS their model probability `P_MCM(s)`, and the value of the transformed state `sig` in the basis in which the MCM is defined.
  - a file with name ending by`_Pk.dat`: which contains, for all integer values of `k` between `0` and `n`, the empirical probability `P_D(k)` VS the model probability `P_MCM(k)` that there are `k` spins with value `+1` in any observed state.
  - a file with name ending by `_MCM_info.dat`: which contains the information about the MCM used, i.e. the basis in which the MCM is defined and the partition defining the MCM in that basis.
 
-The seccond function (2) prints:
+The second function (ii) prints:
  - a file, with name ending by `P_sig.dat`, that contains the values of the empirical probability `P_D(sig)` VS the model probability `P_MCM(sig)` for all the observed states `sig` written in the same basis as `Kset`.
 
 
