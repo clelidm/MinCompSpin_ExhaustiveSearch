@@ -136,11 +136,11 @@ The following functions are defined in `Data_Manipulation.cpp`.
 
 ### Read the input dataset
 
-The function `map<uint32_t, unsigned int>`**`read_datafile`**`(unsigned int *N, string filename = datafilename)` reads the dataset with location and name provided in argument (`string filename`). By default the function will read the file specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `map<uint32_t, unsigned int>`**`Nset`** that maps each observed state to the number of times they occur in the dataset. Note that each state of the system is encoded as an `n`-bit integer.
+The function `vector<pair<uint32_t, unsigned int>>`**`read_datafile`**`(unsigned int *N, string filename = datafilename)` reads the dataset with location and name provided in argument (`string filename`). By default the function will read the file specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `vector<pair<uint32_t, unsigned int>>`**`Nset`** that pairs each observed state (encoded as `uint32_t`) to the number of times they occur in the dataset (encoded as `unsigned int`). Note that each state of the system is encoded as an `n`-bit integer on 32 bits.
 
 ### Re-write the dataset in the new basis
 
-The function `map<uint32_t, unsigned int>`**`build_Kset`**`(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset`, provided as an argument, is written) to the basis provided as an argument in `Basis`. It is possible to print this new map (i.e., the frequency of occurrence of each state in the new basis) by changing the default value of `print_bool` to `true`.
+The function `vector<pair<uint32_t, unsigned int>> `**`build_Kset`**`(vector<pair<uint32_t, unsigned int>> Nset, list<uint32_t> Basis, bool print_bool=false)` changes the basis of the dataset from its original basis (or the one in which `Nset`, provided as an argument, is written) to the basis provided as an argument in `Basis`. It is possible to print this new distribution (i.e., the frequency of occurrence of each state in the new basis) in the Terminal by changing the default value of `print_bool` to `true`.
 
 ## Find the Best MCM:
 
@@ -175,13 +175,13 @@ In the code, partitions of the `r` digits are encoded in two different ways:
 Three functions are available to perform an exhaustive search for the best MCM (i.e., the MCM with the largest log-evidence `logE`):
 
  - **Function 1:** The function **`MCM_GivenRank_r`** compares all the MCMs of rank `r`, based on the `r` first elements of the new basis (i.e., the basis used to build Kset). The total number of these models is given by the Bell number of `r`, denoted `Bell(r)`. See declaration:
- >        map<uint32_t, uint32_t> MCM_GivenRank_r(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+ >        map<uint32_t, uint32_t> MCM_GivenRank_r(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 
  - **Function 2:** The function **`MCM_AllRank_SmallerThan_r_Ordered`** compares all the MCMs based on the `k` first elements of the new basis for all `k=1 to r`. The total number of these model is given by the sum for `k=1` to `r` of `Bell(k)`. See declaration:
->        map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+>        map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 
  - **Function 3:** The function **`MCM_AllRank_SmallerThan_r_nonOrdered`** compares all the MCMs based on **any** `k` elements of the new basis for all `k=1 to r`. The total number of these model is given by the sum for `k=1` to `r` of `[n choose k] x Bell(k)`. See declaration:
->        map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(map<uint32_t, unsigned int > Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+>        map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 
 These three functions enumerate all possible partitions of a set using variantes of the algorithm described in Ref. [2] and [3]. The algorithm efficiently generates all set partitions in Gray-code order.
 
@@ -193,7 +193,7 @@ For all three functions:
 
 ### Print information about your model
 
-The function `void`**`PrintTerminal_MCM_Info`**`(map<uint32_t, unsigned int >Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MCM given as an argument in `MCM_Partition`:
+The function `void`**`PrintTerminal_MCM_Info`**`(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, map<uint32_t, uint32_t> MCM_Partition)` prints in the terminal information about the MCM given as an argument in `MCM_Partition`:
 
  - **For the whole MCM,** the function prints the number of Independent Components of the MCM (i.e., the number of partitions -- or communities -- of the MCM, see ref. [1]), as well as the log-likelihood (`LogL`), the parameter complexity (`C_param`), the geometric complexity (`C_geom`), the total complexity (`C_tot`), the Minimum Description Length (`MDL`) and the log-evidence (`LogE`). 
 See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) for the definition of the complexity of spin models (in connection with the Minimum Description Length Principle).
@@ -225,13 +225,13 @@ You can check that the model (i.e., list of parts) that you have provided proper
 The following functions are defined in `LogL.cpp`, `Complexity.cpp` and `LogE.cpp`.
 
 Users can also get **specific information about an MCM** with the following functions:
-- `double`**`LogL_MCM`**`(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-likelihood of the MCM defined by `Partition`;
-- `double`**`LogE_MCM`**`(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N, bool print_bool = false)` returns the log-evidence of the MCM defined by `Partition`;
+- `double`**`LogL_MCM`**`(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> Partition, unsigned int N)` returns the log-likelihood of the MCM defined by `Partition`;
+- `double`**`LogE_MCM`**`(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> Partition, unsigned int N)` returns the log-evidence of the MCM defined by `Partition`;
 - `double`**`Complexity_MCM`**`(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom)` place the parameter complexity and the geometric complexity of the MCM model defined in `Partition` respectively at the addresses `*C_param` and `*C_geom`. Finally, the function returns the total complexity of the model.
 
 Users can also get **specific information about any subcomplete part (SC-part)** of an MCM with the functions:
- - `double`**`LogL_SubCM`**`(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-likelihood of the SC-part, where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
- - `double`**`LogE_SubCM`**`(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N, bool print_bool = false)` returns the log-evidence of the SC-part, where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
+ - `double`**`LogL_SubCM`**`(vector<pair<uint32_t, unsigned int>> Kset, uint32_t Ai, unsigned int N)` returns the log-likelihood of the SC-part, where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
+ - `double`**`LogE_SubCM`**`(vector<pair<uint32_t, unsigned int>> Kset, uint32_t Ai, unsigned int N)` returns the log-evidence of the SC-part, where `Kset` is the dataset written in the new basis, and where `Ai` is the binary representation of the SC-part (see section "Encoding MCMs").
  - `double`**`ParamComplexity_SubCM`**`(unsigned int m, unsigned int N)` returns the model complexity of the SC-part due to the number of parameters in the part ("parameter complexity"); this is the first order complexity term in the Minimum Description Length principle (this term is of the order of `O(log N)` where `N` is the number of datapoints -- see Ref. [1]).
  - `double`**`GeomComplexity_SubCM`**`(unsigned int m)` returns the geometric complexity of the SC-part; it is the second order complexity term in the Minimum Description Length principle (which is of the order of `O(1)` -- see Ref. [1]).
 
@@ -239,8 +239,8 @@ Users can also get **specific information about any subcomplete part (SC-part)**
 ## Print (in a file) the state probabilities P(s) for the model (and the probability P(k)):
 
 To print the value of the state probabilities P(s) in the data and in the fitted model, and the values of P(k), one can use:
- - (1) the function `void`**`PrintFile_StateProbabilites_OriginalBasis`**`(map<uint32_t, unsigned int > Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Nset` contains the histogram of the original dataset, `Basis` contains the basis on which the specified MCM is defined, `MCM_Partition` contains the partition corresponding to MCM used, and `filename` is a string used to create the output filenames.
- - (2) the function `void`**`PrintFile_StateProbabilites_NewBasis`**`(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Kset` is the histogram of occurrence of the states in the data written in any chosen basis, `MCM_Partition` is the partition defining the chosen MCM in the same basis, `N` is the size of the dataset, and `filename` is a string used to create the output file.
+ - (1) the function `void`**`PrintFile_StateProbabilites_OriginalBasis`**`(vector<pair<uint32_t, unsigned int>> Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Nset` contains the histogram of the original dataset, `Basis` contains the basis on which the specified MCM is defined, `MCM_Partition` contains the partition corresponding to MCM used, and `filename` is a string used to create the output filenames.
+ - (2) the function `void`**`PrintFile_StateProbabilites_NewBasis`**`(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Kset` is the histogram of occurrence of the states in the data written in any chosen basis, `MCM_Partition` is the partition defining the chosen MCM in the same basis, `N` is the size of the dataset, and `filename` is a string used to create the output file.
 
 The first function (1) prints:
  - a file, with name ending by`_Ps.dat`: which contains, for all the states `s` observed in the dataset, their empirical probability `P_D(s)` VS their model probability `P_MCM(s)`, and the value of the transformed state `sig` in the basis in which the MCM is defined.
