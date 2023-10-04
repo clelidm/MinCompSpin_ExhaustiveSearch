@@ -31,8 +31,7 @@ void PrintTerm_Basis(list<uint32_t> Basis_li);
 
 /*** READ DATA and STORE data in Nset:    *************************************/
 /******************************************************************************/
-//map<uint32_t, unsigned int> read_datafile(unsigned int *N, string filename = datafilename); // filename to specify in data.h
-vector<pair<uint32_t, unsigned int>> read_datafile_Vect(unsigned int *N, string filename = datafilename);
+vector<pair<uint32_t, unsigned int>> read_datafile_Vect(unsigned int *N, string filename = datafilename); // filename to specify in data.h
 
 /*** DATA CHANGE of BASIS:    *************************************************/
 /******************************************************************************/
@@ -42,7 +41,6 @@ vector<pair<uint32_t, unsigned int>> read_datafile_Vect(unsigned int *N, string 
 //
 // *** Rem: the new basis can have a lower dimension then the original dataset; 
 // *** in which case the function will reduce the dataset to the subspace defined by the specified basis.
-//map<uint32_t, unsigned int> build_Kset(map<uint32_t, unsigned int> Nset, list<uint32_t> Basis, bool print_bool=false);
 vector<pair<uint32_t, unsigned int>> build_Kset_Vect(vector<pair<uint32_t, unsigned int>> Nset_Vect, list<uint32_t> Basis, bool print_bool=false);
 
 
@@ -60,9 +58,6 @@ vector<pair<uint32_t, unsigned int>> build_Kset_Vect(vector<pair<uint32_t, unsig
 // *** For ex. Ai = 01001 is encoded on n=5 basis elements, and element Op1 and Op4 belong to the part;
 // *** Rem: Basis elements are ordered from the right to the left.
 
-//double LogL_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N);
-//double LogE_SubCM(map<uint32_t, unsigned int > Kset, uint32_t Ai, unsigned int N);
-
 double LogL_SubCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, uint32_t Ai, unsigned int N);
 double LogE_SubCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, uint32_t Ai, unsigned int N);
 
@@ -76,8 +71,6 @@ double LogL_CM(map<uint32_t, unsigned int > Kset, unsigned int N);
 
 /****************************    for a MCM     ********************************/
 /******************************************************************************/
-//double LogL_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N);
-//double LogE_MCM(map<uint32_t, unsigned int > Kset, map<uint32_t, uint32_t> Partition, unsigned int N);
 double Complexity_MCM(map<uint32_t, uint32_t> Partition, unsigned int N, double *C_param, double *C_geom);
 
 double LogL_MCM_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, map<uint32_t, uint32_t> Partition, unsigned int N);
