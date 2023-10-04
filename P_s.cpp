@@ -22,25 +22,11 @@ struct Proba {
     double P_MCM = 1.;  // model probability of s 
 };
 
-/******************************************************************************/
-/****************   Return Kset over a chosen sub-basis b_a    ****************/
-/******************************************************************************/
-map<uint32_t, unsigned int> Build_Kset_ba_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, uint32_t Ai)
-{
-  map<uint32_t, unsigned int > Kset_new;
+/************************************************************************************************************/
+/****************   Return Kset for an ICC over a chosen part (i.e. over a sub-basis b_a)    ****************/
+/************************************************************************************************************/
 
-  uint32_t s;        // state
-  unsigned int ks=0; // number of time state s appear in the dataset
-
-//Build Kset_new:
-  for (auto const& it : Kset_Vect)
-  {
-    s = ((it).first) & Ai;          // troncated state: take only the bits of s (=it.first) indicated by Ai
-    Kset_new[s] += ((it).second);   // # of times s appears in the data set
-  }
-
-  return Kset_new;
-}
+map<uint32_t, unsigned int > build_Kset_ICC(vector<pair<uint32_t, unsigned int>> Kset, uint32_t Ai);
 
 /******************************************************************************/
 /****************************      Check partition     ************************/
@@ -79,7 +65,7 @@ void update_proba_MCM(map<uint32_t, Proba> &all_P, map<uint32_t, unsigned int> K
 /******************************************************************************/
 // This function can be used directly on the original basis, by replacing Kset by Nset:
 
-map<uint32_t, Proba> P_sig_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, map<uint32_t, uint32_t> Partition, unsigned int N) // Probabilities in the sigma basis
+map<uint32_t, Proba> P_sig(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> Partition, unsigned int N) // Probabilities in the sigma basis
 {
   // Fill in the data probability:
   map<uint32_t, Proba> all_P;
@@ -99,7 +85,7 @@ map<uint32_t, Proba> P_sig_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, 
 
 
 //Build Kset_new:
-    for (auto const& it : Kset_Vect)
+    for (auto const& it : Kset)
     {
       s = (it).first;          // initial state s
       ks = (it).second;    // # of times s appears in the data set
@@ -108,15 +94,15 @@ map<uint32_t, Proba> P_sig_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, 
       all_P[s].P_MCM = pre_factor;
     }
 
-    // Compute the Kset over each part: Kset_ba:
-    map<uint32_t, unsigned int> Kset_ba;
+    // Compute the Kset over each part: Kset_icc:
+    map<uint32_t, unsigned int> Kset_icc;
     map<uint32_t, uint32_t>::iterator Part;
 
     for (Part = Partition.begin(); Part != Partition.end(); Part++)
     {
-      Kset_ba = Build_Kset_ba_Vect(Kset_Vect, (*Part).second);         // (*Part).second) = Ai = integer indicated the spin elements included in b_a
-      update_proba_MCM(all_P, Kset_ba, (*Part).second, N);
-      Kset_ba.clear();
+      Kset_icc = build_Kset_ICC(Kset, (*Part).second);         // (*Part).second) = Ai = integer indicated the spin elements included in b_a
+      update_proba_MCM(all_P, Kset_icc, (*Part).second, N);
+      Kset_icc.clear();
     }  
   }
 
@@ -124,10 +110,10 @@ map<uint32_t, Proba> P_sig_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, 
 }
 
 
-void PrintFile_StateProbabilites_NewBasis_Vect(vector<pair<uint32_t, unsigned int>> Kset_Vect, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")
+void PrintFile_StateProbabilites_NewBasis(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")
 {
   // Probabilities in the sigma basis:
-  map<uint32_t, Proba> P_all = P_sig_Vect(Kset_Vect, MCM_Partition, N);
+  map<uint32_t, Proba> P_all = P_sig(Kset, MCM_Partition, N);
   map<uint32_t, Proba>::iterator it_P;
 
   string Psig_filename = filename + "_DataVSMCM_Psig.dat";
@@ -150,7 +136,7 @@ void PrintFile_StateProbabilites_NewBasis_Vect(vector<pair<uint32_t, unsigned in
 /******************************************************************************/
 uint32_t transform_mu_basis(uint32_t mu, list<uint32_t> basis);
 
-map<uint32_t, Proba> P_s_Vect(vector<pair<uint32_t, unsigned int>> Nset_Vect, list<uint32_t> Basis, map<uint32_t, uint32_t> Partition, unsigned int N) // Probabilities in the sigma basis
+map<uint32_t, Proba> P_s(vector<pair<uint32_t, unsigned int>> Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> Partition, unsigned int N) // Probabilities in the sigma basis
 {
   double Nd = (double) N;
 
@@ -161,20 +147,20 @@ map<uint32_t, Proba> P_s_Vect(vector<pair<uint32_t, unsigned int>> Nset_Vect, li
   else
   { 
     // Build Kset:
-    map<uint32_t, unsigned int > Kset;
+    map<uint32_t, unsigned int > Kset_map;
     uint32_t s;        // initial state
     uint32_t sig_m;    // transformed state and to the m first spins
     unsigned int ks=0; // number of time state s appear in the dataset
 
   //Build Kset and fill in P[s] from the data:
     cout << "--->> Build Kset and fill in P[s] from the data..." << endl;
-    for (auto const& it : Nset_Vect)
+    for (auto const& it : Nset)
     {
       s = (it).first;          // original state s
       sig_m = transform_mu_basis(s, Basis);   // new state
 
       // Fill in Kset:
-      Kset[sig_m] += (it).second;    // += ks = number of time state s appear in the dataset
+      Kset_map[sig_m] += (it).second;    // += ks = number of time state s appear in the dataset
 
       // Fill in P[s] empirical and value of transformed state:
       all_P[s].P_D_s = ((double) ((it).second))/Nd; // = ks/Nd
@@ -182,17 +168,17 @@ map<uint32_t, Proba> P_s_Vect(vector<pair<uint32_t, unsigned int>> Nset_Vect, li
     }
 
     // convert map to a vector
-    vector<pair<uint32_t, unsigned int>> Kset_Vect(Kset.size());
+    vector<pair<uint32_t, unsigned int>> Kset(Kset_map.size());
     int i=0;
-    for (auto& my_pair : Kset)
+    for (auto& my_pair : Kset_map)
     {
-      Kset_Vect[i]=my_pair;
+      Kset[i]=my_pair;
       i++;
     }
 
   // Compute the model probability of the MCM based on Kset using "Partition":
     cout << "--->> Compute P[s] for the chosen MCM..." << endl << endl;
-    map<uint32_t, Proba> all_P_sig = P_sig_Vect(Kset_Vect, Partition, N);   // Compute P[s] for the MCM in the new basis
+    map<uint32_t, Proba> all_P_sig = P_sig(Kset, Partition, N);   // Compute P[s] for the MCM in the new basis
 
   // Report the values of P_MCM in the original all_P:
     map<uint32_t, Proba>::iterator it_P;
@@ -204,7 +190,7 @@ map<uint32_t, Proba> P_s_Vect(vector<pair<uint32_t, unsigned int>> Nset_Vect, li
     }
   
     all_P_sig.clear();
-    Kset.clear();
+    Kset_map.clear();
   }
 
   return all_P;  
@@ -267,8 +253,8 @@ void PrintFile_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<u
   {    
     Part = (*i).second;
     m = bitset<n>(Part).count();  // rank of the part (i.e. rank of the SCM)
-    C_param = ParamComplexity_SubCM(m, N);
-    C_geom = GeomComplexity_SubCM(m);
+    C_param = ParamComplexity_ICC(m, N);
+    C_geom = GeomComplexity_ICC(m);
 
     cout << " \t " << Part << " \t " << bitset<n>(Part) << " \t";
     cout << LogL_SubCM(Kset, Part, N) << " \t";
@@ -281,10 +267,10 @@ void PrintFile_MCM_Info(map<uint32_t, unsigned int > Kset, unsigned int N, map<u
 /******************************************************************************/
 /*************      Print the model probabilities in a file     ***************/
 /******************************************************************************/
-void PrintFile_StateProbabilites_OriginalBasis_Vect(vector<pair<uint32_t, unsigned int>> Nset_Vect, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")
+void PrintFile_StateProbabilites_OriginalBasis(vector<pair<uint32_t, unsigned int>> Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")
 {
   // Compute all the state probabilities:
-  map<uint32_t, Proba> P_all = P_s_Vect(Nset_Vect, Basis, MCM_Partition, N);
+  map<uint32_t, Proba> P_all = P_s(Nset, Basis, MCM_Partition, N);
 
   double *Pk_D = (double *)malloc((n+1)*sizeof(double)); 
   double *Pk_MCM = (double *)malloc((n+1)*sizeof(double)); 
