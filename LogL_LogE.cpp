@@ -15,7 +15,7 @@ map<uint32_t, unsigned int> build_Kset_ICC(vector<pair<uint32_t, unsigned int>> 
     map<uint32_t, unsigned int> Kset_ICC;
 
     uint32_t s;        // state
-    unsigned int ks=0; // number of time state s appears in the dataset
+    //unsigned int ks=0; // number of time state s appears in the dataset
 
   //Build Kset_ICC:
     for (auto const& it : Kset)
