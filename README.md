@@ -222,7 +222,7 @@ You can check that the model (i.e., list of parts) that you have provided proper
 
 ## Likelihood, Complexity and Evidence:
 
-The following functions are defined in `LogL.cpp`, `Complexity.cpp` and `LogE.cpp`.
+The following functions are defined in `LogL.cpp`, `LogE.cpp`, and `Complexity.cpp`.
 
 Users can also get **specific information about an MCM** with the following functions:
 - `double`**`LogL_MCM`**`(vector<pair<uint32_t, unsigned int>> Kset, map<uint32_t, uint32_t> Partition, unsigned int N)` returns the log-likelihood of the MCM defined by `Partition`;
@@ -237,6 +237,8 @@ Users can also get **specific information about any subcomplete part (SC-part)**
 
 
 ## Print (in a file) the state probabilities P(s) for the model (and the probability P(k)):
+
+The following functions are defined in `P_s.cpp`.
 
 To print the value of the state probabilities P(s) in the data and in the fitted model, and the values of P(k), one can use:
  - (1) the function `void`**`PrintFile_StateProbabilites_OriginalBasis`**`(vector<pair<uint32_t, unsigned int>> Nset, list<uint32_t> Basis, map<uint32_t, uint32_t> MCM_Partition, unsigned int N, string filename = "Result")`, where `Nset` contains the histogram of the original dataset, `Basis` contains the basis on which the specified MCM is defined, `MCM_Partition` contains the partition corresponding to MCM used, and `filename` is a string used to create the output filenames.
