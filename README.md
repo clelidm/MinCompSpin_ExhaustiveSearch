@@ -236,7 +236,7 @@ Users can also get **specific information about any subcomplete part (SC-part)**
  - `double`**`GeomComplexity_SubCM`**`(unsigned int m)` returns the geometric complexity of the SC-part; it is the second order complexity term in the Minimum Description Length principle (which is of the order of `O(1)` -- see Ref. [1]).
 
 
-## Print (in a file) the state probabilities P(s) for the model (and the probability P(k)):
+## Print in a File the state probabilities P(s) for the model (and the probability P(k)):
 
 The following functions are defined in `P_s.cpp`.
 
