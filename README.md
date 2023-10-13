@@ -1,7 +1,7 @@
 # Exhaustive search
 # for the best Minimally Complex spin Models (MCM)
 
-This program allows to **uncover AND model community structures in binary data**, while **taking into account possible high order patterns** of data in the detection of the communities (i.e., possible high-order correlations between the variables). The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) that have minimal information theoretic complexity. These models are called Minimally Complex Models (MCM). The selected model can be used as a generative model for data. Details can be found in Ref. [1].
+This program allows to **uncover AND model community structures in binary data**, while **taking into account possible high-order patterns** of data in the detection of the communities (i.e., possible high-order correlations between the variables). The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) that have minimal information theoretic complexity. These models are called Minimally Complex Models (MCM). The selected model can be used as a generative model for data. Details can be found in Ref. [1].
 
 ----
 
