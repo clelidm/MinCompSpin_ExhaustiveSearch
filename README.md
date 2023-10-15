@@ -29,7 +29,10 @@ For larger systems (`r>~15`), please check the greedy algorithm available [here]
 
 The code uses the C++11 version of C++.
 
-**To compile:** `g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogL_LogE.cpp Complexity.cpp Basis_Choice.cpp MCM_info.cpp P_s.cpp Best_MCM.cpp`
+**To compile:** 
+```bash
+g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogL_LogE.cpp Complexity.cpp Basis_Choice.cpp MCM_info.cpp P_s.cpp Best_MCM.cpp
+```
 
 **To execute:** `./a.out`
 
@@ -175,13 +178,19 @@ In the code, partitions of the `r` digits are encoded in two different ways:
 Three functions are available to perform an exhaustive search for the best MCM (i.e., the MCM with the largest log-evidence `logE`):
 
  - **Function 1:** The function **`MCM_GivenRank_r`** compares all the MCMs of rank `r`, based on the `r` first elements of the new basis (i.e., the basis used to build Kset). The total number of these models is given by the Bell number of `r`, denoted `Bell(r)`. See declaration:
- >        map<uint32_t, uint32_t> MCM_GivenRank_r(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+```c++
+map<uint32_t, uint32_t> MCM_GivenRank_r(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+```
 
  - **Function 2:** The function **`MCM_AllRank_SmallerThan_r_Ordered`** compares all the MCMs based on the `k` first elements of the new basis for all `k=1 to r`. The total number of these model is given by the sum for `k=1` to `r` of `Bell(k)`. See declaration:
->        map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+```c++
+map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+```
 
  - **Function 3:** The function **`MCM_AllRank_SmallerThan_r_nonOrdered`** compares all the MCMs based on **any** `k` elements of the new basis for all `k=1 to r`. The total number of these model is given by the sum for `k=1` to `r` of `[n choose k] x Bell(k)`. See declaration:
->        map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+```c++
+map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
+```
 
 These three functions enumerate all possible partitions of a set using variantes of the algorithm described in Ref. [2] and [3]. The algorithm efficiently generates all set partitions in Gray-code order.
 
