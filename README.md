@@ -31,7 +31,7 @@ The code uses the C++11 version of C++.
 
 **To compile:** 
 ```bash
-g++ -std=c++11 -O3 main.cpp Data_Manipulation.cpp LogL_LogE.cpp Complexity.cpp Basis_Choice.cpp MCM_info.cpp P_s.cpp Best_MCM.cpp
+g++ -std=c++11 -O3 *.cpp
 ```
 
 **To execute:** `./a.out`
