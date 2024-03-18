@@ -58,7 +58,7 @@ int main()
 //   list<uint32_t> Basis_li = Original_Basis();
 
   // *** The basis can be specified by hand here:
-  uint32_t Basis_Choice[] =  {3, 5, 9, 48, 65, 129, 272, 81, 1};    // Ex. This is the best basis for the "Shapes" dataset
+  uint32_t Basis_Choice[] =  {3, 5, 9, 48, 65, 129, 272, 256, 1};    // Ex. This is the best basis for the "Shapes" dataset
 
   unsigned int m = sizeof(Basis_Choice) / sizeof(uint32_t);
   list<uint32_t> Basis_li;  Basis_li.assign (Basis_Choice, Basis_Choice + m); 
