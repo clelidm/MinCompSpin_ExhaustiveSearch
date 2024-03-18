@@ -40,7 +40,7 @@ g++ -std=c++11 -O3 *.cpp
 
 All the functions useful for the user are declared in the file `library.h` and can be called from the function `int main()` in the file `main.cpp`. They are described in the sections below.
 
-For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the `INPUT` folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" of Ref. [1].
+For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the `INPUT` folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" in the Supplementary Information of Ref. [1].
 
 Note that, for illustration purposes, the example in `int main()` run three different versions of the search algorithm (see section "Find the Best MCM" below for details). To analyze your data, please choose only one of these versions. We advise you to use the function `MCM_GivenRank_r()`, see `Version 1` in the examples.
 
