@@ -58,14 +58,16 @@ int main()
 //   list<uint32_t> Basis_li = Original_Basis();
 
   // *** The basis can be specified by hand here:
+/*
   uint32_t Basis_Choice[] =  {3, 5, 9, 48, 65, 129, 272, 256, 1};    // Ex. This is the best basis for the "Shapes" dataset
 
   unsigned int m = sizeof(Basis_Choice) / sizeof(uint32_t);
   list<uint32_t> Basis_li;  Basis_li.assign (Basis_Choice, Basis_Choice + m); 
+*/
 
   // *** The basis can also be read from a file:
 //   list<uint32_t> Basis_li = Read_BasisOp_IntegerRepresentation();
-//   list<uint32_t> Basis_li = Read_BasisOp_BinaryRepresentation();
+   list<uint32_t> Basis_li = Read_BasisOp_BinaryRepresentation();
 
   // *** Print info about the Basis:
   PrintTerm_Basis(Basis_li);
@@ -91,7 +93,7 @@ int main()
   cout << endl << "\t If the size 'm' of the basis is strictly smaller than the number 'n' of variables, ";
   cout << endl << "\t then the data will be truncated to the 'm' first basis elements." << endl;
 
-  cout << endl << "Transform the data in the specified basis:" << endl;  
+  cout << endl << "Transform the data in the basis specified above:" << endl;  
 
   vector<pair<uint32_t, unsigned int>> Kset = build_Kset(Nset, Basis_li, false);
 
