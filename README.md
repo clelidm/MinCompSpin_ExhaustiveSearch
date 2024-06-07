@@ -40,9 +40,21 @@ g++ -std=c++11 -O3 *.cpp
 
 All the functions useful for the user are declared in the file `library.h` and can be called from the function `int main()` in the file `main.cpp`. They are described in the sections below.
 
-For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. In the `INPUT` folder, we provided the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" in the Supplementary Information of Ref. [1].
+For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. 
+
+In the `INPUT` folder, we provided two datasets:
+ - the binary dataset `Dataset_Shapes_n9_N1e5.dat`, which is the dataset used in the section "Boolean description of a binary dataset" in the Supplementary Information of Ref. [1].
+   The best basis for this dataset is given in the file `Shapes_n9_BestBasis_Binary.dat`. 
+ - the binary dataset `SCOTUS_n9_N895_Data.dat`, which is the dataset of votes of the US Supreme Court analyzed in Ref.[4] and used as an example in Ref.[1]. The dataset was processed by the authors of Ref.[4] from the original data published by Ref.[5] (accessed in 3 April 2012).
+
+To change which dataset you would like to use: open the file `data.h` and change the name of the input datafile in the variable `string datafilename` and if needed, the name of the basis file in the variable `string basis_BinaryRepresentation_filename` (see current examples in the file `data.h`).
 
 Note that, for illustration purposes, the example in `int main()` run three different versions of the search algorithm (see section "Find the Best MCM" below for details). To analyze your data, please choose only one of these versions. We advise you to use the function `MCM_GivenRank_r()`, see `Version 1` in the examples.
+
+[4] E.D. Lee, C.P. Broedersz, W. Bialek, Statistical Mechanics of the US Supreme Court. J Stat Phys 160, 275–301 (2015).
+
+[5] H.J. Spaeth, L. Epstein, T.W. Ruger, K. Whittington, J.A. Segal, A.D. Martin:SupremeCourtdatabase. Version 2011 Release 3 (2011). http://scdb.wustl.edu/index.php. Accessed 3 April 2012.
+
 
 ## License
 
