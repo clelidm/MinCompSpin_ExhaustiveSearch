@@ -47,7 +47,7 @@ In the `INPUT` folder, we provided two datasets:
    The best basis for this dataset is given in the file `Shapes_n9_BestBasis_Binary.dat`. 
  - the binary dataset `SCOTUS_n9_N895_Data.dat`, which is the dataset of votes of the US Supreme Court analyzed in Ref.[4] and used as an example in Ref.[1]. The dataset was processed by the authors of Ref.[4] from the original data published by Ref.[5] (accessed in 3 April 2012).
 
-To change which dataset you would like to use: open the file `data.h` and change the name of the input datafile in the variable `string datafilename` and if needed, the name of the basis file in the variable `string basis_BinaryRepresentation_filename` (see current examples in the file `data.h`).
+To change which dataset you would like to use: open the file `data.h` and change the name of the input datafile in the variable `string datafilename` and if needed, the name of the basis file in the variable `string basis_BinaryRepresentation_filename` (see current examples in the file `data.h`). See section **Usage** below foor more information.
 
 Note that, for illustration purposes, the example in `int main()` run three different versions of the search algorithm (see section "Find the Best MCM" below for details). To analyze your data, please choose only one of these versions. We advise you to use the function `MCM_GivenRank_r()`, see `Version 1` in the examples.
 
