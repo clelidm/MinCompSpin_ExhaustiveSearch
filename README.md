@@ -47,7 +47,10 @@ Note that, for illustration purposes, the example in `int main()` run three diff
 In the `INPUT` folder, we provided two datasets:
  - **the binary dataset `Dataset_Shapes_n9_N1e5.dat`:** which is the dataset used in the section "Boolean description of a binary dataset" in the Supplementary Information of Ref. [1].
    The best basis for this dataset is given in the file `Shapes_n9_BestBasis_Binary.dat`. 
- - **the binary dataset `SCOTUS_n9_N895_Data.dat`:** which is the dataset of votes of the US Supreme Court analyzed in Ref.[4] and used as an example in Ref.[1]. The dataset was processed by the authors of Ref.[4] from the original data published by Ref.[5] (accessed in 3 April 2012).
+ - **the binary dataset `SCOTUS_n9_N895_Data.dat`:** which is the dataset of votes of the US Supreme Court analyzed in Ref.[4] and used as an example in Ref.[1]. The dataset was processed by the authors of Ref.[4] from the original data published by Ref.[5] (accessed in 3 April 2012). The mapping between the variables and the justices is the following (labeled from Right to Left):
+| $S_9$  | $S_8$  | $S_7$  | $S_6$  | $S_5$  | $S_4$  | $S_3$  | $S_2$  | $S_1$  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| WR  | JS  | SO  | AS  | AK  | DS  | CT  | RG  | SB  |
 
 To change which dataset you would like to use: open the file `data.h` and change the name of the input datafile in the variable `string datafilename` and if needed, the name of the basis file in the variable `string basis_BinaryRepresentation_filename` (see current examples in the file `data.h`). See section **Usage** below for more information.
 
