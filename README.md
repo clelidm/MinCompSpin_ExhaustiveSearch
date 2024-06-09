@@ -1,13 +1,13 @@
 # Exhaustive search
 # for the best Minimally Complex spin Models (MCM)
 
-This program allows to **uncover and model community structures in binary data**, while **taking into account possible high-order patterns** of data in the detection of the communities (i.e., possible high-order correlations between the variables). The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) that have minimal information theoretic complexity. These models are called Minimally Complex Models (MCM). The selected model can be used as a generative model for data. Details can be found in Ref. [1].
+This program allows to **uncover and model community structures in binary data**, while **taking into account possible high-order patterns** of data in the detection of the communities (i.e., possible high-order correlations between the variables). The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) that have minimal information-theoretic complexity. These models are called Minimally Complex Models (MCM). The selected model can be used as a generative model for data. Details can be found in Ref. [1].
 
 ----
 
 ## Description
 
-This repository contains a code developed for the paper Ref. [1] on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an exhaustive search for the best Minimally Complex spin Model (MCM) in a chosen basis for the data. The basis is chosen by the user.
+This repository contains a code developed for the paper Ref. [1] on *Statistical Inference of Minimally Complex Models* available in [arXiv:2008.00520](https://arxiv.org/abs/2008.00520). The code performs an **exhaustive search for the best Minimally Complex Model** (MCM) in a chosen basis for the data. The basis is chosen by the user.
 
 To do so, the code go through all possible MCMs of a given rank `r`, where an MCM is defined by a partition of the `r` basis operators provided (see Ref. [1]). The comparison between models is based on their evidence (posterior probability that the model generates the data, integrated over its parameter values). The selected model is the one with the largest evidence.
 
@@ -15,7 +15,7 @@ One big advantage of this family of models (the MCMs) is that the computation of
 
 Provided `r` of basis elements, the number of possible partitions of this set of `r` elements is equal to the Bell number of `r`, which grows roughly exponentially with `r`. Besides, the running time of the program also grows linearly with the number of different states observed in the dataset (so approximatively linearly with the number of datapoints in the dataset). For these reasons, this code is good for use on small systems, typically with `r <~15` variables. Note that for `r~15`, the code will take several days to perform the exhaustive search.
 
-To efficiently generate all possible set partitions of these `r` operators, we used the algorithm described in Ref. [2] and in Ref. [3] (Algorithm E) that generates the partitions in Gray-code order. Thus, the code goes through all possible partitions by changing only single bit for each new partition.
+To efficiently generate all possible set partitions of these `r` operators, we used the algorithm described in Ref. [2] and in Ref. [3] (Algorithm E) that generates the partitions in Gray-code order. Thus, the code goes through all possible partitions by changing only a single bit for each new partition.
 
 For larger systems (`r>~15`), please check the greedy algorithm available [here](https://github.com/clelidm/MinCompSpin_Greedy). 
 
@@ -42,12 +42,12 @@ All the functions useful for the user are declared in the file `library.h` and c
 
 For hands-on and simple tests of the program, check the examples in the function `int main()` of the `main.cpp` file. 
 
-Note that, for illustration purposes, the example in `int main()` run three different versions of the search algorithm (see section "Find the Best MCM" below for details). To analyze your data, please choose only one of these versions. We advise you to use the function `MCM_GivenRank_r()`, see `Version 1` in the examples.
+Note that, for illustration purposes, the example in `int main()` runs three different versions of the search algorithm (see section "Find the Best MCM" below for details). To analyze your data, please choose only one of these versions. We advise you to use the function `MCM_GivenRank_r()`, see `Version 1` in the examples.
 
 In the `INPUT` folder, we provided two datasets:
  - **the binary dataset `Dataset_Shapes_n9_N1e5.dat`:** which is the dataset used in the section "Boolean description of a binary dataset" in the Supplementary Information of Ref. [1].
    The best basis for this dataset is given in the file `Shapes_n9_BestBasis_Binary.dat`. 
- - **the binary dataset `SCOTUS_n9_N895_Data.dat`:** which is the dataset of votes of the US Supreme Court analyzed in Ref.[4] and used as an example in Ref.[1]. The dataset was processed by the authors of Ref.[4] from the original data published by Ref.[5] (accessed in 3 April 2012). The mapping between the variables and the justices is the following (labeled from Right to Left):
+ - **the binary dataset `SCOTUS_n9_N895_Data.dat`:** which is the dataset of votes of the US Supreme Court analyzed in Ref.[4] and used as an example in Ref.[1]. The dataset was processed by the authors of Ref.[4] from the original data published by Ref.[5] (accessed on 3 April 2012). The mapping between the variables and the justices is the following (labeled from Right to Left):
 
    | $S_9$  | $S_8$  | $S_7$  | $S_6$  | $S_5$  | $S_4$  | $S_3$  | $S_2$  | $S_1$  |
    | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -55,7 +55,7 @@ In the `INPUT` folder, we provided two datasets:
 
 To change which dataset you would like to use: open the file `data.h` and change the name of the input datafile in the variable `string datafilename` and if needed, the name of the basis file in the variable `string basis_BinaryRepresentation_filename` (see current examples in the file `data.h`). See section **Usage** below for more information.
 
-**By default:** the code will run the analysis for the US Supreme Court dataset in the new basis.
+**By default:** The code will run the analysis for the US Supreme Court dataset in the best basis of the data (see Ref.[1]).
 
 [4] E.D. Lee, C.P. Broedersz, W. Bialek, Statistical Mechanics of the US Supreme Court. J Stat Phys 160, 275–301 (2015).
 
@@ -64,7 +64,7 @@ To change which dataset you would like to use: open the file `data.h` and change
 
 ## License
 
-This code is an open source project under the GNU GPLv3.
+This code is an open-source project under the GNU GPLv3.
 
 ----
 
@@ -102,32 +102,32 @@ In the code, a basis is stored as a list of 32-bit integers `list<uint32_t>`**`B
  
  - The basis can simply be the original basis in which the data is already written. If you don’t know which basis to use, you can run the minimally complex model algorithm on the "original basis" of the data, which is the basis in which the dataset is written. This can be done by using the function `list<uint32_t>`**`Original_Basis`**`()` to define the basis.
 
-In general, we advise you to use the basis in which the dataset is the closest to be generated from an independent model (see discussion in Ref. [1]). Finding this basis can be done using the greedy search algorithm available separately [here](https://github.com/clelidm/BinaryData_HighOrderInteractions_GreedyAlgo).
+In general, we advise you to use the basis in which the dataset is the closest to being generated from an independent model (see discussion in Ref. [1]). Finding this basis can be done using the greedy search algorithm available separately [here](https://github.com/clelidm/BinaryData_HighOrderInteractions_GreedyAlgo).
 
 ### Structure of the basis:
 
-**Basis:** The basis elements are spin operators that are all independent from each others (see Ref. [1]). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
+**Basis:** The basis elements are spin operators that are all independent from each other (see Ref. [1]). You can use the function (*to come*) to check if the elements you have specified in `list<uint32_t> Basis` actually form a basis, i.e. if the set is only composed of independent operators.
 
 The number of elements in the basis can be at most equal to the number `n` of variables in the system. Note that if you provide more than `n` elements in your basis, then the elements in the set you provided are not independent, and, at most, there is `n` of them that are independent. 
 
 The rank `r` of the basis you provide can be smaller than `n`. In this case, the code will automatically truncate the data to reduce it to the sub-space defined by the `r` first basis elements specified.
 
-**Spin operators:** Each element of the basis must be a spin operator, where a spin operator is defined as the product of a subset of spin variables. For instance, `Op = s1 * s2` is a spin operator (graphically, it is associated to a pairwise interactions between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (associated to a three-body interaction between `s1`, `s2` and `s3`).
+**Spin operators:** Each element of the basis must be a spin operator, where a spin operator is defined as the product of a subset of spin variables. For instance, `Op = s1 * s2` is a spin operator (graphically, it corresponds to a pairwise interaction between `s1` and `s2`); `Op = s1*s2*s3` is also a spin operator (corresponds to a three-body interaction between `s1`, `s2` and `s3`).
 
 In the code, spin operators are encoded by a binary integer on `n` bits, where `n` is the number of spin variables in the system (which you must define in the file `data.h`). The binary representation of a given operator has a bit `1` for each spin included in the operator, and `0` for all the other spins. Importantly, spin variables are numbered from the right to the left. 
-For instance, take a system of `n=9` spins and the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011`. Finally, to simplify the definition of a spin operator in the code, you can directly use the integer corresponding to this binary number. For instance, to defined the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
+For instance, take a system of `n=9` spins and the operator `Op = s1 s2`, this operator would be represented in the code by the binary number `Op = 000000011`. Finally, to simplify the definition of a spin operator in the code, you can directly use the integer corresponding to this binary number. For instance, to define the operator `Op = s1 s2`, you can use the binary representation `Op = 000000011` or the integer representation `Op = 3`.
 >      Example: the three representations of a spin operator: 
 >      -->  Op = s1 s2           Spin operator
 >      -->  Op = 000000011       Binary representation
 >      -->  Op = 3               Integer representation   ( 000000011 = 3 )
 
-The convention taken for writing the spin operators is to label the spin variables from the right to the left in the binary representation. Note that this doesn't change the ordering of the spin variables from their order in the dataset, i.e., the first variable on the left in the binary representation of the operators is the same as the first variable on the left in the dataset provided as input file.
+The convention taken for writing the spin operators is to label the spin variables from the right to the left in the binary representation. Note that this doesn't change the ordering of the spin variables from their order in the dataset, i.e., the first variable on the left in the binary representation of the operators is the same as the first variable on the left in the dataset provided as an input file.
 
 However, an important point, to be able to interpret the results of the program, is that we adopted the same convention for the new basis: the first operator provided in the basis will correspond to the variable `sigma1`, which will be the variable the most on the right in the transformed dataset (see the example in the next section).
 
 ### Defining the basis manually (see example at the beginning of the `int main()` function):
 
-The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, we advise you to use the integer representation of the basis operators. For example, `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent spin operators. Below we give the different representations for these operators: first, the integer representation in the original basis; second, the corresponding binary representation; third, the corresponding spin operator; and finally representations of these operators in the new basis:
+The basis can be specified by hand directly at the beginning of the `int main()` function in `uint32_t Basis_Choice[]`. In this case, we suggest using the integer representation of the basis operators. For example, `uint32_t Basis_Choice[] = {36, 10, 3, 272, 260, 320, 130, 65, 4}` defines a basis with `9` independent spin operators. Below we give the different representations for these operators: first, the integer representation in the original basis; second, the corresponding binary representation; third, the corresponding spin operator; and finally representations of these operators in the new basis:
 >      36     000100100     s3 s6     -->>  new basis :     000000001     1       sigma1
 >      10     000001010     s2 s4     -->>  new basis :     000000010     2       sigma2
 >      3      000000011     s1 s2     -->>  new basis :     000000100     4       sigma3
@@ -142,9 +142,9 @@ The basis can be specified by hand directly at the beginning of the `int main()`
 
 The following functions allow you to define the basis from an input file:
 
- - `list<uint32_t>`**`Read_BasisOp_BinaryRepresentation`**`(string Basis_binary_filename = basis_BinaryRepresentation_filename)`, for operators written with the binary representation (see the example file `Dataset_Shapes_n9_Basis_Binary.dat` in the `INPUT` folder). The location of the file must be given as an argument of the function. By default the function will read the file specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
+ - `list<uint32_t>`**`Read_BasisOp_BinaryRepresentation`**`(string Basis_binary_filename = basis_BinaryRepresentation_filename)`, for operators written with the binary representation (see the example file `Dataset_Shapes_n9_Basis_Binary.dat` in the `INPUT` folder). The location of the file must be given as an argument of the function. By default, the function will read the file specified in `data.h` in the variable `basis_BinaryRepresentation_filename`.
 
- - `list<uint32_t>`**`Read_BasisOp_IntegerRepresentation`**`(string Basis_integer_filename = basis_IntegerRepresentation_filename)`, for operators written with the integer representation (see example file `Dataset_Shapes_n9_Basis_Integer.dat` in the `INPUT` folder). The location of the file must be given as an argument of the function. By default the function will read the file specified in `data.h` in the variable `basis_IntegerRepresentation_filename`.
+ - `list<uint32_t>`**`Read_BasisOp_IntegerRepresentation`**`(string Basis_integer_filename = basis_IntegerRepresentation_filename)`, for operators written with the integer representation (see example file `Dataset_Shapes_n9_Basis_Integer.dat` in the `INPUT` folder). The location of the file must be given as an argument of the function. By default, the function will read the file specified in `data.h` in the variable `basis_IntegerRepresentation_filename`.
 
 For both functions, operators must be written in the file in one single column. The operator at the top of the column will correspond to the variable `sigma1` in the new basis (i.e. to the bit the most to the right), the second to `sigma2`, etc.
 
@@ -157,7 +157,7 @@ The following functions are defined in `Data_Manipulation.cpp`.
 
 ### Read the input dataset
 
-The function `vector<pair<uint32_t, unsigned int>>`**`read_datafile`**`(unsigned int *N, string filename = datafilename)` reads the dataset with location and name provided in argument (`string filename`). By default the function will read the file specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `vector<pair<uint32_t, unsigned int>>`**`Nset`** that pairs each observed state (encoded as `uint32_t`) to the number of times they occur in the dataset (encoded as `unsigned int`). Note that each state of the system is encoded as an `n`-bit integer on 32 bits.
+The function `vector<pair<uint32_t, unsigned int>>`**`read_datafile`**`(unsigned int *N, string filename = datafilename)` reads the dataset with location and name provided in argument (`string filename`). By default, the function will read the file specified in the variable `const string datafilename` in `data.h`. The dataset is then stored in the structure `vector<pair<uint32_t, unsigned int>>`**`Nset`** that pairs each observed state (encoded as `uint32_t`) to the number of times they occur in the dataset (encoded as `unsigned int`). Note that each state of the system is encoded as an `n`-bit integer on 32 bits.
 
 ### Re-write the dataset in the new basis
 
@@ -170,13 +170,13 @@ The following functions are defined in `Best_MCM.cpp`.
 ### Encoding MCMs:
 
 The code only compares MCMs that correspond to partitions of the basis operators provided.
-Once the dataset is converted in the new basis, these MCMs are simply encoded on `r` digits, where `r` is the number of basis operators on which one want to perform the search for the best MCM (see next section).
+Once the dataset is converted to the new basis, these MCMs are simply encoded on `r` digits, where `r` is the number of basis operators on which one wants to perform the search for the best MCM (see next section).
 
 In the code, partitions of the `r` digits are encoded in two different ways:
 
- - **Version a:**  a vector of `r` integers, which is used for enumerating partitions in Gray-code order. In this representation, spin variables with the same digit belong to the same part. This representation is also used for printing MCMs in files. See example below.
+ - **Version a:**  a vector of `r` integers, which is used for enumerating partitions in Gray-code order. In this representation, spin variables with the same digit belong to the same part. This representation is also used for printing MCMs in files. See the example below.
 
- - **Version b:**  a list of 32-bits integers, which is used for computing the log-evidence and the log-likelihood of MCMs (see section below), and which is the representation in which the best MCM is printed to the terminal. In this representation, each integer encodes a part of the partition: in the binary representation of each integer, the variables with a bit equal to `1` belong to the part. See example below.
+ - **Version b:**  a list of 32-bits integers, which is used for computing the log-evidence and the log-likelihood of MCMs (see section below), and which is the representation in which the best MCM is printed to the terminal. In this representation, each integer encodes a part of the partition: in the binary representation of each integer, the variables with a bit equal to `1` belong to the part. See the example below.
 
 >      Example, for a system with 9 binary variables:
 >      
@@ -200,7 +200,7 @@ Three functions are available to perform an exhaustive search for the best MCM (
 map<uint32_t, uint32_t> MCM_GivenRank_r(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 ```
 
- - **Function 2:** The function **`MCM_AllRank_SmallerThan_r_Ordered`** compares all the MCMs based on the `k` first elements of the new basis for all `k=1 to r`. The total number of these model is given by the sum for `k=1` to `r` of `Bell(k)`. See declaration:
+ - **Function 2:** The function **`MCM_AllRank_SmallerThan_r_Ordered`** compares all the MCMs based on the `k` first elements of the new basis for all `k=1 to r`. The total number of these models is given by the sum for `k=1` to `r` of `Bell(k)`. See declaration:
 ```c++
 map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 ```
@@ -210,13 +210,13 @@ map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_Ordered(vector<pair<uint32_t, 
 map<uint32_t, uint32_t> MCM_AllRank_SmallerThan_r_nonOrdered(vector<pair<uint32_t, unsigned int>> Kset, unsigned int N, double *LogE_best, unsigned int r=n, bool print_bool=false)
 ```
 
-These three functions enumerate all possible partitions of a set using variantes of the algorithm described in Ref. [2] and [3]. The algorithm efficiently generates all set partitions in Gray-code order.
+These three functions enumerate all possible partitions of a set using variants of the algorithm described in Ref. [2] and [3]. The algorithm efficiently generates all set partitions in Gray-code order.
 
 For all three functions: 
  - the default value of `r` is the number `n` of spin variables;
- - it is possible to print in a file the values of the log-Evidence of **all the tested models**. To do so, change the value of the input variable `print_bool` to true (the defaut value is `false`).
+ - it is possible to print in a file the values of the log-Evidence of **all the tested models**. To do so, change the value of the input variable `print_bool` to true (the default value is `false`).
 
-**Recommendations:**  These three functions were created for you to test what happens if you compare the models for the three different cases. However, for general use, we recommend that, once you have defined which are the `r` operators on which you want to search for the best MCM, you directly run the search among MCMs exactly based on these `r` operators (i.e., using the function 1). We suggest to reduce beforehand the selection to the `r` most relevant basis operators (similarly to a dimensionality reduction step).
+**Recommendations:**  These three functions were created for you to test what happens if you compare the models for the three different cases. However, for general use, we recommend that, once you have defined which are the `r` operators on which you want to search for the best MCM, you directly run the search among MCMs exactly based on these `r` operators (i.e., using the function 1). We suggest reducing beforehand the selection to the `r` most relevant basis operators (similarly to a dimensionality reduction step).
 
 ### Print information about your model
 
@@ -231,7 +231,7 @@ See Ref. [Entropy 2018, 20(10), 739](https://www.mdpi.com/1099-4300/20/10/739) f
 
 Any MCM can also be specified by the user:
 
-  - **directly in the program**, with the function `map<uint32_t, uint32_t>`**`Create_MCM`**`(uint32_t MCM_table[], int k)` (see the example in the `int main()` function). In this case, we advise you to use the integer representation of the parts. For example, `uint32_t MCM_Choice[] = {384, 64, 32, 16, 8, 4, 2, 1}` defines an MCM with `8` independent parts, based on `n=9` spins. This is the best MCM obtained in the example of section "Boolean description of a binary dataset" in Ref. [1]. 
+  - **directly in the program**, with the function `map<uint32_t, uint32_t>`**`Create_MCM`**`(uint32_t MCM_table[], int k)` (see the example in the `int main()` function). In this case, we advise you to use the integer representation of the parts. For example, `uint32_t MCM_Choice[] = {384, 64, 32, 16, 8, 4, 2, 1}` defines an MCM with `8` independent parts, based on `n=9` spins. This is the best MCM obtained in the example of the section "Boolean description of a binary dataset" in Ref. [1]. 
 
   - **using an input file**, with the function `map<uint32_t, uint32_t>`**`Read_MCMParts_BinaryRepresentation`**`(string MCM_binary_filename)`. Parts must be written with the binary representation, one part per line (see the example file `Dataset_Shapes_n9_MCM_Binary.dat` in the INPUT folder). The location of the file must be given as an argument of the function (see the example in `int main()`).
 
