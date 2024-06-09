@@ -5,7 +5,7 @@ This program allows **uncovering and modeling community structures in binary dat
 
 This code performs an exhaustive search and can be used with up to ~14-15 variables.
 
-**To cite this repository:** use the Zenodo reference <br>
+**To cite this repository:** <br>
 C. de Mulatier. (2024). Exhaustive Search for the best Minimally Complex Model (v2.0). Zenodo. https://doi.org/10.5281/zenodo.5578954
 
 ----
