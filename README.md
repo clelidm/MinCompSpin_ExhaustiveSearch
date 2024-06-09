@@ -3,6 +3,11 @@
 
 This program allows **uncovering and modeling community structures in binary data**, while **taking into account possible high-order patterns** of data in the detection of the communities (i.e., possible high-order correlations between the variables). The idea of the algorithm is based on performing statistical inference with a family of spin models (maximum entropy models for binary data) that have minimal information-theoretic complexity. These models are called Minimally Complex Models (MCM). The selected model can be used as a generative model for data. Details can be found in Ref. [1].
 
+This is an exhaustive search and can be used with up to ~14-15 variables.
+
+To cite this repository use: 
+Clélia de Mulatier. (2023). clelidm/MinCompSpin_ExhaustiveSearch: v2.0 (v2.0). Zenodo. https://doi.org/10.5281/zenodo.8405795
+
 ----
 
 ## Description
